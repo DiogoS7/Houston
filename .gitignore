@@ -10,3 +10,5 @@ powerbi/**/.pbi/cache.abf
 .DS_Store
 Thumbs.db
 .vscode/
+
+*.pbix
