@@ -1,0 +1,250 @@
+relationship 6cf1afb1-5c50-4ac3-93e8-6a4da717ed4a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_assignment.'Created On'
+	toColumn: LocalDateTable_fb11ef4a-dc0c-4dd8-8549-8d51b7b4d273.Date
+
+relationship e9adf5fd-2646-4d8e-b115-c034369ed5bc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_assignment.'Modified On'
+	toColumn: LocalDateTable_014d474e-8e03-4f4a-91a9-2fc133d945ee.Date
+
+relationship 1742d47d-4997-4207-b563-85f40db89e1b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_assignment.'Record Created On'
+	toColumn: LocalDateTable_6a1dfa01-5857-4917-a1b8-78adb9925efb.Date
+
+relationship 1901aa60-f1ae-440e-9dc4-7099d4972541
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_assignment.'Start Date'
+	toColumn: LocalDateTable_fa1bccae-4a94-4efb-9b3b-f1e88f0328f4.Date
+
+relationship 85629014-de6a-4f00-87d1-1db920ad0861
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_assignment.'End Date'
+	toColumn: LocalDateTable_9614b89a-e558-4ea8-85ed-f025b6c9e701.Date
+
+relationship 769d954e-a3d7-4d2d-a3b6-3be9e3d09822
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_client.'Created On'
+	toColumn: LocalDateTable_99d44f8a-a8cf-4b56-87ec-38e5e0a3e7af.Date
+
+relationship 07dd7ee3-9ff1-4f73-9fa6-de0aa4282333
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_client.'Modified On'
+	toColumn: LocalDateTable_21cc2860-0b17-4fd3-bd3c-f195c365bbca.Date
+
+relationship 6a3a9692-db7c-4d3d-af1f-916abc4a5b64
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_client.'Record Created On'
+	toColumn: LocalDateTable_fda411dc-7d0b-4dad-a63f-d36ab8aa9420.Date
+
+relationship 3fecb753-ab68-47f4-b4c6-8832f25f352e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_consultant.'Created On'
+	toColumn: LocalDateTable_d47ed1c9-fa68-4ef5-8803-518ae03eefa1.Date
+
+relationship 8b694830-3dbe-4732-9b8c-6e4c05526649
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_consultant.'Modified On'
+	toColumn: LocalDateTable_336f1dec-6496-417e-bc06-950cf10146f4.Date
+
+relationship ac12ac45-314e-4967-9a88-b7e2e17859f7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_consultant.'Record Created On'
+	toColumn: LocalDateTable_ea24bde6-29bd-47da-97e3-3a8996af8f13.Date
+
+relationship e241caa7-0dd7-4a2b-ae65-6ddfbd964c8d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_consultantskill.'Created On'
+	toColumn: LocalDateTable_3bacd4fb-8519-4b6e-ba23-7a6d00e48ea5.Date
+
+relationship 06e48e7d-9aef-48b9-9d74-bd94b41760aa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_consultantskill.'Modified On'
+	toColumn: LocalDateTable_0951ce16-d3ef-4f08-b2e7-5dca6374961f.Date
+
+relationship ab433608-8c82-460d-9ccd-42c9562ce3b8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_consultantskill.'Record Created On'
+	toColumn: LocalDateTable_03e32709-5777-452e-a917-1cbb8933eee5.Date
+
+relationship 89178616-3a5a-4581-bf32-ebdce111fece
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_consultantskill.'Last Used'
+	toColumn: LocalDateTable_2c744eb3-30bc-424d-84b8-0c9636663b24.Date
+
+relationship cee65bcb-a088-42b9-b4a8-34be07489a08
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_engagement.'Created On'
+	toColumn: LocalDateTable_32f36244-41c0-45de-8c68-cfc343eca7ce.Date
+
+relationship c12decb0-7d1c-4490-836a-cbf8569767d5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_engagement.'Modified On'
+	toColumn: LocalDateTable_5179002c-d8d3-44c5-80e4-4bc9f75ae275.Date
+
+relationship 4590f843-fda3-488b-a42c-87ce72d989de
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_engagement.'Record Created On'
+	toColumn: LocalDateTable_481c30e2-b2c4-470a-b4a3-9790e43c8f49.Date
+
+relationship dd77e7a8-4e12-463b-9bf3-7a3ffc4a12ea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_engagement.'Start Date'
+	toColumn: LocalDateTable_8987bac5-f50f-4ca1-8d7b-0f142cb51087.Date
+
+relationship e1023c16-0109-4cc9-84ac-290cd075c68d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_engagement.'End Date'
+	toColumn: LocalDateTable_76bb2340-e4cb-49d3-818e-78ec84171665.Date
+
+relationship 15cc7419-0b67-4f88-b6a2-3b276bece2bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_skill.'Created On'
+	toColumn: LocalDateTable_31b06af5-9c43-47da-bbe4-f5584d155ec2.Date
+
+relationship 68013ed0-bd41-4646-be12-9f28de93375b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_skill.'Modified On'
+	toColumn: LocalDateTable_e7a58f98-32d7-43b3-95bc-35711b5c3fbd.Date
+
+relationship aa4dcdc2-35e3-4e22-97cd-b3f52ab3047a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_skill.'Record Created On'
+	toColumn: LocalDateTable_9f5749c8-7cf8-4154-9c9c-78309f815668.Date
+
+relationship e01d856b-b261-4696-8bc9-f15abb3f44e1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timeentry.'Created On'
+	toColumn: LocalDateTable_472b55a4-969d-47a1-b2e1-5fd68f3795e7.Date
+
+relationship d1ed0320-99c6-42f3-9e99-4ee4f9ab3b5c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timeentry.'Modified On'
+	toColumn: LocalDateTable_1a9ffb9f-bfe6-4b57-b055-80dc6edf2660.Date
+
+relationship 388fce54-1bf1-4f31-b5a8-335712bda5a8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timeentry.'Record Created On'
+	toColumn: LocalDateTable_55812cd3-7c93-4a08-a27c-b33a6b22dc40.Date
+
+relationship b3627312-0b5b-4286-b9f3-847bd948fa94
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timeentry.Date
+	toColumn: LocalDateTable_3ca6e2ff-fb67-4a33-a31f-6bc513516470.Date
+
+relationship 0efec263-430d-476a-8bb8-d073801ea2bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timesheet.'Created On'
+	toColumn: LocalDateTable_ff5b4af2-090f-4e52-bfcc-bb62ef54a228.Date
+
+relationship 5bded2ab-9f6b-45c1-b1e3-8056f7d9c545
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timesheet.'Modified On'
+	toColumn: LocalDateTable_60448a35-261b-4b1f-8d93-5998635100f1.Date
+
+relationship 4f545e67-568b-4abc-bdb9-4357a15ed046
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timesheet.'Record Created On'
+	toColumn: LocalDateTable_a6871d5f-49c5-460a-9fa2-0017dd51d3ab.Date
+
+relationship 6580f37c-1145-411e-9ec1-56738bfeccaa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timesheet.'Week Start'
+	toColumn: LocalDateTable_e0552d4e-3355-4322-8bc0-0193d27be670.Date
+
+relationship e578f672-9c8d-4ba8-b852-e90059ffe1b6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_timesheet.'Decision Date'
+	toColumn: LocalDateTable_0412f7e5-9f85-4f27-80c1-aabb23a94cac.Date
+
+relationship 4451187a-249e-4bce-8fe6-44bb9d6973c3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_engagementskill.'Created On'
+	toColumn: LocalDateTable_3b48cd8d-e389-41c8-a624-09ffd9b35e8b.Date
+
+relationship 7310e14d-7c31-40af-89a2-f7db30ad67d7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_engagementskill.'Modified On'
+	toColumn: LocalDateTable_8a29ced1-f8d1-40a1-ba5b-f13e1501cf1a.Date
+
+relationship 0fe77104-1a18-418e-82a3-dde266e24bc4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: hou_engagementskill.'Record Created On'
+	toColumn: LocalDateTable_9bcd04b8-cf13-46d9-a87b-e46cf5372973.Date
+
+relationship 6d6659b7-3f65-4c2c-874a-1e901eadf536
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: hou_assignment.hou_consultant
+	toColumn: hou_consultant.Consultant
+
+	annotation PBI_IsFromSource = FS
+
+relationship e3658e14-750d-4c1c-bcdc-2a8bc13695fc
+	fromColumn: hou_assignment.hou_engagement
+	toColumn: hou_engagement.Engagement
+
+	annotation PBI_IsFromSource = FS
+
+relationship c852e070-3976-427c-bdf5-99a291f39f01
+	fromColumn: hou_consultantskill.hou_consultant
+	toColumn: hou_consultant.Consultant
+
+	annotation PBI_IsFromSource = FS
+
+relationship 00e4055c-8dcf-4bb2-90eb-492def46482d
+	fromColumn: hou_consultantskill.hou_skill
+	toColumn: hou_skill.Skill
+
+	annotation PBI_IsFromSource = FS
+
+relationship db69c1fa-f4f5-44fd-a6aa-23bff4e415ee
+	fromColumn: hou_engagement.hou_client
+	toColumn: hou_client.Client
+
+	annotation PBI_IsFromSource = FS
+
+relationship aaae3fc5-4a43-4d57-a97b-ab6750a41e21
+	fromColumn: hou_timeentry.hou_engagement
+	toColumn: hou_engagement.Engagement
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2a1a12fd-7f59-4dff-a520-4fd731d4dff1
+	fromColumn: hou_timeentry.hou_timesheet
+	toColumn: hou_timesheet.Timesheet
+
+	annotation PBI_IsFromSource = FS
+
+relationship 43f97a1e-e066-4e87-8001-f72a46e57f57
+	isActive: false
+	fromColumn: hou_timesheet.hou_approver
+	toColumn: hou_consultant.Consultant
+
+	annotation PBI_IsFromSource = FS
+
+relationship 43d73644-8990-42ac-874b-e0b1806a052e
+	isActive: false
+	fromColumn: hou_timesheet.hou_consultant
+	toColumn: hou_consultant.Consultant
+
+	annotation PBI_IsFromSource = FS
+
+relationship 303e8db9-ff1d-44e3-a2cd-bc435ece6bb0
+	fromColumn: hou_engagementskill.hou_engagement
+	toColumn: hou_engagement.Engagement
+
+	annotation PBI_IsFromSource = FS
+
+relationship b6a294db-dc97-421f-9dcf-6b4649f44476
+	fromColumn: hou_engagementskill.hou_skill
+	toColumn: hou_skill.Skill
+
+	annotation PBI_IsFromSource = FS
+
+relationship 8eb163f1-5950-43a9-bace-36e351d23b6f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Weeks.'Week Start'
+	toColumn: LocalDateTable_f3fb5c52-f90e-4758-8373-2e0a3309a780.Date
+

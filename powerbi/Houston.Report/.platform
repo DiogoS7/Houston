@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Houston"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "aa4a7226-ca4f-4a4d-9b3e-4d51900b3fb9"
+  }
+}

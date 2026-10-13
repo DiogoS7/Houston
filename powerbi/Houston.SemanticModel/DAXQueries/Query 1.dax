@@ -1,0 +1,33 @@
+// Welcome to DAX query view! Learn more about DAX queries at https://aka.ms/dax-queries.
+// Right-click on tables, columns, or measures in the data pane to access quick queries, or ask Copilot for help writing DAX.
+DEFINE
+    MEASURE hou_timeentry[Total Hours] =
+        SUM(hou_timeentry[Hours])
+    MEASURE hou_timeentry[Billable Hours] =
+        CALCULATE([Total Hours],
+            KEEPFILTERS(FILTER(VALUES(hou_timeentry[Billable]),
+                FORMAT(hou_timeentry[Billable], "") IN {"True", "Yes"})))
+    MEASURE hou_timeentry[Capacity Hours] =
+        COUNTROWS(hou_timesheet) * 40
+    MEASURE hou_timeentry[Billable Utilisation %] =
+        DIVIDE([Billable Hours], [Capacity Hours])
+    MEASURE hou_timeentry[Target Utilisation %] =
+        DIVIDE(AVERAGE(hou_consultant[Target Utilisation]), 100)
+    MEASURE hou_timeentry[Utilisation vs Target] =
+        [Billable Utilisation %] - [Target Utilisation %]
+    MEASURE hou_assignment[Forecast Allocation %] =
+        VAR wk = MAX(Weeks[Week Start])
+        RETURN DIVIDE(
+            SUMX(FILTER(hou_assignment,
+                hou_assignment[Start Date] <= wk && hou_assignment[End Date] >= wk),
+                hou_assignment[Allocation %]) + 0, 100)
+    MEASURE hou_assignment[Consultants on Bench] =
+        COUNTROWS(FILTER(VALUES(hou_consultant[Consultant]), [Forecast Allocation %] = 0))
+    MEASURE hou_consultantskill[Skill Supply] =
+        CALCULATE(DISTINCTCOUNT(hou_consultantskill[Consultant]), hou_consultantskill[Proficiency] >= 3)
+    MEASURE hou_consultantskill[Skill Demand] =
+        CALCULATE(SUM(hou_engagementskill[Headcount]), hou_engagement[Engagement Status] <> "Closed")
+    MEASURE hou_consultantskill[Skill Gap] =
+        [Skill Demand] - [Skill Supply]
+EVALUATE
+    ROW("Billable utilisation", [Billable Utilisation %], "On bench", [Consultants on Bench])

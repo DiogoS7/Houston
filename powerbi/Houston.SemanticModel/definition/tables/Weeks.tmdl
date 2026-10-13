@@ -1,0 +1,48 @@
+table Weeks
+	lineageTag: 7d373a69-0b8f-455f-904d-fdd131276af5
+
+	column Value
+		formatString: 0
+		lineageTag: 0f7d557b-811b-4332-be8a-3f06263980de
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Start'
+		formatString: General Date
+		lineageTag: f03bf1d7-70b2-4b19-8b4f-449e920b4814
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Week Start]
+
+		variation Variation
+			isDefault
+			relationship: 8eb163f1-5950-43a9-bace-36e351d23b6f
+			defaultHierarchy: LocalDateTable_f3fb5c52-f90e-4758-8373-2e0a3309a780.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Label'
+		lineageTag: d052c754-abd9-4ffc-872a-8da4c2fbec67
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Week Label]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Weeks = calculated
+		mode: import
+		source =
+				
+				VAR StartWeek = TODAY() - WEEKDAY(TODAY(), 2) + 1
+				RETURN
+				    ADDCOLUMNS(
+				        GENERATESERIES(0, 7, 1),
+				        "Week Start", StartWeek + [Value] * 7,
+				        "Week Label", "W" & WEEKNUM(StartWeek + [Value] * 7, 21) & " · " & FORMAT(StartWeek + [Value] * 7, "dd/mm")
+				    )
+
+	annotation PBI_Id = 9df2ef57e2684563a6e585eeed19f0c9
+

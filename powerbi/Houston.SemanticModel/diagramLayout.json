@@ -1,0 +1,151 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 490.62260569843613,
+            "y": 333.18853289414915
+          },
+          "nodeIndex": "hou_assignment",
+          "nodeLineageTag": "cfba1602-eb12-4431-923d-96564625099b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1150.4674930157787,
+            "y": 393.20064734497964
+          },
+          "nodeIndex": "hou_client",
+          "nodeLineageTag": "092ca064-b472-468c-8af0-7231d794d597",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 240.373243134375,
+            "y": 686.75919332814715
+          },
+          "nodeIndex": "hou_consultant",
+          "nodeLineageTag": "aa29d71b-7732-4e70-8967-bfbe3537295e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 333.02649361792476
+          },
+          "nodeIndex": "hou_consultantskill",
+          "nodeLineageTag": "f0131109-0d81-40df-94e6-4dbbf388fdad",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 864.484425019208,
+            "y": 303.73785322630226
+          },
+          "nodeIndex": "hou_engagement",
+          "nodeLineageTag": "6b7ea583-0bd7-4266-8a63-83bf24ac3a52",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 604.05305885065513,
+            "y": -50
+          },
+          "nodeIndex": "hou_engagementskill",
+          "nodeLineageTag": "7d60d30c-b86e-4278-afe6-48e843368b94",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 291.7425545372605,
+            "y": -20.668886106309856
+          },
+          "nodeIndex": "hou_skill",
+          "nodeLineageTag": "9d05ae63-9b81-42c4-a5cb-4b41a3e8bd17",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 777.61569057688814,
+            "y": 657.500042571816
+          },
+          "nodeIndex": "hou_timeentry",
+          "nodeLineageTag": "0e05fb74-0a14-4256-8cdc-4bc494a0f7b4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 465.20459089391267,
+            "y": 1040.4313759715492
+          },
+          "nodeIndex": "hou_timesheet",
+          "nodeLineageTag": "c8ca909c-8339-4539-a520-becbaf8ecbe0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1384.4674930157787,
+            "y": 595.21568798577459
+          },
+          "nodeIndex": "Weeks",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 79.553182037699813,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

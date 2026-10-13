@@ -1,0 +1,361 @@
+table hou_consultantskill
+	lineageTag: f0131109-0d81-40df-94e6-4dbbf388fdad
+
+	measure 'Skill Supply' = ```
+			
+			        CALCULATE(DISTINCTCOUNT(hou_consultantskill[Consultant]), hou_consultantskill[Proficiency] >= 3)
+			```
+		formatString: 0
+		lineageTag: 3f63716f-8751-4939-a503-34806f4a91e2
+
+	measure 'Skill Demand' = ```
+			
+			        CALCULATE(SUM(hou_engagementskill[Headcount]), hou_engagement[Engagement Status] <> "Closed")
+			```
+		formatString: 0
+		lineageTag: d3d082f6-7908-4f3d-8db9-df6f4a0e6134
+
+	measure 'Skill Gap' = ```
+			
+			        [Skill Demand] - [Skill Supply]
+			```
+		formatString: 0
+		lineageTag: ef2b63a3-a83d-4874-9771-9f13c97757e7
+
+	column 'Consultant Skill'
+		dataType: string
+		lineageTag: b0339748-252a-4357-ba96-7a4578d932b9
+		summarizeBy: none
+		sourceColumn: hou_consultantskillid
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9a6a0935-2645-4331-a539-b327454142cc
+		summarizeBy: none
+		sourceColumn: createdon
+
+		variation Variation
+			isDefault
+			relationship: e241caa7-0dd7-4a2b-ae65-6ddfbd964c8d
+			defaultHierarchy: LocalDateTable_3bacd4fb-8519-4b6e-ba23-7a6d00e48ea5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column createdby
+		dataType: string
+		lineageTag: dc3692d7-76f0-4d6c-a130-a690a6e7097e
+		summarizeBy: none
+		sourceColumn: createdby
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Modified On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b61d5e14-dd10-4527-ac18-a235a9e17e81
+		summarizeBy: none
+		sourceColumn: modifiedon
+
+		variation Variation
+			isDefault
+			relationship: 06e48e7d-9aef-48b9-9d74-bd94b41760aa
+			defaultHierarchy: LocalDateTable_0951ce16-d3ef-4f08-b2e7-5dca6374961f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column modifiedby
+		dataType: string
+		lineageTag: 254a5a47-f324-4d63-b558-d47faaaeb688
+		summarizeBy: none
+		sourceColumn: modifiedby
+
+		annotation SummarizationSetBy = Automatic
+
+	column createdonbehalfby
+		dataType: string
+		lineageTag: 1d7349fd-9b03-4b77-9df1-655bd15c7279
+		summarizeBy: none
+		sourceColumn: createdonbehalfby
+
+		annotation SummarizationSetBy = Automatic
+
+	column modifiedonbehalfby
+		dataType: string
+		lineageTag: 40a753b3-b415-4aaf-bceb-34e3997f42bf
+		summarizeBy: none
+		sourceColumn: modifiedonbehalfby
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created By'
+		dataType: string
+		lineageTag: 20ecafe0-5a7e-4a83-9f76-6ccd167af4ab
+		summarizeBy: none
+		sourceColumn: createdbyname
+
+		annotation SummarizationSetBy = Automatic
+
+	column createdbyyominame
+		dataType: string
+		lineageTag: 49ba9351-9d50-4cb5-ba4f-384e95ff7ac8
+		summarizeBy: none
+		sourceColumn: createdbyyominame
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created By (Delegate)'
+		dataType: string
+		lineageTag: 4862b1ed-ec06-4f77-8b54-11d4ffd50e01
+		summarizeBy: none
+		sourceColumn: createdonbehalfbyname
+
+		annotation SummarizationSetBy = Automatic
+
+	column createdonbehalfbyyominame
+		dataType: string
+		lineageTag: 8b0e627b-bac3-4242-8539-c3c3d46838b5
+		summarizeBy: none
+		sourceColumn: createdonbehalfbyyominame
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Modified By'
+		dataType: string
+		lineageTag: b2ca896b-caf0-42b8-b497-b3590ac8e7af
+		summarizeBy: none
+		sourceColumn: modifiedbyname
+
+		annotation SummarizationSetBy = Automatic
+
+	column modifiedbyyominame
+		dataType: string
+		lineageTag: a16d3977-f56f-4ea9-829e-c8c352bcfd1c
+		summarizeBy: none
+		sourceColumn: modifiedbyyominame
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Modified By (Delegate)'
+		dataType: string
+		lineageTag: 4de618b3-7709-4bed-9953-98b3b3708dbe
+		summarizeBy: none
+		sourceColumn: modifiedonbehalfbyname
+
+		annotation SummarizationSetBy = Automatic
+
+	column modifiedonbehalfbyyominame
+		dataType: string
+		lineageTag: 44a515db-2839-4439-b8df-d3b71d30d938
+		summarizeBy: none
+		sourceColumn: modifiedonbehalfbyyominame
+
+		annotation SummarizationSetBy = Automatic
+
+	column ownerid
+		dataType: string
+		lineageTag: b796de74-c45a-41d1-807f-f3a0cfaa4c81
+		summarizeBy: none
+		sourceColumn: ownerid
+
+		annotation SummarizationSetBy = Automatic
+
+	column Owner
+		dataType: string
+		lineageTag: ea9a3ccb-233e-4e0c-ab42-33a760341664
+		summarizeBy: none
+		sourceColumn: owneridname
+
+		annotation SummarizationSetBy = Automatic
+
+	column owneridyominame
+		dataType: string
+		lineageTag: ba259eb2-7642-437b-89e2-bbddb147c9b4
+		summarizeBy: none
+		sourceColumn: owneridyominame
+
+		annotation SummarizationSetBy = Automatic
+
+	column owningbusinessunit
+		dataType: string
+		lineageTag: 0e1cca76-3a24-4f71-a1be-d1c6e4610d72
+		summarizeBy: none
+		sourceColumn: owningbusinessunit
+
+		annotation SummarizationSetBy = Automatic
+
+	column owninguser
+		dataType: string
+		lineageTag: 405dc4e2-08ee-4949-a6f0-be15279b12b0
+		summarizeBy: none
+		sourceColumn: owninguser
+
+		annotation SummarizationSetBy = Automatic
+
+	column owningteam
+		dataType: string
+		lineageTag: 884acd2a-a9e8-4a77-b378-3c36567baf7f
+		summarizeBy: none
+		sourceColumn: owningteam
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Owning Business Unit'
+		dataType: string
+		lineageTag: 4cdefca7-a108-4cfa-9f56-6b3bb9abd09b
+		summarizeBy: none
+		sourceColumn: owningbusinessunitname
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: int64
+		formatString: 0
+		lineageTag: 13e2c8ca-163b-440a-b799-6e1e0f3e9784
+		summarizeBy: sum
+		sourceColumn: statecode
+
+		annotation SummarizationSetBy = Automatic
+
+	column statecodename
+		dataType: string
+		lineageTag: 165119f7-d86d-49ab-8a10-7988fb7e4c60
+		summarizeBy: none
+		sourceColumn: statecodename
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Status Reason'
+		dataType: int64
+		formatString: 0
+		lineageTag: d52126bd-7ca3-4633-baf7-2ac153f5ec45
+		summarizeBy: sum
+		sourceColumn: statuscode
+
+		annotation SummarizationSetBy = Automatic
+
+	column statuscodename
+		dataType: string
+		lineageTag: d2b88b3d-728c-413f-b9dd-01419be9556b
+		summarizeBy: none
+		sourceColumn: statuscodename
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Import Sequence Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 484c388f-31b5-4521-8460-c58cb86d5852
+		summarizeBy: sum
+		sourceColumn: importsequencenumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Record Created On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 92fa8e29-0a0d-47a6-84bf-af811c9fe9c3
+		summarizeBy: none
+		sourceColumn: overriddencreatedon
+
+		variation Variation
+			isDefault
+			relationship: ab433608-8c82-460d-9ccd-42c9562ce3b8
+			defaultHierarchy: LocalDateTable_03e32709-5777-452e-a917-1cbb8933eee5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time Zone Rule Version Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fb859a5-b142-498b-980a-223c098cbce3
+		summarizeBy: sum
+		sourceColumn: timezoneruleversionnumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UTC Conversion Time Zone Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: ae241f0f-0306-4e83-8fbd-6d639908ceca
+		summarizeBy: count
+		sourceColumn: utcconversiontimezonecode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference
+		dataType: string
+		lineageTag: 3694e676-2589-47cb-a536-146be8e9ff73
+		summarizeBy: none
+		sourceColumn: hou_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Proficiency
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e9a459f-899f-41ca-926b-ff3b79937bcc
+		summarizeBy: sum
+		sourceColumn: hou_proficiency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Used'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1aa79f11-6b3d-493c-8e48-c1ef4c0d54f3
+		summarizeBy: none
+		sourceColumn: hou_lastused
+
+		variation Variation
+			isDefault
+			relationship: 89178616-3a5a-4581-bf32-ebdce111fece
+			defaultHierarchy: LocalDateTable_2c744eb3-30bc-424d-84b8-0c9636663b24.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column hou_consultant
+		dataType: string
+		lineageTag: 21438153-8fa7-47ee-abbd-cadf3bcd7439
+		summarizeBy: none
+		sourceColumn: hou_consultant
+
+		annotation SummarizationSetBy = Automatic
+
+	column Consultant
+		dataType: string
+		lineageTag: b1ec332d-a078-4caf-a347-afb86f5109b3
+		summarizeBy: none
+		sourceColumn: hou_consultantname
+
+		annotation SummarizationSetBy = Automatic
+
+	column hou_skill
+		dataType: string
+		lineageTag: 50198450-63f6-4945-936d-62ce2fcc89df
+		summarizeBy: none
+		sourceColumn: hou_skill
+
+		annotation SummarizationSetBy = Automatic
+
+	column Skill
+		dataType: string
+		lineageTag: e56ebaf3-6ce0-406e-bcd8-6a2baab67e51
+		summarizeBy: none
+		sourceColumn: hou_skillname
+
+		annotation SummarizationSetBy = Automatic
+
+	partition hou_consultantskill = m
+		mode: import
+		source =
+				let
+				    Source = CommonDataService.Database("orgdf3f58c1.crm4.dynamics.com"),
+				    dbo_hou_consultantskill = Source{[Schema="dbo",Item="hou_consultantskill"]}[Data]
+				in
+				    dbo_hou_consultantskill
+
+	annotation PBI_ResultType = Table
+

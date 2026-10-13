@@ -1,0 +1,65 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["hou_assignment","hou_client","hou_consultant","hou_consultantskill","hou_engagement","hou_skill","hou_timeentry","hou_timesheet","hou_engagementskill"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table hou_assignment
+ref table DateTableTemplate_1275e877-2627-4e3f-a62e-700fa343831e
+ref table LocalDateTable_fb11ef4a-dc0c-4dd8-8549-8d51b7b4d273
+ref table LocalDateTable_014d474e-8e03-4f4a-91a9-2fc133d945ee
+ref table LocalDateTable_6a1dfa01-5857-4917-a1b8-78adb9925efb
+ref table LocalDateTable_fa1bccae-4a94-4efb-9b3b-f1e88f0328f4
+ref table LocalDateTable_9614b89a-e558-4ea8-85ed-f025b6c9e701
+ref table hou_client
+ref table LocalDateTable_99d44f8a-a8cf-4b56-87ec-38e5e0a3e7af
+ref table LocalDateTable_21cc2860-0b17-4fd3-bd3c-f195c365bbca
+ref table LocalDateTable_fda411dc-7d0b-4dad-a63f-d36ab8aa9420
+ref table hou_consultant
+ref table LocalDateTable_d47ed1c9-fa68-4ef5-8803-518ae03eefa1
+ref table LocalDateTable_336f1dec-6496-417e-bc06-950cf10146f4
+ref table LocalDateTable_ea24bde6-29bd-47da-97e3-3a8996af8f13
+ref table hou_consultantskill
+ref table LocalDateTable_3bacd4fb-8519-4b6e-ba23-7a6d00e48ea5
+ref table LocalDateTable_0951ce16-d3ef-4f08-b2e7-5dca6374961f
+ref table LocalDateTable_03e32709-5777-452e-a917-1cbb8933eee5
+ref table LocalDateTable_2c744eb3-30bc-424d-84b8-0c9636663b24
+ref table hou_engagement
+ref table LocalDateTable_32f36244-41c0-45de-8c68-cfc343eca7ce
+ref table LocalDateTable_5179002c-d8d3-44c5-80e4-4bc9f75ae275
+ref table LocalDateTable_481c30e2-b2c4-470a-b4a3-9790e43c8f49
+ref table LocalDateTable_8987bac5-f50f-4ca1-8d7b-0f142cb51087
+ref table LocalDateTable_76bb2340-e4cb-49d3-818e-78ec84171665
+ref table hou_skill
+ref table LocalDateTable_31b06af5-9c43-47da-bbe4-f5584d155ec2
+ref table LocalDateTable_e7a58f98-32d7-43b3-95bc-35711b5c3fbd
+ref table LocalDateTable_9f5749c8-7cf8-4154-9c9c-78309f815668
+ref table hou_timeentry
+ref table LocalDateTable_472b55a4-969d-47a1-b2e1-5fd68f3795e7
+ref table LocalDateTable_1a9ffb9f-bfe6-4b57-b055-80dc6edf2660
+ref table LocalDateTable_55812cd3-7c93-4a08-a27c-b33a6b22dc40
+ref table LocalDateTable_3ca6e2ff-fb67-4a33-a31f-6bc513516470
+ref table hou_timesheet
+ref table LocalDateTable_ff5b4af2-090f-4e52-bfcc-bb62ef54a228
+ref table LocalDateTable_60448a35-261b-4b1f-8d93-5998635100f1
+ref table LocalDateTable_a6871d5f-49c5-460a-9fa2-0017dd51d3ab
+ref table LocalDateTable_e0552d4e-3355-4322-8bc0-0193d27be670
+ref table LocalDateTable_0412f7e5-9f85-4f27-80c1-aabb23a94cac
+ref table hou_engagementskill
+ref table LocalDateTable_3b48cd8d-e389-41c8-a624-09ffd9b35e8b
+ref table LocalDateTable_8a29ced1-f8d1-40a1-ba5b-f13e1501cf1a
+ref table LocalDateTable_9bcd04b8-cf13-46d9-a87b-e46cf5372973
+ref table Weeks
+ref table LocalDateTable_f3fb5c52-f90e-4758-8373-2e0a3309a780
+
+ref cultureInfo en-US
+
