@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>hou_houston_dab0c</Name>
-  <AppVersion>2026-10-13T16:20:31Z</AppVersion>
+  <AppVersion>2026-10-13T19:59:41Z</AppVersion>
   <Status>Ready</Status>
   <CreatedByClientVersion>3.26094.9.0</CreatedByClientVersion>
   <MinClientVersion>3.26094.9.0</MinClientVersion>
-  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.26094.9","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","m365CopilotSettingValue":"0"}</Tags>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.26094.9","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","m365CopilotSettingValue":"0","sienaVersion":"20261013T162031Z-3.26094.9.0"}</Tags>
   <IsCdsUpgraded>0</IsCdsUpgraded>
   <GalleryItemId xsi:nil="true"></GalleryItemId>
-  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <BackgroundColor>rgba(31, 42, 92, 1)</BackgroundColor>
   <DisplayName>Houston</DisplayName>
   <Description xsi:nil="true"></Description>
   <CommitMessage xsi:nil="true"></CommitMessage>
   <Publisher xsi:nil="true"></Publisher>
-  <AuthorizationReferences>[]</AuthorizationReferences>
+  <AuthorizationReferences>[{"resourceId":"powerbi"}]</AuthorizationReferences>
   <ConnectionReferences>{}</ConnectionReferences>
-  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"NotSpecified","environmentName":"default.cds","overrideValues":{"status":"NotSpecified","environmentVariableName":""}},"dataSources":{"Consultants":{"entitySetName":"hou_consultants","logicalName":"hou_consultant"},"hou_engagements":{"entitySetName":"hou_engagements","logicalName":"hou_engagement"},"Engagements":{"entitySetName":"hou_engagements","logicalName":"hou_engagement"},"hou_timesheets":{"entitySetName":"hou_timesheets","logicalName":"hou_timesheet"},"Timesheets":{"entitySetName":"hou_timesheets","logicalName":"hou_timesheet"},"hou_timeentries":{"entitySetName":"hou_timeentries","logicalName":"hou_timeentry"},"Time Entries":{"entitySetName":"hou_timeentries","logicalName":"hou_timeentry"}}}}</DatabaseReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified","environmentVariableName":""}},"dataSources":{"Consultants":{"entitySetName":"hou_consultants","logicalName":"hou_consultant"},"Engagements":{"entitySetName":"hou_engagements","logicalName":"hou_engagement"},"Timesheets":{"entitySetName":"hou_timesheets","logicalName":"hou_timesheet"},"Time Entries":{"entitySetName":"hou_timeentries","logicalName":"hou_timeentry"},"Assignments":{"entitySetName":"hou_assignments","logicalName":"hou_assignment"}}}}</DatabaseReferences>
   <AppComponents>[]</AppComponents>
   <AppComponentDependencies>[]</AppComponentDependencies>
   <CanConsumeAppPass>1</CanConsumeAppPass>
@@ -24,7 +24,7 @@
   <AdminControlBypassConsent>0</AdminControlBypassConsent>
   <EmbeddedApp xsi:nil="true"></EmbeddedApp>
   <IntroducedVersion>1.0</IntroducedVersion>
-  <CdsDependencies>{"cdsdependencies":[{"logicalname":"hou_consultant","componenttype":1},{"logicalname":"hou_engagement","componenttype":1},{"logicalname":"hou_timesheet","componenttype":1},{"logicalname":"hou_timeentry","componenttype":1}]}</CdsDependencies>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"hou_consultant","componenttype":1},{"logicalname":"hou_engagement","componenttype":1},{"logicalname":"hou_timesheet","componenttype":1},{"logicalname":"hou_timeentry","componenttype":1},{"logicalname":"hou_assignment","componenttype":1}]}</CdsDependencies>
   <IsCustomizable>1</IsCustomizable>
   <BackgroundImageUri>/CanvasApps/hou_houston_dab0c_BackgroundImageUri</BackgroundImageUri>
   <DocumentUri>/CanvasApps/hou_houston_dab0c_DocumentUri.msapp</DocumentUri>

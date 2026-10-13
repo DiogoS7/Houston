@@ -1,103 +1,299 @@
 Screens:
   scrMyTimesheet:
     Properties:
-      Fill: =RGBA(246, 247, 251, 1)
+      Fill: |-
+        =RGBA(246, 247, 251, 1)
       OnVisible: |-
         =If(IsBlank(gblMe), Set(gblMe, LookUp(Consultants, Name = "Ana Lopes")));
         If(IsBlank(gblWeekStart), Set(gblWeekStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days)));
         Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart))
     Children:
-      - recHeader:
+      - recHeaderT:
           Control: Rectangle
           Properties:
-            X: =0
-            Y: =0
-            Width: =Parent.Width
-            Height: =64
-            Fill: =RGBA(31, 42, 92, 1)
-      - lblAppName:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =64
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+      - lblBrandT:
           Control: Label
           Properties:
-            Text: ="Houston"
-            X: =32
-            Y: =0
-            Width: =200
-            Height: =64
-            Size: =20
-            FontWeight: =FontWeight.Bold
-            Color: =RGBA(255, 255, 255, 1)
-      - lblUser:
+            Text: |-
+              ="Houston"
+            X: |-
+              =32
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =20
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - cirBrandT:
+          Control: Circle
+          Properties:
+            X: |-
+              =150
+            Y: |-
+              =27
+            Width: |-
+              =10
+            Height: |-
+              =10
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
+      - lblUserT:
           Control: Label
           Properties:
-            Text: =gblMe.Name
-            X: =Parent.Width - 332
-            Y: =0
-            Width: =300
-            Height: =64
-            Align: =Align.Right
-            Size: =13
-            Color: =RGBA(190, 200, 235, 1)
-      - lblTitle:
+            Text: |-
+              =gblMe.Name
+            X: |-
+              =Parent.Width - 332
+            Y: |-
+              =0
+            Width: |-
+              =300
+            Height: |-
+              =64
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Right
+      - lblNav0T:
           Control: Label
           Properties:
-            Text: ="My Timesheet"
-            X: =40
-            Y: =84
-            Width: =400
-            Height: =44
-            Size: =24
-            FontWeight: =FontWeight.Bold
-            Color: =RGBA(27, 33, 64, 1)
+            Text: |-
+              ="Home"
+            X: |-
+              =200
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrHome, ScreenTransition.None)
+      - lblNav1T:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Timesheet"
+            X: |-
+              =340
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            FontWeight: |-
+              =FontWeight.Semibold
+      - recNavLineT:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =370
+            Y: |-
+              =58
+            Width: |-
+              =80
+            Height: |-
+              =4
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
+      - lblNav2T:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Bench Board"
+            X: |-
+              =480
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrBenchBoard, ScreenTransition.None)
+      - lblTitleT:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Timesheet"
+            X: |-
+              =40
+            Y: |-
+              =84
+            Width: |-
+              =400
+            Height: |-
+              =44
+            Size: |-
+              =24
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
       - btnPrevWeek:
           Control: Classic/Button
           Properties:
-            Text: ="◀"
-            X: =40
-            Y: =132
-            Width: =40
-            Height: =32
-            Size: =12
-            Fill: =RGBA(255, 255, 255, 1)
-            Color: =RGBA(31, 42, 92, 1)
-            BorderColor: =RGBA(210, 214, 230, 1)
-            BorderThickness: =1
-            HoverFill: =RGBA(234, 238, 250, 1)
-            HoverColor: =RGBA(31, 42, 92, 1)
+            Text: |-
+              ="◀"
+            X: |-
+              =40
+            Y: |-
+              =134
+            Width: |-
+              =40
+            Height: |-
+              =34
+            Size: |-
+              =12
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
             OnSelect: |-
-              =Set(gblWeekStart, DateAdd(gblWeekStart, -7, TimeUnit.Days));
-              Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart))
+              =Set(gblWeekStart, DateAdd(gblWeekStart, -7, TimeUnit.Days)); Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart))
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            Color: |-
+              =RGBA(31, 42, 92, 1)
+            HoverFill: |-
+              =RGBA(234, 238, 250, 1)
+            HoverColor: |-
+              =RGBA(31, 42, 92, 1)
+            PressedFill: |-
+              =RGBA(234, 238, 250, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
       - lblWeek:
           Control: Label
           Properties:
-            Text: ="Week of " & Text(gblWeekStart, "dd mmm yyyy")
-            X: =88
-            Y: =132
-            Width: =200
-            Height: =32
-            Align: =Align.Center
-            Size: =13
-            FontWeight: =FontWeight.Semibold
-            Color: =RGBA(27, 33, 64, 1)
+            Text: |-
+              ="Week of " & Text(gblWeekStart, "dd mmm yyyy")
+            X: |-
+              =88
+            Y: |-
+              =134
+            Width: |-
+              =200
+            Height: |-
+              =34
+            Size: |-
+              =13
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            FontWeight: |-
+              =FontWeight.Semibold
       - btnNextWeek:
           Control: Classic/Button
           Properties:
-            Text: ="▶"
-            X: =296
-            Y: =132
-            Width: =40
-            Height: =32
-            Size: =12
-            Fill: =RGBA(255, 255, 255, 1)
-            Color: =RGBA(31, 42, 92, 1)
-            BorderColor: =RGBA(210, 214, 230, 1)
-            BorderThickness: =1
-            HoverFill: =RGBA(234, 238, 250, 1)
-            HoverColor: =RGBA(31, 42, 92, 1)
+            Text: |-
+              ="▶"
+            X: |-
+              =296
+            Y: |-
+              =134
+            Width: |-
+              =40
+            Height: |-
+              =34
+            Size: |-
+              =12
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
             OnSelect: |-
-              =Set(gblWeekStart, DateAdd(gblWeekStart, 7, TimeUnit.Days));
-              Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart))
-      - lblStatus:
-          Control: Label
+              =Set(gblWeekStart, DateAdd(gblWeekStart, 7, TimeUnit.Days)); Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart))
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            Color: |-
+              =RGBA(31, 42, 92, 1)
+            HoverFill: |-
+              =RGBA(234, 238, 250, 1)
+            HoverColor: |-
+              =RGBA(31, 42, 92, 1)
+            PressedFill: |-
+              =RGBA(234, 238, 250, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+      - btnStatus:
+          Control: Classic/Button
           Properties:
             Text: |-
               =If(IsBlank(gblSheet), "Not started",
@@ -105,226 +301,444 @@ Screens:
                   gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Submitted, "Submitted",
                   gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Rejected, "Rejected",
                   "Draft")
-            X: =Parent.Width - 200
-            Y: =92
-            Width: =160
-            Height: =32
-            Align: =Align.Center
-            Size: =12
-            FontWeight: =FontWeight.Bold
-            Fill: |-
-              =Switch(Self.Text,
-                  "Approved", RGBA(215, 245, 232, 1),
-                  "Submitted", RGBA(222, 233, 255, 1),
-                  "Rejected", RGBA(255, 217, 217, 1),
-                  "Draft", RGBA(255, 241, 194, 1),
-                  RGBA(236, 238, 245, 1))
-            Color: |-
-              =Switch(Self.Text,
-                  "Approved", RGBA(15, 122, 82, 1),
-                  "Submitted", RGBA(37, 87, 214, 1),
-                  "Rejected", RGBA(180, 35, 24, 1),
-                  "Draft", RGBA(138, 101, 0, 1),
-                  RGBA(107, 115, 153, 1))
-      - recEntriesCard:
-          Control: Rectangle
+            X: |-
+              =Parent.Width - 200
+            Y: |-
+              =92
+            Width: |-
+              =160
+            Height: |-
+              =34
+            Size: |-
+              =11
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            DisplayMode: |-
+              =DisplayMode.Disabled
+            DisabledFill: |-
+              =Switch(Self.Text, "Approved", RGBA(215, 245, 232, 1), "Submitted", RGBA(222, 233, 255, 1), "Rejected", RGBA(255, 217, 217, 1), "Draft", RGBA(255, 241, 194, 1), RGBA(236, 238, 245, 1))
+            DisabledColor: |-
+              =Switch(Self.Text, "Approved", RGBA(15, 122, 82, 1), "Submitted", RGBA(37, 87, 214, 1), "Rejected", RGBA(180, 35, 24, 1), "Draft", RGBA(138, 101, 0, 1), RGBA(107, 115, 153, 1))
+            DisabledBorderColor: |-
+              =Switch(Self.Text, "Approved", RGBA(215, 245, 232, 1), "Submitted", RGBA(222, 233, 255, 1), "Rejected", RGBA(255, 217, 217, 1), "Draft", RGBA(255, 241, 194, 1), RGBA(236, 238, 245, 1))
+            BorderThickness: |-
+              =0
+            RadiusTopLeft: |-
+              =17
+            RadiusTopRight: |-
+              =17
+            RadiusBottomLeft: |-
+              =17
+            RadiusBottomRight: |-
+              =17
+      - conEntries:
+          Control: GroupContainer
+          Variant: ManualLayout
           Properties:
-            X: =40
-            Y: =184
-            Width: =Parent.Width - 520
-            Height: =Parent.Height - 224
-            Fill: =RGBA(255, 255, 255, 1)
-            BorderColor: =RGBA(226, 229, 240, 1)
-            BorderThickness: =1
-      - lblEntriesHeader:
+            X: |-
+              =40
+            Y: |-
+              =184
+            Width: |-
+              =Parent.Width - 512
+            Height: |-
+              =Parent.Height - 208
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+      - lblEntriesTitle:
           Control: Label
           Properties:
-            Text: ="Entries this week"
-            X: =64
-            Y: =200
-            Width: =400
-            Height: =36
-            Size: =15
-            FontWeight: =FontWeight.Bold
-            Color: =RGBA(27, 33, 64, 1)
+            Text: |-
+              ="Entries this week"
+            X: |-
+              =64
+            Y: |-
+              =198
+            Width: |-
+              =400
+            Height: |-
+              =32
+            Size: |-
+              =15
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
       - galEntries:
           Control: Gallery
           Variant: Vertical
           Properties:
-            Items: =Sort(Filter('Time Entries', Timesheet.Timesheet = gblSheet.Timesheet), Date, SortOrder.Ascending)
-            X: =56
-            Y: =252
-            Width: =Parent.Width - 552
-            Height: =Parent.Height - 360
-            TemplateSize: =56
-            TemplatePadding: =0
+            Items: |-
+              =Sort(Filter('Time Entries', Timesheet.Timesheet = gblSheet.Timesheet), Date, SortOrder.Ascending)
+            X: |-
+              =56
+            Y: |-
+              =240
+            Width: |-
+              =Parent.Width - 544
+            Height: |-
+              =Parent.Height - 330
+            TemplateSize: |-
+              =58
+            TemplatePadding: |-
+              =0
           Children:
             - lblEntryEngagement:
                 Control: Label
                 Properties:
-                  Text: =ThisItem.Engagement.Name
-                  X: =8
-                  Y: =6
-                  Width: =Parent.TemplateWidth - 220
-                  Height: =24
-                  Size: =13
-                  FontWeight: =FontWeight.Semibold
-                  Color: =RGBA(27, 33, 64, 1)
+                  Text: |-
+                    =ThisItem.Engagement.Name
+                  X: |-
+                    =8
+                  Y: |-
+                    =8
+                  Width: |-
+                    =Parent.TemplateWidth - 220
+                  Height: |-
+                    =24
+                  Size: |-
+                    =13
+                  Color: |-
+                    =RGBA(27, 33, 64, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
             - lblEntryDate:
                 Control: Label
                 Properties:
-                  Text: =Text(ThisItem.Date, "dddd, dd mmm") & If(ThisItem.Billable = 'Billable (Time Entries)'.Yes, " · billable", " · non-billable")
-                  X: =8
-                  Y: =28
-                  Width: =Parent.TemplateWidth - 220
-                  Height: =22
-                  Size: =11
-                  Color: =RGBA(107, 115, 153, 1)
+                  Text: |-
+                    =Text(ThisItem.Date, "dddd, dd mmm") & If(ThisItem.Billable = 'Billable (Time Entries)'.Yes, " · billable", " · non-billable")
+                  X: |-
+                    =8
+                  Y: |-
+                    =30
+                  Width: |-
+                    =Parent.TemplateWidth - 220
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
             - lblEntryHours:
                 Control: Label
                 Properties:
-                  Text: =Text(ThisItem.Hours, "0.0") & " h"
-                  X: =Parent.TemplateWidth - 200
-                  Y: =6
-                  Width: =120
-                  Height: =44
-                  Align: =Align.Right
-                  Size: =15
-                  FontWeight: =FontWeight.Bold
-                  Color: =RGBA(27, 33, 64, 1)
+                  Text: |-
+                    =Text(ThisItem.Hours, "0.0") & " h"
+                  X: |-
+                    =Parent.TemplateWidth - 200
+                  Y: |-
+                    =8
+                  Width: |-
+                    =120
+                  Height: |-
+                    =44
+                  Size: |-
+                    =15
+                  Color: |-
+                    =RGBA(27, 33, 64, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Right
+                  FontWeight: |-
+                    =FontWeight.Semibold
             - icoDeleteEntry:
                 Control: Classic/Icon
                 Properties:
-                  Icon: =Icon.Trash
-                  X: =Parent.TemplateWidth - 60
-                  Y: =12
-                  Width: =32
-                  Height: =32
-                  PaddingTop: =6
-                  PaddingBottom: =6
-                  PaddingLeft: =6
-                  PaddingRight: =6
-                  Color: =RGBA(180, 35, 24, 1)
-                  Visible: =gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft
-                  OnSelect: =Remove('Time Entries', ThisItem)
+                  Icon: |-
+                    =Icon.Trash
+                  X: |-
+                    =Parent.TemplateWidth - 60
+                  Y: |-
+                    =13
+                  Width: |-
+                    =32
+                  Height: |-
+                    =32
+                  PaddingTop: |-
+                    =6
+                  PaddingBottom: |-
+                    =6
+                  PaddingLeft: |-
+                    =6
+                  PaddingRight: |-
+                    =6
+                  Color: |-
+                    =RGBA(180, 35, 24, 1)
+                  Visible: |-
+                    =gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft
+                  OnSelect: |-
+                    =Remove('Time Entries', ThisItem)
             - recEntryDivider:
                 Control: Rectangle
                 Properties:
-                  X: =0
-                  Y: =Parent.TemplateHeight - 1
-                  Width: =Parent.TemplateWidth
-                  Height: =1
-                  Fill: =RGBA(236, 238, 245, 1)
+                  X: |-
+                    =0
+                  Y: |-
+                    =Parent.TemplateHeight - 1
+                  Width: |-
+                    =Parent.TemplateWidth
+                  Height: |-
+                    =1
+                  Fill: |-
+                    =RGBA(236, 238, 245, 1)
       - lblTotal:
           Control: Label
           Properties:
             Text: |-
               ="Total: " & Text(Coalesce(Sum(galEntries.AllItems, Hours), 0), "0.0") & " h"
-            X: =64
-            Y: =Parent.Height - 92
-            Width: =Parent.Width - 600
-            Height: =40
-            Align: =Align.Right
-            Size: =16
-            FontWeight: =FontWeight.Bold
-            Color: =RGBA(27, 33, 64, 1)
-      - recLogCard:
-          Control: Rectangle
+            X: |-
+              =64
+            Y: |-
+              =Parent.Height - 76
+            Width: |-
+              =Parent.Width - 600
+            Height: |-
+              =40
+            Size: |-
+              =16
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Right
+            FontWeight: |-
+              =FontWeight.Semibold
+      - conLog:
+          Control: GroupContainer
+          Variant: ManualLayout
           Properties:
-            X: =Parent.Width - 456
-            Y: =184
-            Width: =416
-            Height: =Parent.Height - 224
-            Fill: =RGBA(255, 255, 255, 1)
-            BorderColor: =RGBA(226, 229, 240, 1)
-            BorderThickness: =1
-      - lblLogHeader:
+            X: |-
+              =Parent.Width - 448
+            Y: |-
+              =184
+            Width: |-
+              =408
+            Height: |-
+              =Parent.Height - 208
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+      - lblLogTitle:
           Control: Label
           Properties:
-            Text: ="Log hours"
-            X: =Parent.Width - 432
-            Y: =200
-            Width: =368
-            Height: =36
-            Size: =15
-            FontWeight: =FontWeight.Bold
-            Color: =RGBA(27, 33, 64, 1)
-      - lblEngagementCaption:
+            Text: |-
+              ="Log hours"
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =198
+            Width: |-
+              =360
+            Height: |-
+              =32
+            Size: |-
+              =15
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblEngagementCap:
           Control: Label
           Properties:
-            Text: ="Engagement"
-            X: =Parent.Width - 432
-            Y: =244
-            Width: =368
-            Height: =24
-            Size: =11
-            Color: =RGBA(107, 115, 153, 1)
+            Text: |-
+              ="Engagement"
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =240
+            Width: |-
+              =360
+            Height: |-
+              =22
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
       - cmbEngagement:
           Control: Classic/ComboBox
           Properties:
-            Items: =Filter(Engagements, 'Engagement Status' <> 'Engagement Status (Engagements)'.Closed)
-            DisplayFields: =["hou_name"]
-            SearchFields: =["hou_name"]
-            SelectMultiple: =false
-            InputTextPlaceholder: ="Choose an engagement"
-            X: =Parent.Width - 432
-            Y: =270
-            Width: =368
-            Height: =40
-      - lblDateCaption:
+            Items: |-
+              =Filter(Engagements, 'Engagement Status' <> 'Engagement Status (Engagements)'.Closed)
+            DisplayFields: |-
+              =["hou_name"]
+            SearchFields: |-
+              =["hou_name"]
+            SelectMultiple: |-
+              =false
+            InputTextPlaceholder: |-
+              ="Choose an engagement"
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =264
+            Width: |-
+              =360
+            Height: |-
+              =40
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            Font: |-
+              =Font.'Segoe UI'
+      - lblDateCap:
           Control: Label
           Properties:
-            Text: ="Date"
-            X: =Parent.Width - 432
-            Y: =322
-            Width: =368
-            Height: =24
-            Size: =11
-            Color: =RGBA(107, 115, 153, 1)
+            Text: |-
+              ="Date"
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =316
+            Width: |-
+              =360
+            Height: |-
+              =22
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
       - dpEntryDate:
           Control: Classic/DatePicker
           Properties:
-            DefaultDate: =gblWeekStart
-            Format: ="dd/mm/yyyy"
-            X: =Parent.Width - 432
-            Y: =348
-            Width: =368
-            Height: =40
-      - lblHoursCaption:
+            DefaultDate: |-
+              =gblWeekStart
+            Format: |-
+              ="dd/mm/yyyy"
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =340
+            Width: |-
+              =360
+            Height: |-
+              =40
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            Font: |-
+              =Font.'Segoe UI'
+      - lblHoursCap:
           Control: Label
           Properties:
-            Text: ="Hours"
-            X: =Parent.Width - 432
-            Y: =400
-            Width: =368
-            Height: =24
-            Size: =11
-            Color: =RGBA(107, 115, 153, 1)
+            Text: |-
+              ="Hours"
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =392
+            Width: |-
+              =360
+            Height: |-
+              =22
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
       - txtHours:
           Control: Classic/TextInput
           Properties:
-            Default: =""
-            HintText: ="e.g. 8"
-            Format: =TextFormat.Number
-            X: =Parent.Width - 432
-            Y: =426
-            Width: =368
-            Height: =40
+            Default: |-
+              =""
+            HintText: |-
+              ="e.g. 8"
+            Format: |-
+              =TextFormat.Number
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =416
+            Width: |-
+              =360
+            Height: |-
+              =40
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            RadiusTopLeft: |-
+              =8
+            RadiusTopRight: |-
+              =8
+            RadiusBottomLeft: |-
+              =8
+            RadiusBottomRight: |-
+              =8
       - btnAddHours:
           Control: Classic/Button
           Properties:
-            Text: ="Add hours"
-            X: =Parent.Width - 432
-            Y: =486
-            Width: =368
-            Height: =44
-            Fill: =RGBA(31, 42, 92, 1)
-            Color: =RGBA(255, 255, 255, 1)
-            HoverFill: =RGBA(45, 60, 130, 1)
-            DisplayMode: |-
-              =If((IsBlank(gblSheet) || gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft)
-                  && !IsBlank(cmbEngagement.Selected) && Value(txtHours.Text) > 0,
-                  DisplayMode.Edit, DisplayMode.Disabled)
+            Text: |-
+              ="Add hours"
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =476
+            Width: |-
+              =360
+            Height: |-
+              =46
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
             OnSelect: |-
               =If(IsBlank(gblSheet),
                   Set(gblSheet, Patch(Timesheets, Defaults(Timesheets), {
@@ -340,20 +754,76 @@ Screens:
                   Hours: Value(txtHours.Text),
                   Billable: If(cmbEngagement.Selected.Billable = 'Billable (Engagements)'.Yes, 'Billable (Time Entries)'.Yes, 'Billable (Time Entries)'.No) });
               Reset(txtHours)
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            HoverFill: |-
+              =RGBA(45, 60, 130, 1)
+            PressedFill: |-
+              =RGBA(45, 60, 130, 1)
+            BorderThickness: |-
+              =0
+            DisabledFill: |-
+              =RGBA(220, 223, 235, 1)
+            DisabledColor: |-
+              =RGBA(107, 115, 153, 1)
+            DisplayMode: |-
+              =If((IsBlank(gblSheet) || gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft)
+                  && !IsBlank(cmbEngagement.Selected) && Value(txtHours.Text) > 0,
+                  DisplayMode.Edit, DisplayMode.Disabled)
       - btnSubmit:
           Control: Classic/Button
           Properties:
-            Text: ="Submit for approval"
-            X: =Parent.Width - 432
-            Y: =Parent.Height - 104
-            Width: =368
-            Height: =48
-            Fill: =RGBA(31, 157, 107, 1)
-            Color: =RGBA(255, 255, 255, 1)
-            HoverFill: =RGBA(22, 130, 88, 1)
-            DisplayMode: |-
-              =If(!IsBlank(gblSheet) && gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft && CountRows(galEntries.AllItems) > 0,
-                  DisplayMode.Edit, DisplayMode.Disabled)
+            Text: |-
+              ="Submit for approval"
+            X: |-
+              =Parent.Width - 424
+            Y: |-
+              =Parent.Height - 92
+            Width: |-
+              =360
+            Height: |-
+              =48
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
             OnSelect: |-
               =Set(gblSheet, Patch(Timesheets, gblSheet, { 'Approval Status': 'Approval Status (Timesheets)'.Submitted }));
               Notify("Timesheet submitted for approval", NotificationType.Success)
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+            Fill: |-
+              =RGBA(31, 157, 107, 1)
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            HoverFill: |-
+              =RGBA(22, 130, 88, 1)
+            PressedFill: |-
+              =RGBA(22, 130, 88, 1)
+            BorderThickness: |-
+              =0
+            DisabledFill: |-
+              =RGBA(220, 223, 235, 1)
+            DisabledColor: |-
+              =RGBA(107, 115, 153, 1)
+            DisplayMode: |-
+              =If(!IsBlank(gblSheet) && gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft && CountRows(galEntries.AllItems) > 0,
+                  DisplayMode.Edit, DisplayMode.Disabled)

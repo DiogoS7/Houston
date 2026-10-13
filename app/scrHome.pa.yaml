@@ -1,0 +1,706 @@
+Screens:
+  scrHome:
+    Properties:
+      Fill: |-
+        =RGBA(246, 247, 251, 1)
+      OnVisible: |-
+        =If(IsBlank(gblMe), Set(gblMe, LookUp(Consultants, Name = "Ana Lopes")));
+        If(IsBlank(gblWeekStart), Set(gblWeekStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days)));
+        Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart));
+        ClearCollect(colAssign, Assignments)
+    Children:
+      - recHeaderH:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =64
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+      - lblBrandH:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Houston"
+            X: |-
+              =32
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =20
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - cirBrandH:
+          Control: Circle
+          Properties:
+            X: |-
+              =150
+            Y: |-
+              =27
+            Width: |-
+              =10
+            Height: |-
+              =10
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
+      - lblUserH:
+          Control: Label
+          Properties:
+            Text: |-
+              =gblMe.Name
+            X: |-
+              =Parent.Width - 332
+            Y: |-
+              =0
+            Width: |-
+              =300
+            Height: |-
+              =64
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Right
+      - lblNav0H:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Home"
+            X: |-
+              =200
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            FontWeight: |-
+              =FontWeight.Semibold
+      - recNavLineH:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =230
+            Y: |-
+              =58
+            Width: |-
+              =80
+            Height: |-
+              =4
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
+      - lblNav1H:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Timesheet"
+            X: |-
+              =340
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrMyTimesheet, ScreenTransition.None)
+      - lblNav2H:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Bench Board"
+            X: |-
+              =480
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrBenchBoard, ScreenTransition.None)
+      - lblHello:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Good " & If(Hour(Now()) < 12, "morning", Hour(Now()) < 18, "afternoon", "evening") & ", " & First(Split(gblMe.Name, " ")).Value
+            X: |-
+              =40
+            Y: |-
+              =84
+            Width: |-
+              =800
+            Height: |-
+              =44
+            Size: |-
+              =24
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblHelloSub:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Here is your week at a glance · week of " & Text(gblWeekStart, "dd mmm yyyy")
+            X: |-
+              =40
+            Y: |-
+              =128
+            Width: |-
+              =800
+            Height: |-
+              =28
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - conKpiHours:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =40
+            Y: |-
+              =172
+            Width: |-
+              =410
+            Height: |-
+              =128
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+      - lblKpiHoursCap:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Hours logged this week"
+            X: |-
+              =64
+            Y: |-
+              =188
+            Width: |-
+              =360
+            Height: |-
+              =24
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - lblKpiHours:
+          Control: Label
+          Properties:
+            Text: |-
+              =Text(Coalesce(Sum(Filter('Time Entries', Timesheet.Timesheet = gblSheet.Timesheet), Hours), 0), "0.0") & " h"
+            X: |-
+              =64
+            Y: |-
+              =216
+            Width: |-
+              =360
+            Height: |-
+              =56
+            Size: |-
+              =30
+            Color: |-
+              =RGBA(31, 42, 92, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - conKpiStatus:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =478
+            Y: |-
+              =172
+            Width: |-
+              =410
+            Height: |-
+              =128
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+      - lblKpiStatusCap:
+          Control: Label
+          Properties:
+            Text: |-
+              ="This week's timesheet"
+            X: |-
+              =502
+            Y: |-
+              =188
+            Width: |-
+              =360
+            Height: |-
+              =24
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - btnKpiStatus:
+          Control: Classic/Button
+          Properties:
+            Text: |-
+              =If(IsBlank(gblSheet), "Not started",
+                  gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Approved, "Approved",
+                  gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Submitted, "Submitted",
+                  gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Rejected, "Rejected",
+                  "Draft")
+            X: |-
+              =502
+            Y: |-
+              =226
+            Width: |-
+              =170
+            Height: |-
+              =40
+            Size: |-
+              =11
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            DisplayMode: |-
+              =DisplayMode.Disabled
+            DisabledFill: |-
+              =Switch(Self.Text, "Approved", RGBA(215, 245, 232, 1), "Submitted", RGBA(222, 233, 255, 1), "Rejected", RGBA(255, 217, 217, 1), "Draft", RGBA(255, 241, 194, 1), RGBA(236, 238, 245, 1))
+            DisabledColor: |-
+              =Switch(Self.Text, "Approved", RGBA(15, 122, 82, 1), "Submitted", RGBA(37, 87, 214, 1), "Rejected", RGBA(180, 35, 24, 1), "Draft", RGBA(138, 101, 0, 1), RGBA(107, 115, 153, 1))
+            DisabledBorderColor: |-
+              =Switch(Self.Text, "Approved", RGBA(215, 245, 232, 1), "Submitted", RGBA(222, 233, 255, 1), "Rejected", RGBA(255, 217, 217, 1), "Draft", RGBA(255, 241, 194, 1), RGBA(236, 238, 245, 1))
+            BorderThickness: |-
+              =0
+            RadiusTopLeft: |-
+              =20
+            RadiusTopRight: |-
+              =20
+            RadiusBottomLeft: |-
+              =20
+            RadiusBottomRight: |-
+              =20
+      - conKpiBench:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =916
+            Y: |-
+              =172
+            Width: |-
+              =410
+            Height: |-
+              =128
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+      - lblKpiBenchCap:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Team on the bench in 4 weeks"
+            X: |-
+              =940
+            Y: |-
+              =188
+            Width: |-
+              =360
+            Height: |-
+              =24
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - lblKpiBench:
+          Control: Label
+          Properties:
+            Text: |-
+              =With({d: DateAdd(gblWeekStart, 28, TimeUnit.Days)},
+                  CountRows(Filter(Consultants As c,
+                      Coalesce(Sum(Filter(colAssign As a,
+                          a.Consultant.Consultant = c.Consultant && a.'Start Date' <= d && a.'End Date' >= d),
+                          a.'Allocation %'), 0) = 0))) & " consultants"
+            X: |-
+              =940
+            Y: |-
+              =216
+            Width: |-
+              =360
+            Height: |-
+              =56
+            Size: |-
+              =30
+            Color: |-
+              =RGBA(31, 42, 92, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - conInsights:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =40
+            Y: |-
+              =324
+            Width: |-
+              =886
+            Height: |-
+              =404
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+      - lblInsightsTitle:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Team insights"
+            X: |-
+              =64
+            Y: |-
+              =340
+            Width: |-
+              =600
+            Height: |-
+              =32
+            Size: |-
+              =15
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblInsightsSub:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Live from the Houston Power BI report"
+            X: |-
+              =64
+            Y: |-
+              =370
+            Width: |-
+              =600
+            Height: |-
+              =24
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - lblInsightsPlaceholder:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Power BI tile goes here: Insert > Charts > Power BI tile, then place it inside this card."
+            X: |-
+              =64
+            Y: |-
+              =410
+            Width: |-
+              =838
+            Height: |-
+              =290
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Fill: |-
+              =RGBA(246, 247, 251, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            BorderStyle: |-
+              =BorderStyle.Dashed
+      - conActions:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =950
+            Y: |-
+              =324
+            Width: |-
+              =376
+            Height: |-
+              =404
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+      - lblActionsTitle:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Quick actions"
+            X: |-
+              =974
+            Y: |-
+              =340
+            Width: |-
+              =320
+            Height: |-
+              =32
+            Size: |-
+              =15
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - btnGoTimesheet:
+          Control: Classic/Button
+          Properties:
+            Text: |-
+              ="Log my hours"
+            X: |-
+              =974
+            Y: |-
+              =392
+            Width: |-
+              =328
+            Height: |-
+              =48
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            OnSelect: |-
+              =Navigate(scrMyTimesheet, ScreenTransition.None)
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            HoverFill: |-
+              =RGBA(45, 60, 130, 1)
+            PressedFill: |-
+              =RGBA(45, 60, 130, 1)
+            BorderThickness: |-
+              =0
+            DisabledFill: |-
+              =RGBA(220, 223, 235, 1)
+            DisabledColor: |-
+              =RGBA(107, 115, 153, 1)
+      - btnGoBench:
+          Control: Classic/Button
+          Properties:
+            Text: |-
+              ="Open the Bench Board"
+            X: |-
+              =974
+            Y: |-
+              =452
+            Width: |-
+              =328
+            Height: |-
+              =48
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            OnSelect: |-
+              =Navigate(scrBenchBoard, ScreenTransition.None)
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            Color: |-
+              =RGBA(31, 42, 92, 1)
+            HoverFill: |-
+              =RGBA(234, 238, 250, 1)
+            HoverColor: |-
+              =RGBA(31, 42, 92, 1)
+            PressedFill: |-
+              =RGBA(234, 238, 250, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+      - lblActionsNote:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Timesheets are submitted to your manager for approval. The Bench Board shows who is staffed over the next 6 weeks."
+            X: |-
+              =974
+            Y: |-
+              =520
+            Width: |-
+              =328
+            Height: |-
+              =120
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            VerticalAlign: |-
+              =VerticalAlign.Top

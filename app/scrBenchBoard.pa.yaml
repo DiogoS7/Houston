@@ -1,239 +1,518 @@
 Screens:
   scrBenchBoard:
     Properties:
-      Fill: =RGBA(246, 247, 251, 1)
+      Fill: |-
+        =RGBA(246, 247, 251, 1)
       OnVisible: |-
-        =Set(gblBenchStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days));
+        =If(IsBlank(gblMe), Set(gblMe, LookUp(Consultants, Name = "Ana Lopes")));
+        If(IsBlank(gblWeekStart), Set(gblWeekStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days)));
+        Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart));
+        Set(gblBenchStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days));
         ClearCollect(colAssign, Assignments)
     Children:
       - recHeaderB:
           Control: Rectangle
           Properties:
-            X: =0
-            Y: =0
-            Width: =Parent.Width
-            Height: =64
-            Fill: =RGBA(31, 42, 92, 1)
-      - lblAppNameB:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =64
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+      - lblBrandB:
           Control: Label
           Properties:
-            Text: ="Houston"
-            X: =32
-            Y: =0
-            Width: =150
-            Height: =64
-            Size: =20
-            FontWeight: =FontWeight.Bold
-            Color: =RGBA(255, 255, 255, 1)
+            Text: |-
+              ="Houston"
+            X: |-
+              =32
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =20
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - cirBrandB:
+          Control: Circle
+          Properties:
+            X: |-
+              =150
+            Y: |-
+              =27
+            Width: |-
+              =10
+            Height: |-
+              =10
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
       - lblUserB:
           Control: Label
           Properties:
-            Text: =gblMe.Name
-            X: =Parent.Width - 332
-            Y: =0
-            Width: =300
-            Height: =64
-            Align: =Align.Right
-            Size: =13
-            Color: =RGBA(190, 200, 235, 1)
-      - lblNavTimesheetB:
+            Text: |-
+              =gblMe.Name
+            X: |-
+              =Parent.Width - 332
+            Y: |-
+              =0
+            Width: |-
+              =300
+            Height: |-
+              =64
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Right
+      - lblNav0B:
           Control: Label
           Properties:
-            Text: ="My Timesheet"
-            X: =200
-            Y: =0
-            Width: =130
-            Height: =64
-            Align: =Align.Center
-            Size: =13
-            Color: =RGBA(190, 200, 235, 1)
-            OnSelect: =Navigate(scrMyTimesheet, ScreenTransition.None)
-      - lblNavBenchB:
+            Text: |-
+              ="Home"
+            X: |-
+              =200
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrHome, ScreenTransition.None)
+      - lblNav1B:
           Control: Label
           Properties:
-            Text: ="Bench Board"
-            X: =330
-            Y: =0
-            Width: =130
-            Height: =64
-            Align: =Align.Center
-            Size: =13
-            FontWeight: =FontWeight.Semibold
-            Color: =RGBA(255, 255, 255, 1)
-      - recNavUnderlineB:
+            Text: |-
+              ="My Timesheet"
+            X: |-
+              =340
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrMyTimesheet, ScreenTransition.None)
+      - lblNav2B:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Bench Board"
+            X: |-
+              =480
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            FontWeight: |-
+              =FontWeight.Semibold
+      - recNavLineB:
           Control: Rectangle
           Properties:
-            X: =350
-            Y: =58
-            Width: =90
-            Height: =3
-            Fill: =RGBA(62, 230, 168, 1)
+            X: |-
+              =510
+            Y: |-
+              =58
+            Width: |-
+              =80
+            Height: |-
+              =4
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
       - lblTitleB:
           Control: Label
           Properties:
-            Text: ="Bench Board"
-            X: =40
-            Y: =84
-            Width: =400
-            Height: =44
-            Size: =24
-            FontWeight: =FontWeight.Bold
-            Color: =RGBA(27, 33, 64, 1)
-      - lblSubtitleB:
+            Text: |-
+              ="Bench Board"
+            X: |-
+              =40
+            Y: |-
+              =84
+            Width: |-
+              =400
+            Height: |-
+              =44
+            Size: |-
+              =24
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblSubB:
           Control: Label
           Properties:
-            Text: ="Allocation per consultant for the next 6 weeks, compared with each consultant's target utilisation."
-            X: =40
-            Y: =128
-            Width: =800
-            Height: =28
-            Size: =12
-            Color: =RGBA(107, 115, 153, 1)
-      - lblLegendFull:
-          Control: Label
+            Text: |-
+              ="Allocation per consultant for the next 6 weeks, against each consultant's target"
+            X: |-
+              =40
+            Y: |-
+              =128
+            Width: |-
+              =760
+            Height: |-
+              =26
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - btnLegendOk:
+          Control: Classic/Button
           Properties:
-            Text: ="At or above target"
-            X: =Parent.Width - 520
-            Y: =96
-            Width: =150
-            Height: =28
-            Align: =Align.Center
-            Size: =10
-            FontWeight: =FontWeight.Semibold
-            Fill: =RGBA(215, 245, 232, 1)
-            Color: =RGBA(15, 122, 82, 1)
-      - lblLegendPartial:
-          Control: Label
+            Text: |-
+              ="At or above target"
+            X: |-
+              =Parent.Width - 556
+            Y: |-
+              =96
+            Width: |-
+              =170
+            Height: |-
+              =30
+            Size: |-
+              =10
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            DisplayMode: |-
+              =DisplayMode.Disabled
+            DisabledFill: |-
+              =RGBA(215, 245, 232, 1)
+            DisabledColor: |-
+              =RGBA(15, 122, 82, 1)
+            DisabledBorderColor: |-
+              =RGBA(215, 245, 232, 1)
+            BorderThickness: |-
+              =0
+            RadiusTopLeft: |-
+              =15
+            RadiusTopRight: |-
+              =15
+            RadiusBottomLeft: |-
+              =15
+            RadiusBottomRight: |-
+              =15
+      - btnLegendLow:
+          Control: Classic/Button
           Properties:
-            Text: ="Below target"
-            X: =Parent.Width - 360
-            Y: =96
-            Width: =150
-            Height: =28
-            Align: =Align.Center
-            Size: =10
-            FontWeight: =FontWeight.Semibold
-            Fill: =RGBA(255, 241, 194, 1)
-            Color: =RGBA(138, 101, 0, 1)
-      - lblLegendBench:
-          Control: Label
+            Text: |-
+              ="Below target"
+            X: |-
+              =Parent.Width - 376
+            Y: |-
+              =96
+            Width: |-
+              =150
+            Height: |-
+              =30
+            Size: |-
+              =10
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            DisplayMode: |-
+              =DisplayMode.Disabled
+            DisabledFill: |-
+              =RGBA(255, 241, 194, 1)
+            DisabledColor: |-
+              =RGBA(138, 101, 0, 1)
+            DisabledBorderColor: |-
+              =RGBA(255, 241, 194, 1)
+            BorderThickness: |-
+              =0
+            RadiusTopLeft: |-
+              =15
+            RadiusTopRight: |-
+              =15
+            RadiusBottomLeft: |-
+              =15
+            RadiusBottomRight: |-
+              =15
+      - btnLegendBench:
+          Control: Classic/Button
           Properties:
-            Text: ="On the bench"
-            X: =Parent.Width - 200
-            Y: =96
-            Width: =160
-            Height: =28
-            Align: =Align.Center
-            Size: =10
-            FontWeight: =FontWeight.Semibold
-            Fill: =RGBA(255, 217, 217, 1)
-            Color: =RGBA(180, 35, 24, 1)
-      - recBoardCard:
-          Control: Rectangle
+            Text: |-
+              ="On the bench"
+            X: |-
+              =Parent.Width - 216
+            Y: |-
+              =96
+            Width: |-
+              =176
+            Height: |-
+              =30
+            Size: |-
+              =10
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            DisplayMode: |-
+              =DisplayMode.Disabled
+            DisabledFill: |-
+              =RGBA(255, 217, 217, 1)
+            DisabledColor: |-
+              =RGBA(180, 35, 24, 1)
+            DisabledBorderColor: |-
+              =RGBA(255, 217, 217, 1)
+            BorderThickness: |-
+              =0
+            RadiusTopLeft: |-
+              =15
+            RadiusTopRight: |-
+              =15
+            RadiusBottomLeft: |-
+              =15
+            RadiusBottomRight: |-
+              =15
+      - conBoard:
+          Control: GroupContainer
+          Variant: ManualLayout
           Properties:
-            X: =40
-            Y: =172
-            Width: =Parent.Width - 80
-            Height: =Parent.Height - 204
-            Fill: =RGBA(255, 255, 255, 1)
-            BorderColor: =RGBA(226, 229, 240, 1)
-            BorderThickness: =1
+            X: |-
+              =40
+            Y: |-
+              =172
+            Width: |-
+              =Parent.Width - 80
+            Height: |-
+              =Parent.Height - 196
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
       - lblColConsultant:
           Control: Label
           Properties:
-            Text: ="Consultant"
-            X: =64
-            Y: =184
-            Width: =300
-            Height: =36
-            Size: =11
-            FontWeight: =FontWeight.Semibold
-            Color: =RGBA(107, 115, 153, 1)
+            Text: |-
+              ="Consultant"
+            X: |-
+              =64
+            Y: |-
+              =186
+            Width: |-
+              =300
+            Height: |-
+              =32
+            Size: |-
+              =11
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
       - galWeekHeaders:
           Control: Gallery
           Variant: Horizontal
           Properties:
             Items: |-
               =ForAll(Sequence(6) As w, {Wk: DateAdd(gblBenchStart, (w.Value - 1) * 7, TimeUnit.Days)})
-            X: =Parent.Width - 656
-            Y: =184
-            Width: =600
-            Height: =40
-            TemplateSize: =100
-            TemplatePadding: =0
-            ShowScrollbar: =false
+            X: |-
+              =Parent.Width - 664
+            Y: |-
+              =186
+            Width: |-
+              =600
+            Height: |-
+              =32
+            TemplateSize: |-
+              =100
+            TemplatePadding: |-
+              =0
+            ShowScrollbar: |-
+              =false
           Children:
             - lblWeekHeader:
                 Control: Label
                 Properties:
-                  Text: ="W" & ISOWeekNum(ThisItem.Wk) & " · " & Text(ThisItem.Wk, "dd/mm")
-                  X: =0
-                  Y: =0
-                  Width: =Parent.TemplateWidth
-                  Height: =36
-                  Align: =Align.Center
-                  Size: =11
-                  FontWeight: =FontWeight.Semibold
-                  Color: =RGBA(107, 115, 153, 1)
+                  Text: |-
+                    ="W" & ISOWeekNum(ThisItem.Wk) & " · " & Text(ThisItem.Wk, "dd/mm")
+                  X: |-
+                    =0
+                  Y: |-
+                    =0
+                  Width: |-
+                    =Parent.TemplateWidth
+                  Height: |-
+                    =32
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Center
+                  FontWeight: |-
+                    =FontWeight.Semibold
       - galBench:
           Control: Gallery
           Variant: Vertical
           Properties:
-            Items: =Sort(Consultants, Name, SortOrder.Ascending)
-            X: =48
-            Y: =232
-            Width: =Parent.Width - 96
-            Height: =Parent.Height - 264
-            TemplateSize: =60
-            TemplatePadding: =0
+            Items: |-
+              =Sort(Consultants, Name, SortOrder.Ascending)
+            X: |-
+              =48
+            Y: |-
+              =224
+            Width: |-
+              =Parent.Width - 96
+            Height: |-
+              =Parent.Height - 260
+            TemplateSize: |-
+              =60
+            TemplatePadding: |-
+              =0
           Children:
             - cirAvatar:
                 Control: Circle
                 Properties:
-                  X: =16
-                  Y: =12
-                  Width: =36
-                  Height: =36
+                  X: |-
+                    =16
+                  Y: |-
+                    =12
+                  Width: |-
+                    =36
+                  Height: |-
+                    =36
                   Fill: |-
                     =Switch(Mod(Len(ThisItem.Name), 5),
-                        0, RGBA(107, 91, 255, 1),
-                        1, RGBA(224, 86, 155, 1),
-                        2, RGBA(31, 157, 107, 1),
-                        3, RGBA(217, 138, 28, 1),
-                        RGBA(61, 107, 255, 1))
+                        0, RGBA(107, 91, 255, 1), 1, RGBA(224, 86, 155, 1), 2, RGBA(31, 157, 107, 1),
+                        3, RGBA(217, 138, 28, 1), RGBA(61, 107, 255, 1))
             - lblInitials:
                 Control: Label
                 Properties:
-                  Text: =Left(ThisItem.Name, 1) & Left(Last(Split(ThisItem.Name, " ")).Value, 1)
-                  X: =16
-                  Y: =12
-                  Width: =36
-                  Height: =36
-                  Align: =Align.Center
-                  Size: =10
-                  FontWeight: =FontWeight.Bold
-                  Color: =RGBA(255, 255, 255, 1)
+                  Text: |-
+                    =Left(ThisItem.Name, 1) & Left(Last(Split(ThisItem.Name, " ")).Value, 1)
+                  X: |-
+                    =16
+                  Y: |-
+                    =12
+                  Width: |-
+                    =36
+                  Height: |-
+                    =36
+                  Size: |-
+                    =10
+                  Color: |-
+                    =RGBA(255, 255, 255, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Center
+                  FontWeight: |-
+                    =FontWeight.Semibold
             - lblConsultantName:
                 Control: Label
                 Properties:
-                  Text: =ThisItem.Name
-                  X: =64
-                  Y: =8
-                  Width: =280
-                  Height: =24
-                  Size: =13
-                  FontWeight: =FontWeight.Semibold
-                  Color: =RGBA(27, 33, 64, 1)
+                  Text: |-
+                    =ThisItem.Name
+                  X: |-
+                    =64
+                  Y: |-
+                    =8
+                  Width: |-
+                    =280
+                  Height: |-
+                    =24
+                  Size: |-
+                    =13
+                  Color: |-
+                    =RGBA(27, 33, 64, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
             - lblConsultantTarget:
                 Control: Label
                 Properties:
-                  Text: ="Target " & ThisItem.'Target Utilisation' & "%" & If(IsBlank(ThisItem.Manager), " · Manager", " · reports to " & ThisItem.Manager.Name)
-                  X: =64
-                  Y: =30
-                  Width: =320
-                  Height: =22
-                  Size: =10
-                  Color: =RGBA(107, 115, 153, 1)
+                  Text: |-
+                    ="Target " & ThisItem.'Target Utilisation' & "%" & If(IsBlank(ThisItem.Manager), " · Manager", " · reports to " & ThisItem.Manager.Name)
+                  X: |-
+                    =64
+                  Y: |-
+                    =30
+                  Width: |-
+                    =340
+                  Height: |-
+                    =22
+                  Size: |-
+                    =10
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
             - galCells:
                 Control: Gallery
                 Variant: Horizontal
@@ -248,38 +527,68 @@ Screens:
                                     Consultant.Consultant = ThisItem.Consultant
                                     && 'Start Date' <= wk && 'End Date' >= wk), 'Allocation %'), 0)
                             }))
-                  X: =Parent.TemplateWidth - 608
-                  Y: =10
-                  Width: =600
-                  Height: =40
-                  TemplateSize: =100
-                  TemplatePadding: =0
-                  ShowScrollbar: =false
+                  X: |-
+                    =Parent.TemplateWidth - 608
+                  Y: |-
+                    =8
+                  Width: |-
+                    =600
+                  Height: |-
+                    =44
+                  TemplateSize: |-
+                    =100
+                  TemplatePadding: |-
+                    =0
+                  ShowScrollbar: |-
+                    =false
                 Children:
-                  - lblCell:
-                      Control: Label
+                  - btnCell:
+                      Control: Classic/Button
                       Properties:
-                        Text: =ThisItem.Alloc & "%"
-                        X: =4
-                        Y: =0
-                        Width: =Parent.TemplateWidth - 8
-                        Height: =40
-                        Align: =Align.Center
-                        Size: =11
-                        FontWeight: =FontWeight.Bold
-                        Fill: |-
-                          =If(ThisItem.Alloc >= ThisItem.Target, RGBA(215, 245, 232, 1),
-                              ThisItem.Alloc > 0, RGBA(255, 241, 194, 1),
-                              RGBA(255, 217, 217, 1))
-                        Color: |-
-                          =If(ThisItem.Alloc >= ThisItem.Target, RGBA(15, 122, 82, 1),
-                              ThisItem.Alloc > 0, RGBA(138, 101, 0, 1),
-                              RGBA(180, 35, 24, 1))
+                        Text: |-
+                          =ThisItem.Alloc & "%"
+                        X: |-
+                          =4
+                        Y: |-
+                          =4
+                        Width: |-
+                          =Parent.TemplateWidth - 8
+                        Height: |-
+                          =36
+                        Size: |-
+                          =11
+                        Font: |-
+                          =Font.'Segoe UI'
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                        DisplayMode: |-
+                          =DisplayMode.Disabled
+                        DisabledFill: |-
+                          =If(ThisItem.Alloc >= ThisItem.Target, RGBA(215, 245, 232, 1), ThisItem.Alloc > 0, RGBA(255, 241, 194, 1), RGBA(255, 217, 217, 1))
+                        DisabledColor: |-
+                          =If(ThisItem.Alloc >= ThisItem.Target, RGBA(15, 122, 82, 1), ThisItem.Alloc > 0, RGBA(138, 101, 0, 1), RGBA(180, 35, 24, 1))
+                        DisabledBorderColor: |-
+                          =If(ThisItem.Alloc >= ThisItem.Target, RGBA(215, 245, 232, 1), ThisItem.Alloc > 0, RGBA(255, 241, 194, 1), RGBA(255, 217, 217, 1))
+                        BorderThickness: |-
+                          =0
+                        RadiusTopLeft: |-
+                          =8
+                        RadiusTopRight: |-
+                          =8
+                        RadiusBottomLeft: |-
+                          =8
+                        RadiusBottomRight: |-
+                          =8
             - recRowDivider:
                 Control: Rectangle
                 Properties:
-                  X: =0
-                  Y: =Parent.TemplateHeight - 1
-                  Width: =Parent.TemplateWidth
-                  Height: =1
-                  Fill: =RGBA(236, 238, 245, 1)
+                  X: |-
+                    =0
+                  Y: |-
+                    =Parent.TemplateHeight - 1
+                  Width: |-
+                    =Parent.TemplateWidth
+                  Height: |-
+                    =1
+                  Fill: |-
+                    =RGBA(236, 238, 245, 1)
