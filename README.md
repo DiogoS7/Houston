@@ -1,4 +1,4 @@
-![Houston banner](assets/banner-bench.png)
+![Houston banner](assets/houston-banner.png)
 
 # Houston
 
@@ -37,6 +37,7 @@ All modules share one Dataverse data model: Consultants, Clients, Engagements an
 │   └── releases/    Release notes per version
 ├── powerbi/         Power BI report as a Power BI Project (.pbip)
 ├── screenshots/     Screenshots per release
+├── scripts/         Setup-Houston.ps1: builds the Dataverse data model and loads the seed data
 └── solution/        Unpacked Dataverse solution (source)
 ```
 
@@ -44,13 +45,16 @@ All modules share one Dataverse data model: Consultants, Clients, Engagements an
 
 1. Get a free [Power Apps Developer Plan](https://powerapps.microsoft.com/developerplan) environment.
 2. Install the [Power Platform Tools](https://marketplace.visualstudio.com/items?itemName=microsoft-IsvExpTools.powerplatform-vscode) extension for VS Code.
-3. Pack and import the solution:
+3. Build the data model and load the seed data with one script (sign-in uses a device code):
+   ```
+   powershell -ExecutionPolicy Bypass -File scripts\Setup-Houston.ps1 -OrgUrl https://<your-org>.crm4.dynamics.com
+   ```
+   Or, once the solution is in source control, pack and import it:
    ```
    pac solution pack --zipfile out/Houston.zip --folder solution
    pac solution import --path out/Houston.zip
    ```
-4. Load the CSVs in `data/` into the matching tables.
-5. Open `powerbi/` in Power BI Desktop and point the Dataverse connection at your environment.
+4. Open `powerbi/` in Power BI Desktop and point the Dataverse connection at your environment.
 
 ## Documentation
 
