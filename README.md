@@ -1,4 +1,4 @@
-![Houston banner](assets/banner.png)
+![Houston banner](assets/houston-banner.png)
 
 # Houston
 
