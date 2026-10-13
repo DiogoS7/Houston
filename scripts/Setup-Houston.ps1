@@ -144,7 +144,7 @@ $Columns = @(
   @{ T = 'consultant';      S = 'TargetUtilisation'; L = 'Target Utilisation'; Type = 'Int'; Min = 0; Max = 100 }
   @{ T = 'engagement';      S = 'StartDate';         L = 'Start Date';         Type = 'Date' }
   @{ T = 'engagement';      S = 'EndDate';           L = 'End Date';           Type = 'Date' }
-  @{ T = 'engagement';      S = 'Status';            L = 'Status';             Type = 'Choice' }
+  @{ T = 'engagement';      S = 'Status';            L = 'Engagement Status';  Type = 'Choice' }
   @{ T = 'engagement';      S = 'Billable';          L = 'Billable';           Type = 'YesNo'; Default = $true }
   @{ T = 'consultantskill'; S = 'Proficiency';       L = 'Proficiency';        Type = 'Int'; Min = 1; Max = 5 }
   @{ T = 'consultantskill'; S = 'LastUsed';          L = 'Last Used';          Type = 'Date' }
@@ -154,7 +154,7 @@ $Columns = @(
   @{ T = 'assignment';      S = 'StartDate';         L = 'Start Date';         Type = 'Date' }
   @{ T = 'assignment';      S = 'EndDate';           L = 'End Date';           Type = 'Date' }
   @{ T = 'timesheet';       S = 'WeekStart';         L = 'Week Start';         Type = 'Date' }
-  @{ T = 'timesheet';       S = 'Status';            L = 'Status';             Type = 'Choice' }
+  @{ T = 'timesheet';       S = 'Status';            L = 'Approval Status';    Type = 'Choice' }
   @{ T = 'timesheet';       S = 'DecisionDate';      L = 'Decision Date';      Type = 'DateTime' }
   @{ T = 'timesheet';       S = 'Comment';           L = 'Comment';            Type = 'Memo' }
   @{ T = 'timeentry';       S = 'Date';              L = 'Date';               Type = 'Date' }
