@@ -341,6 +341,7 @@
           <IsFilterable>0</IsFilterable>
           <IsRetrievable>0</IsRetrievable>
           <IsLocalizable>0</IsLocalizable>
+          <AppDefaultValue>-1</AppDefaultValue>
           <optionset Name="hou_timesheet_hou_status">
             <OptionSetType>picklist</OptionSetType>
             <IntroducedVersion>1.0.0.0</IntroducedVersion>
@@ -372,8 +373,11 @@
             </options>
           </optionset>
           <displaynames>
-            <displayname description="Status" languagecode="1033" />
+            <displayname description="Approval Status" languagecode="1033" />
           </displaynames>
+          <Descriptions>
+            <Description description="" languagecode="1033" />
+          </Descriptions>
         </attribute>
         <attribute PhysicalName="hou_TimesheetId">
           <Type>primarykey</Type>
