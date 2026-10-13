@@ -30,13 +30,25 @@ jobs:
           sys.exit(1 if errors else 0)
           EOF
 
+      - name: Set up .NET
+        if: hashFiles('solution/Other/Solution.xml') != ''
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+
       - name: Install Power Platform CLI
         if: hashFiles('solution/Other/Solution.xml') != ''
-        uses: microsoft/powerplatform-actions/actions-install@v1
+        run: |
+          dotnet tool install --global Microsoft.PowerApps.CLI.Tool
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
 
       - name: Pack solution
         if: hashFiles('solution/Other/Solution.xml') != ''
-        run: pac solution pack --zipfile out/Houston.zip --folder solution --packagetype Unmanaged
+        run: |
+          pac help | head -5
+          pac solution pack --zipfile out/Houston.zip --folder solution --packagetype Unmanaged
 
       - name: Upload solution package
         if: hashFiles('solution/Other/Solution.xml') != ''
