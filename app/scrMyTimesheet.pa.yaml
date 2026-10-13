@@ -611,9 +611,9 @@ Screens:
             Items: |-
               =Filter(Engagements, 'Engagement Status' <> 'Engagement Status (Engagements)'.Closed)
             DisplayFields: |-
-              =["hou_name"]
+              =["Name"]
             SearchFields: |-
-              =["hou_name"]
+              =["Name"]
             SelectMultiple: |-
               =false
             InputTextPlaceholder: |-
