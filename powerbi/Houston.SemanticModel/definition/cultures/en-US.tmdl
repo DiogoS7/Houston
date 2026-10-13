@@ -1,2 +1,221 @@
 cultureInfo en-US
 
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "hou_timesheet.week_start": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_timesheet",
+			          "ConceptualProperty": "Week Start"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Week": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hou_timeentry.billable_utilisation_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_timeentry",
+			          "ConceptualProperty": "Billable Utilisation %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Billable utilisation": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hou_timeentry.target_utilisation_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_timeentry",
+			          "ConceptualProperty": "Target Utilisation %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Target": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hou_consultant.name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_consultant",
+			          "ConceptualProperty": "Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Consultant": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "weeks.week_label": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Weeks",
+			          "ConceptualProperty": "Week Label"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Week": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hou_assignment.forecast_allocation_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_assignment",
+			          "ConceptualProperty": "Forecast Allocation %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Allocation": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hou_skill.name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_skill",
+			          "ConceptualProperty": "Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Skill": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hou_consultantskill.skill_gap": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_consultantskill",
+			          "ConceptualProperty": "Skill Gap"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Shortage": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hou_consultantskill.skill_supply": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_consultantskill",
+			          "ConceptualProperty": "Skill Supply"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Consultants with the skill": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hou_consultantskill.skill_demand": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "hou_consultantskill",
+			          "ConceptualProperty": "Skill Demand"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Headcount needed": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

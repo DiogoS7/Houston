@@ -4,14 +4,13 @@ table hou_assignment
 	measure 'Forecast Allocation %' = ```
 			
 			        VAR wk = MAX(Weeks[Week Start])
-			        RETURN DIVIDE(
+			        RETURN IF(COUNTROWS(hou_consultant) = 0, BLANK(), DIVIDE(
 			            SUMX(FILTER(hou_assignment,
 			                hou_assignment[Start Date] <= wk && hou_assignment[End Date] >= wk),
-			                hou_assignment[Allocation %]) + 0, 100)
+			                hou_assignment[Allocation %]) + 0, 100))
 			```
+		formatString: 0%
 		lineageTag: a7d77ba2-3e45-489e-aec0-8eafbe81fafe
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Consultants on Bench' = ```
 			

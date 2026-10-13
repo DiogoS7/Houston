@@ -29,6 +29,7 @@ table Weeks
 		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Week Label]
+		sortByColumn: Value
 
 		annotation SummarizationSetBy = Automatic
 

@@ -30,25 +30,22 @@ table hou_timeentry
 			
 			        DIVIDE([Billable Hours], [Capacity Hours])
 			```
+		formatString: 0.0%
 		lineageTag: 182e9305-cbd8-40b6-9551-bbbebe65763e
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Target Utilisation %' = ```
 			
 			        DIVIDE(AVERAGE(hou_consultant[Target Utilisation]), 100)
 			```
+		formatString: 0.0%
 		lineageTag: fe429ab9-8c53-4a97-a797-6ac76be564f7
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Utilisation vs Target' = ```
 			
 			        [Billable Utilisation %] - [Target Utilisation %]
 			```
+		formatString: 0.0%
 		lineageTag: 8ae149a9-0112-4385-aab5-aa94b8896fc5
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column 'Time Entry'
 		dataType: string

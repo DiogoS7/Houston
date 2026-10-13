@@ -174,8 +174,6 @@ relationship 0fe77104-1a18-418e-82a3-dde266e24bc4
 	toColumn: LocalDateTable_9bcd04b8-cf13-46d9-a87b-e46cf5372973.Date
 
 relationship 6d6659b7-3f65-4c2c-874a-1e901eadf536
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
 	fromColumn: hou_assignment.hou_consultant
 	toColumn: hou_consultant.Consultant
 
@@ -225,7 +223,6 @@ relationship 43f97a1e-e066-4e87-8001-f72a46e57f57
 	annotation PBI_IsFromSource = FS
 
 relationship 43d73644-8990-42ac-874b-e0b1806a052e
-	isActive: false
 	fromColumn: hou_timesheet.hou_consultant
 	toColumn: hou_consultant.Consultant
 

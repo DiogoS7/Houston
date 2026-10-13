@@ -1,0 +1,218 @@
+{
+  "name": "Houston",
+  "dataColors": [
+    "#3D6BFF",
+    "#3EE6A8",
+    "#1F2A5C",
+    "#F2B705",
+    "#E0569B",
+    "#6B5BFF",
+    "#1F9D6B",
+    "#D98A1C"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#1B2140",
+  "tableAccent": "#3D6BFF",
+  "good": "#0F7A52",
+  "neutral": "#8A6500",
+  "bad": "#B42318",
+  "maximum": "#0F7A52",
+  "center": "#F2B705",
+  "minimum": "#B42318",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 30,
+      "color": "#1F2A5C"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 13,
+      "color": "#1B2140"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#1B2140"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#6B7399"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E2E5F0"
+              }
+            },
+            "radius": 14
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "padding": [
+          {
+            "top": 14,
+            "bottom": 14,
+            "left": 18,
+            "right": 18
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontColor": {
+              "solid": {
+                "color": "#1B2140"
+              }
+            },
+            "fontSize": 13,
+            "bold": false
+          }
+        ],
+        "subTitle": [
+          {
+            "show": false
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": true,
+            "background": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "valueAxis": [
+          {
+            "gridlineColor": {
+              "solid": {
+                "color": "#EEF0F6"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F6F7FB"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F6F7FB"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "pivotTable": {
+      "*": {
+        "grid": [
+          {
+            "rowPadding": 6,
+            "gridHorizontal": false,
+            "gridVertical": false
+          }
+        ],
+        "columnHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#6B7399"
+              }
+            },
+            "fontSize": 11,
+            "alignment": "Center"
+          }
+        ],
+        "rowHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#1B2140"
+              }
+            },
+            "fontSize": 12
+          }
+        ],
+        "values": [
+          {
+            "fontSize": 11
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "grid": [
+          {
+            "rowPadding": 6,
+            "gridHorizontal": true,
+            "gridHorizontalColor": {
+              "solid": {
+                "color": "#EEF0F6"
+              }
+            },
+            "gridVertical": false
+          }
+        ],
+        "columnHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#6B7399"
+              }
+            },
+            "fontSize": 11
+          }
+        ],
+        "values": [
+          {
+            "fontSize": 12,
+            "fontColorPrimary": {
+              "solid": {
+                "color": "#1B2140"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
