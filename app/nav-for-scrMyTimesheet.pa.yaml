@@ -1,0 +1,32 @@
+- lblNavTimesheet:
+    Control: Label
+    Properties:
+      Text: ="My Timesheet"
+      X: =200
+      Y: =0
+      Width: =130
+      Height: =64
+      Align: =Align.Center
+      Size: =13
+      FontWeight: =FontWeight.Semibold
+      Color: =RGBA(255, 255, 255, 1)
+- lblNavBench:
+    Control: Label
+    Properties:
+      Text: ="Bench Board"
+      X: =330
+      Y: =0
+      Width: =130
+      Height: =64
+      Align: =Align.Center
+      Size: =13
+      Color: =RGBA(190, 200, 235, 1)
+      OnSelect: =Navigate(scrBenchBoard, ScreenTransition.None)
+- recNavUnderline:
+    Control: Rectangle
+    Properties:
+      X: =220
+      Y: =58
+      Width: =90
+      Height: =3
+      Fill: =RGBA(62, 230, 168, 1)

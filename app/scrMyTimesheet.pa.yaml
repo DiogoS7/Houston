@@ -1,0 +1,359 @@
+Screens:
+  scrMyTimesheet:
+    Properties:
+      Fill: =RGBA(246, 247, 251, 1)
+      OnVisible: |-
+        =If(IsBlank(gblMe), Set(gblMe, LookUp(Consultants, Name = "Ana Lopes")));
+        If(IsBlank(gblWeekStart), Set(gblWeekStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days)));
+        Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart))
+    Children:
+      - recHeader:
+          Control: Rectangle
+          Properties:
+            X: =0
+            Y: =0
+            Width: =Parent.Width
+            Height: =64
+            Fill: =RGBA(31, 42, 92, 1)
+      - lblAppName:
+          Control: Label
+          Properties:
+            Text: ="Houston"
+            X: =32
+            Y: =0
+            Width: =200
+            Height: =64
+            Size: =20
+            FontWeight: =FontWeight.Bold
+            Color: =RGBA(255, 255, 255, 1)
+      - lblUser:
+          Control: Label
+          Properties:
+            Text: =gblMe.Name
+            X: =Parent.Width - 332
+            Y: =0
+            Width: =300
+            Height: =64
+            Align: =Align.Right
+            Size: =13
+            Color: =RGBA(190, 200, 235, 1)
+      - lblTitle:
+          Control: Label
+          Properties:
+            Text: ="My Timesheet"
+            X: =40
+            Y: =84
+            Width: =400
+            Height: =44
+            Size: =24
+            FontWeight: =FontWeight.Bold
+            Color: =RGBA(27, 33, 64, 1)
+      - btnPrevWeek:
+          Control: Classic/Button
+          Properties:
+            Text: ="◀"
+            X: =40
+            Y: =132
+            Width: =40
+            Height: =32
+            Size: =12
+            Fill: =RGBA(255, 255, 255, 1)
+            Color: =RGBA(31, 42, 92, 1)
+            BorderColor: =RGBA(210, 214, 230, 1)
+            BorderThickness: =1
+            HoverFill: =RGBA(234, 238, 250, 1)
+            HoverColor: =RGBA(31, 42, 92, 1)
+            OnSelect: |-
+              =Set(gblWeekStart, DateAdd(gblWeekStart, -7, TimeUnit.Days));
+              Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart))
+      - lblWeek:
+          Control: Label
+          Properties:
+            Text: ="Week of " & Text(gblWeekStart, "dd mmm yyyy")
+            X: =88
+            Y: =132
+            Width: =200
+            Height: =32
+            Align: =Align.Center
+            Size: =13
+            FontWeight: =FontWeight.Semibold
+            Color: =RGBA(27, 33, 64, 1)
+      - btnNextWeek:
+          Control: Classic/Button
+          Properties:
+            Text: ="▶"
+            X: =296
+            Y: =132
+            Width: =40
+            Height: =32
+            Size: =12
+            Fill: =RGBA(255, 255, 255, 1)
+            Color: =RGBA(31, 42, 92, 1)
+            BorderColor: =RGBA(210, 214, 230, 1)
+            BorderThickness: =1
+            HoverFill: =RGBA(234, 238, 250, 1)
+            HoverColor: =RGBA(31, 42, 92, 1)
+            OnSelect: |-
+              =Set(gblWeekStart, DateAdd(gblWeekStart, 7, TimeUnit.Days));
+              Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart))
+      - lblStatus:
+          Control: Label
+          Properties:
+            Text: |-
+              =If(IsBlank(gblSheet), "Not started",
+                  gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Approved, "Approved",
+                  gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Submitted, "Submitted",
+                  gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Rejected, "Rejected",
+                  "Draft")
+            X: =Parent.Width - 200
+            Y: =92
+            Width: =160
+            Height: =32
+            Align: =Align.Center
+            Size: =12
+            FontWeight: =FontWeight.Bold
+            Fill: |-
+              =Switch(Self.Text,
+                  "Approved", RGBA(215, 245, 232, 1),
+                  "Submitted", RGBA(222, 233, 255, 1),
+                  "Rejected", RGBA(255, 217, 217, 1),
+                  "Draft", RGBA(255, 241, 194, 1),
+                  RGBA(236, 238, 245, 1))
+            Color: |-
+              =Switch(Self.Text,
+                  "Approved", RGBA(15, 122, 82, 1),
+                  "Submitted", RGBA(37, 87, 214, 1),
+                  "Rejected", RGBA(180, 35, 24, 1),
+                  "Draft", RGBA(138, 101, 0, 1),
+                  RGBA(107, 115, 153, 1))
+      - recEntriesCard:
+          Control: Rectangle
+          Properties:
+            X: =40
+            Y: =184
+            Width: =Parent.Width - 520
+            Height: =Parent.Height - 224
+            Fill: =RGBA(255, 255, 255, 1)
+            BorderColor: =RGBA(226, 229, 240, 1)
+            BorderThickness: =1
+      - lblEntriesHeader:
+          Control: Label
+          Properties:
+            Text: ="Entries this week"
+            X: =64
+            Y: =200
+            Width: =400
+            Height: =36
+            Size: =15
+            FontWeight: =FontWeight.Bold
+            Color: =RGBA(27, 33, 64, 1)
+      - galEntries:
+          Control: Gallery
+          Variant: Vertical
+          Properties:
+            Items: =Sort(Filter('Time Entries', Timesheet.Timesheet = gblSheet.Timesheet), Date, SortOrder.Ascending)
+            X: =56
+            Y: =252
+            Width: =Parent.Width - 552
+            Height: =Parent.Height - 360
+            TemplateSize: =56
+            TemplatePadding: =0
+          Children:
+            - lblEntryEngagement:
+                Control: Label
+                Properties:
+                  Text: =ThisItem.Engagement.Name
+                  X: =8
+                  Y: =6
+                  Width: =Parent.TemplateWidth - 220
+                  Height: =24
+                  Size: =13
+                  FontWeight: =FontWeight.Semibold
+                  Color: =RGBA(27, 33, 64, 1)
+            - lblEntryDate:
+                Control: Label
+                Properties:
+                  Text: =Text(ThisItem.Date, "dddd, dd mmm") & If(ThisItem.Billable = 'Billable (Time Entries)'.Yes, " · billable", " · non-billable")
+                  X: =8
+                  Y: =28
+                  Width: =Parent.TemplateWidth - 220
+                  Height: =22
+                  Size: =11
+                  Color: =RGBA(107, 115, 153, 1)
+            - lblEntryHours:
+                Control: Label
+                Properties:
+                  Text: =Text(ThisItem.Hours, "0.0") & " h"
+                  X: =Parent.TemplateWidth - 200
+                  Y: =6
+                  Width: =120
+                  Height: =44
+                  Align: =Align.Right
+                  Size: =15
+                  FontWeight: =FontWeight.Bold
+                  Color: =RGBA(27, 33, 64, 1)
+            - icoDeleteEntry:
+                Control: Classic/Icon
+                Properties:
+                  Icon: =Icon.Trash
+                  X: =Parent.TemplateWidth - 60
+                  Y: =12
+                  Width: =32
+                  Height: =32
+                  PaddingTop: =6
+                  PaddingBottom: =6
+                  PaddingLeft: =6
+                  PaddingRight: =6
+                  Color: =RGBA(180, 35, 24, 1)
+                  Visible: =gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft
+                  OnSelect: =Remove('Time Entries', ThisItem)
+            - recEntryDivider:
+                Control: Rectangle
+                Properties:
+                  X: =0
+                  Y: =Parent.TemplateHeight - 1
+                  Width: =Parent.TemplateWidth
+                  Height: =1
+                  Fill: =RGBA(236, 238, 245, 1)
+      - lblTotal:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Total: " & Text(Coalesce(Sum(galEntries.AllItems, Hours), 0), "0.0") & " h"
+            X: =64
+            Y: =Parent.Height - 92
+            Width: =Parent.Width - 600
+            Height: =40
+            Align: =Align.Right
+            Size: =16
+            FontWeight: =FontWeight.Bold
+            Color: =RGBA(27, 33, 64, 1)
+      - recLogCard:
+          Control: Rectangle
+          Properties:
+            X: =Parent.Width - 456
+            Y: =184
+            Width: =416
+            Height: =Parent.Height - 224
+            Fill: =RGBA(255, 255, 255, 1)
+            BorderColor: =RGBA(226, 229, 240, 1)
+            BorderThickness: =1
+      - lblLogHeader:
+          Control: Label
+          Properties:
+            Text: ="Log hours"
+            X: =Parent.Width - 432
+            Y: =200
+            Width: =368
+            Height: =36
+            Size: =15
+            FontWeight: =FontWeight.Bold
+            Color: =RGBA(27, 33, 64, 1)
+      - lblEngagementCaption:
+          Control: Label
+          Properties:
+            Text: ="Engagement"
+            X: =Parent.Width - 432
+            Y: =244
+            Width: =368
+            Height: =24
+            Size: =11
+            Color: =RGBA(107, 115, 153, 1)
+      - cmbEngagement:
+          Control: Classic/ComboBox
+          Properties:
+            Items: =Filter(Engagements, 'Engagement Status' <> 'Engagement Status (Engagements)'.Closed)
+            DisplayFields: =["hou_name"]
+            SearchFields: =["hou_name"]
+            SelectMultiple: =false
+            InputTextPlaceholder: ="Choose an engagement"
+            X: =Parent.Width - 432
+            Y: =270
+            Width: =368
+            Height: =40
+      - lblDateCaption:
+          Control: Label
+          Properties:
+            Text: ="Date"
+            X: =Parent.Width - 432
+            Y: =322
+            Width: =368
+            Height: =24
+            Size: =11
+            Color: =RGBA(107, 115, 153, 1)
+      - dpEntryDate:
+          Control: Classic/DatePicker
+          Properties:
+            DefaultDate: =gblWeekStart
+            Format: ="dd/mm/yyyy"
+            X: =Parent.Width - 432
+            Y: =348
+            Width: =368
+            Height: =40
+      - lblHoursCaption:
+          Control: Label
+          Properties:
+            Text: ="Hours"
+            X: =Parent.Width - 432
+            Y: =400
+            Width: =368
+            Height: =24
+            Size: =11
+            Color: =RGBA(107, 115, 153, 1)
+      - txtHours:
+          Control: Classic/TextInput
+          Properties:
+            Default: =""
+            HintText: ="e.g. 8"
+            Format: =TextFormat.Number
+            X: =Parent.Width - 432
+            Y: =426
+            Width: =368
+            Height: =40
+      - btnAddHours:
+          Control: Classic/Button
+          Properties:
+            Text: ="Add hours"
+            X: =Parent.Width - 432
+            Y: =486
+            Width: =368
+            Height: =44
+            Fill: =RGBA(31, 42, 92, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(45, 60, 130, 1)
+            DisplayMode: |-
+              =If((IsBlank(gblSheet) || gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft)
+                  && !IsBlank(cmbEngagement.Selected) && Value(txtHours.Text) > 0,
+                  DisplayMode.Edit, DisplayMode.Disabled)
+            OnSelect: |-
+              =If(IsBlank(gblSheet),
+                  Set(gblSheet, Patch(Timesheets, Defaults(Timesheets), {
+                      Name: gblMe.Name & " – " & Text(gblWeekStart, "yyyy-mm-dd"),
+                      Consultant: gblMe,
+                      'Week Start': gblWeekStart,
+                      'Approval Status': 'Approval Status (Timesheets)'.Draft }))
+              );
+              Patch('Time Entries', Defaults('Time Entries'), {
+                  Timesheet: gblSheet,
+                  Engagement: cmbEngagement.Selected,
+                  Date: dpEntryDate.SelectedDate,
+                  Hours: Value(txtHours.Text),
+                  Billable: If(cmbEngagement.Selected.Billable = 'Billable (Engagements)'.Yes, 'Billable (Time Entries)'.Yes, 'Billable (Time Entries)'.No) });
+              Reset(txtHours)
+      - btnSubmit:
+          Control: Classic/Button
+          Properties:
+            Text: ="Submit for approval"
+            X: =Parent.Width - 432
+            Y: =Parent.Height - 104
+            Width: =368
+            Height: =48
+            Fill: =RGBA(31, 157, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(22, 130, 88, 1)
+            DisplayMode: |-
+              =If(!IsBlank(gblSheet) && gblSheet.'Approval Status' = 'Approval Status (Timesheets)'.Draft && CountRows(galEntries.AllItems) > 0,
+                  DisplayMode.Edit, DisplayMode.Disabled)
+            OnSelect: |-
+              =Set(gblSheet, Patch(Timesheets, gblSheet, { 'Approval Status': 'Approval Status (Timesheets)'.Submitted }));
+              Notify("Timesheet submitted for approval", NotificationType.Success)
