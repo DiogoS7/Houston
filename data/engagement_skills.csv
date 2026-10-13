@@ -1,0 +1,11 @@
+hou_engagement,hou_skill,hou_requiredlevel,hou_headcount
+Core Banking CRM Rollout,Salesforce,4,2
+Core Banking CRM Rollout,Requirements Elicitation,3,1
+Claims Automation,Power Automate,4,2
+Claims Automation,Dataverse,3,1
+Store Ops Analytics,Power BI,4,2
+Store Ops Analytics,SQL,3,1
+Citizen Services Portal,Power Apps,4,2
+Citizen Services Portal,Process Modelling (BPMN),3,1
+Field Service Modernisation,Salesforce,4,3
+Field Service Modernisation,Apex,4,1

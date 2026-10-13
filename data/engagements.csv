@@ -1,0 +1,8 @@
+hou_name,hou_client,hou_startdate,hou_enddate,hou_status,hou_billable
+Core Banking CRM Rollout,Banco Atlântico,2026-06-01,2027-02-26,Active,Yes
+Claims Automation,Seguros Tejo,2026-07-06,2026-12-18,Active,Yes
+Store Ops Analytics,Mercado Norte,2026-09-01,2026-11-27,Active,Yes
+Citizen Services Portal,Câmara Digital,2026-11-02,2027-04-30,Pipeline,Yes
+Field Service Modernisation,Energia Sul,2026-12-01,2027-06-30,Pipeline,Yes
+Warehouse KPI Dashboards,Iberia Logistics,2026-04-06,2026-09-25,Closed,Yes
+Internal: Houston Platform,,2026-09-01,2026-12-31,Active,No

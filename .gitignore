@@ -1,0 +1,12 @@
+# Build output
+out/
+*.zip
+
+# Power BI Project local files
+powerbi/**/.pbi/localSettings.json
+powerbi/**/.pbi/cache.abf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/

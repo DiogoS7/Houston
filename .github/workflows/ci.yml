@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Validate seed data
+        run: |
+          python3 - <<'EOF'
+          import csv, glob, sys
+          errors = 0
+          for path in sorted(glob.glob("data/*.csv")):
+              with open(path, encoding="utf-8") as f:
+                  rows = list(csv.reader(f))
+              width = len(rows[0])
+              for i, row in enumerate(rows[1:], start=2):
+                  if len(row) != width:
+                      print(f"{path}:{i}: expected {width} columns, got {len(row)}")
+                      errors += 1
+              print(f"{path}: {len(rows) - 1} rows")
+          sys.exit(1 if errors else 0)
+          EOF
+
+      - name: Install Power Platform CLI
+        if: hashFiles('solution/Other/Solution.xml') != ''
+        uses: microsoft/powerplatform-actions/actions-install@v1
+
+      - name: Pack solution
+        if: hashFiles('solution/Other/Solution.xml') != ''
+        run: pac solution pack --zipfile out/Houston.zip --folder solution --packagetype Unmanaged
+
+      - name: Upload solution package
+        if: hashFiles('solution/Other/Solution.xml') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: Houston-solution
+          path: out/Houston.zip

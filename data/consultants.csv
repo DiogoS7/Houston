@@ -1,0 +1,13 @@
+hou_name,hou_email,hou_grade,hou_practice,hou_targetutilisation,hou_manager
+Marta Ferreira,marta.ferreira@houston-demo.com,Manager,Power Platform,70,
+Rui Costa,rui.costa@houston-demo.com,Manager,Salesforce,70,
+Ana Lopes,ana.lopes@houston-demo.com,Senior Consultant,Power Platform,85,Marta Ferreira
+Tiago Martins,tiago.martins@houston-demo.com,Consultant,Power Platform,85,Marta Ferreira
+Inês Rodrigues,ines.rodrigues@houston-demo.com,Consultant,Data & AI,85,Marta Ferreira
+João Almeida,joao.almeida@houston-demo.com,Analyst,Business Analysis,80,Marta Ferreira
+Beatriz Sousa,beatriz.sousa@houston-demo.com,Senior Consultant,Salesforce,85,Rui Costa
+Pedro Gomes,pedro.gomes@houston-demo.com,Consultant,Salesforce,85,Rui Costa
+Sofia Carvalho,sofia.carvalho@houston-demo.com,Consultant,Business Analysis,80,Rui Costa
+Miguel Pinto,miguel.pinto@houston-demo.com,Analyst,Data & AI,80,Rui Costa
+Carolina Ribeiro,carolina.ribeiro@houston-demo.com,Consultant,Power Platform,85,Marta Ferreira
+Duarte Silva,duarte.silva@houston-demo.com,Analyst,Salesforce,80,Rui Costa
