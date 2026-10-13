@@ -1,14 +1,10 @@
-<p align="center">
-  <img src="assets/banner.png" alt="Houston banner" width="100%">
-</p>
+![Houston banner](assets/banner.png)
 
-<h1 align="center">Houston</h1>
+# Houston
 
-<p align="center">
-  <a href="https://github.com/DiogoS7/Houston/actions/workflows/ci.yml"><img src="https://github.com/DiogoS7/Houston/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-</p>
+[![CI](https://github.com/DiogoS7/Houston/actions/workflows/ci.yml/badge.svg)](https://github.com/DiogoS7/Houston/actions/workflows/ci.yml)
 
-<p align="center"><em>Houston, we have a solution.</em></p>
+*Houston, we have a solution.*
 
 A consulting delivery platform built on Microsoft Power Platform. Houston follows an engagement through its whole lifecycle: staffing the team, scoping the work, delivering it and stabilising it after go-live.
 
