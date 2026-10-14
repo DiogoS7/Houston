@@ -87,6 +87,7 @@
       <RootComponent type="1" schemaName="hou_skill" behavior="0" />
       <RootComponent type="1" schemaName="hou_timeentry" behavior="0" />
       <RootComponent type="1" schemaName="hou_timesheet" behavior="0" />
+      <RootComponent type="29" id="{8bf4fbf0-e8c7-f111-a059-00224888dd67}" behavior="0" />
       <RootComponent type="300" schemaName="hou_houston_dab0c" behavior="0" />
     </RootComponents>
     <MissingDependencies />
