@@ -123,6 +123,7 @@ $Tables = @(
   @{ N = 'assignment';      D = 'Assignment';       P = 'Assignments';       Pk = 'Reference'; Auto = 'ASG-{SEQNUM:5}' }
   @{ N = 'timesheet';       D = 'Timesheet';        P = 'Timesheets';        Pk = 'Name' }
   @{ N = 'timeentry';       D = 'Time Entry';       P = 'Time Entries';      Pk = 'Reference'; Auto = 'TE-{SEQNUM:6}' }
+  @{ N = 'alert';           D = 'Alert';            P = 'Alerts';            Pk = 'Title' }
 )
 
 # Columns: table, schema suffix, label, type, extra
@@ -133,6 +134,7 @@ $Choices = @{
   'consultant.practice' = @('Power Platform', 'Salesforce', 'Data & AI', 'Business Analysis')
   'engagement.status'   = @('Pipeline', 'Active', 'Closed')
   'timesheet.status'    = @('Draft', 'Submitted', 'Approved', 'Rejected')
+  'alert.type'          = @('Timesheet reminder', 'Bench alert', 'Approval')
 }
 $Columns = @(
   @{ T = 'skill';           S = 'Category';          L = 'Category';           Type = 'Choice' }
@@ -160,6 +162,9 @@ $Columns = @(
   @{ T = 'timeentry';       S = 'Date';              L = 'Date';               Type = 'Date' }
   @{ T = 'timeentry';       S = 'Hours';             L = 'Hours';              Type = 'Decimal'; Min = 0; Max = 24 }
   @{ T = 'timeentry';       S = 'Billable';          L = 'Billable';           Type = 'YesNo'; Default = $true }
+  @{ T = 'alert';           S = 'Message';           L = 'Message';            Type = 'Memo' }
+  @{ T = 'alert';           S = 'Type';              L = 'Alert Type';         Type = 'Choice' }
+  @{ T = 'alert';           S = 'IsRead';            L = 'Is Read';            Type = 'YesNo'; Default = $false }
 )
 
 # Lookups: child table, lookup schema suffix, label, parent table, parental (cascade delete)
@@ -176,6 +181,7 @@ $Lookups = @(
   @{ T = 'timesheet';       S = 'Approver';   L = 'Approver';   P = 'consultant' }
   @{ T = 'timeentry';       S = 'Timesheet';  L = 'Timesheet';  P = 'timesheet'; Parental = $true }
   @{ T = 'timeentry';       S = 'Engagement'; L = 'Engagement'; P = 'engagement' }
+  @{ T = 'alert';           S = 'Recipient';  L = 'Recipient';  P = 'consultant' }
 )
 
 function Get-ChoiceValues([string]$key) {

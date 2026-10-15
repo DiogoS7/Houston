@@ -78,6 +78,7 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="1" schemaName="hou_alert" behavior="0" />
       <RootComponent type="1" schemaName="hou_assignment" behavior="0" />
       <RootComponent type="1" schemaName="hou_client" behavior="0" />
       <RootComponent type="1" schemaName="hou_consultant" behavior="0" />
@@ -88,8 +89,17 @@
       <RootComponent type="1" schemaName="hou_timeentry" behavior="0" />
       <RootComponent type="1" schemaName="hou_timesheet" behavior="0" />
       <RootComponent type="29" id="{8bf4fbf0-e8c7-f111-a059-00224888dd67}" behavior="0" />
+      <RootComponent type="29" id="{b68153a1-fec7-f111-a059-00224888dd67}" behavior="0" />
       <RootComponent type="300" schemaName="hou_houston_dab0c" behavior="0" />
+      <RootComponent type="9" schemaName="hou_alerttype" behavior="0" />
     </RootComponents>
-    <MissingDependencies />
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="appnotification" displayName="Notification" solution="AppNotifications (10.0.0.17)">
+          <package appName="PowerAppsUnifiedClientExtensionApp Package" version="1.0.0.103">PowerAppsUnifiedClientExtensionApp_Anchor (1.0.0.103)</package>
+        </Required>
+        <Dependent type="300" schemaName="hou_houston_dab0c" displayName="Houston" />
+      </MissingDependency>
+    </MissingDependencies>
   </SolutionManifest>
 </ImportExportXml>

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>hou_houston_dab0c</Name>
-  <AppVersion>2026-10-13T20:06:26Z</AppVersion>
+  <AppVersion>2026-10-15T09:58:10Z</AppVersion>
   <Status>Ready</Status>
-  <CreatedByClientVersion>3.26094.9.0</CreatedByClientVersion>
-  <MinClientVersion>3.26094.9.0</MinClientVersion>
-  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.26094.9","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","m365CopilotSettingValue":"0","sienaVersion":"20261013T162031Z-3.26094.9.0"}</Tags>
+  <CreatedByClientVersion>3.26101.10.0</CreatedByClientVersion>
+  <MinClientVersion>3.26101.10.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.26101.10","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","m365CopilotSettingValue":"0","sienaVersion":"20261013T162031Z-3.26094.9.0"}</Tags>
   <IsCdsUpgraded>0</IsCdsUpgraded>
   <GalleryItemId xsi:nil="true"></GalleryItemId>
   <BackgroundColor>rgba(31, 42, 92, 1)</BackgroundColor>
@@ -15,7 +15,7 @@
   <Publisher xsi:nil="true"></Publisher>
   <AuthorizationReferences>[{"resourceId":"powerbi"}]</AuthorizationReferences>
   <ConnectionReferences>{}</ConnectionReferences>
-  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified","environmentVariableName":""}},"dataSources":{"Consultants":{"entitySetName":"hou_consultants","logicalName":"hou_consultant"},"Engagements":{"entitySetName":"hou_engagements","logicalName":"hou_engagement"},"Timesheets":{"entitySetName":"hou_timesheets","logicalName":"hou_timesheet"},"Time Entries":{"entitySetName":"hou_timeentries","logicalName":"hou_timeentry"},"Assignments":{"entitySetName":"hou_assignments","logicalName":"hou_assignment"}}}}</DatabaseReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified","environmentVariableName":""}},"dataSources":{"Consultants":{"entitySetName":"hou_consultants","logicalName":"hou_consultant"},"Engagements":{"entitySetName":"hou_engagements","logicalName":"hou_engagement"},"Timesheets":{"entitySetName":"hou_timesheets","logicalName":"hou_timesheet"},"Time Entries":{"entitySetName":"hou_timeentries","logicalName":"hou_timeentry"},"Assignments":{"entitySetName":"hou_assignments","logicalName":"hou_assignment"},"appnotifications":{"entitySetName":"appnotifications","logicalName":"appnotification"},"hou_alerts":{"entitySetName":"hou_alerts","logicalName":"hou_alert"},"Alerts":{"entitySetName":"hou_alerts","logicalName":"hou_alert"}}}}</DatabaseReferences>
   <AppComponents>[]</AppComponents>
   <AppComponentDependencies>[]</AppComponentDependencies>
   <CanConsumeAppPass>1</CanConsumeAppPass>
@@ -24,7 +24,7 @@
   <AdminControlBypassConsent>0</AdminControlBypassConsent>
   <EmbeddedApp xsi:nil="true"></EmbeddedApp>
   <IntroducedVersion>1.0</IntroducedVersion>
-  <CdsDependencies>{"cdsdependencies":[{"logicalname":"hou_consultant","componenttype":1},{"logicalname":"hou_engagement","componenttype":1},{"logicalname":"hou_timesheet","componenttype":1},{"logicalname":"hou_timeentry","componenttype":1},{"logicalname":"hou_assignment","componenttype":1}]}</CdsDependencies>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"hou_consultant","componenttype":1},{"logicalname":"hou_engagement","componenttype":1},{"logicalname":"hou_timesheet","componenttype":1},{"logicalname":"hou_timeentry","componenttype":1},{"logicalname":"hou_assignment","componenttype":1},{"logicalname":"appnotification","componenttype":1},{"logicalname":"hou_alert","componenttype":1}]}</CdsDependencies>
   <IsCustomizable>1</IsCustomizable>
   <BackgroundImageUri>/CanvasApps/hou_houston_dab0c_BackgroundImageUri</BackgroundImageUri>
   <DocumentUri>/CanvasApps/hou_houston_dab0c_DocumentUri.msapp</DocumentUri>

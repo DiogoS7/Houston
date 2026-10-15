@@ -1,0 +1,102 @@
+- lblNotifTitle:
+    Control: Label
+    Properties:
+      Text: |-
+        ="Notifications" & If(CountRows(galNotifications.AllItems) > 0, "  ·  " & CountRows(galNotifications.AllItems) & " new", "")
+      X: =974
+      Y: =514
+      Width: =328
+      Height: =28
+      Size: =13
+      FontWeight: =FontWeight.Semibold
+      Font: =Font.'Segoe UI'
+      Color: =RGBA(27, 33, 64, 1)
+- lblNotifEmpty:
+    Control: Label
+    Properties:
+      Text: ="You're all caught up."
+      Visible: =CountRows(galNotifications.AllItems) = 0
+      X: =974
+      Y: =546
+      Width: =328
+      Height: =28
+      Size: =11
+      Font: =Font.'Segoe UI'
+      Color: =RGBA(107, 115, 153, 1)
+- galNotifications:
+    Control: Gallery
+    Variant: Vertical
+    Properties:
+      Items: |-
+        =Sort(
+            Filter(Alerts,
+                Recipient.Consultant = gblMe.Consultant
+                && 'Is Read' = 'Is Read (Alerts)'.No),
+            'Created On', SortOrder.Descending)
+      X: =966
+      Y: =546
+      Width: =344
+      Height: =170
+      TemplateSize: =56
+      TemplatePadding: =0
+    Children:
+      - recNotifDot:
+          Control: Circle
+          Properties:
+            X: =8
+            Y: =14
+            Width: =10
+            Height: =10
+            Fill: |-
+              =Switch(Text(ThisItem.'Alert Type'),
+                  "Bench alert", RGBA(180, 35, 24, 1),
+                  "Approval", RGBA(15, 122, 82, 1),
+                  RGBA(242, 183, 5, 1))
+      - lblNotifItemTitle:
+          Control: Label
+          Properties:
+            Text: =ThisItem.Title
+            X: =26
+            Y: =4
+            Width: =Parent.TemplateWidth - 70
+            Height: =22
+            Size: =11
+            FontWeight: =FontWeight.Semibold
+            Font: =Font.'Segoe UI'
+            Color: =RGBA(27, 33, 64, 1)
+      - lblNotifItemMessage:
+          Control: Label
+          Properties:
+            Text: =ThisItem.Message
+            X: =26
+            Y: =24
+            Width: =Parent.TemplateWidth - 70
+            Height: =30
+            Size: =10
+            Font: =Font.'Segoe UI'
+            Color: =RGBA(107, 115, 153, 1)
+            VerticalAlign: =VerticalAlign.Top
+      - icoNotifRead:
+          Control: Classic/Icon
+          Properties:
+            Icon: =Icon.Check
+            Tooltip: ="Mark as read"
+            X: =Parent.TemplateWidth - 40
+            Y: =12
+            Width: =30
+            Height: =30
+            PaddingTop: =6
+            PaddingBottom: =6
+            PaddingLeft: =6
+            PaddingRight: =6
+            Color: =RGBA(15, 122, 82, 1)
+            OnSelect: |-
+              =Patch(Alerts, ThisItem, {'Is Read': 'Is Read (Alerts)'.Yes})
+      - recNotifDivider:
+          Control: Rectangle
+          Properties:
+            X: =0
+            Y: =Parent.TemplateHeight - 1
+            Width: =Parent.TemplateWidth
+            Height: =1
+            Fill: =RGBA(236, 238, 245, 1)

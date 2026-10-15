@@ -1,0 +1,182 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "hou_dataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Week",
+            "interval": 1,
+            "timeZone": "GMT Standard Time",
+            "startTime": "2026-10-14T08:00:00Z",
+            "schedule": {
+              "weekDays": [
+                "Friday"
+              ],
+              "hours": [
+                "15"
+              ],
+              "minutes": [
+                0
+              ]
+            }
+          },
+          "evaluatedRecurrence": {
+            "frequency": "Week",
+            "interval": 1,
+            "timeZone": "GMT Standard Time",
+            "startTime": "2026-10-14T08:00:00Z",
+            "schedule": {
+              "weekDays": [
+                "Friday"
+              ],
+              "hours": [
+                "15"
+              ],
+              "minutes": [
+                0
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "73f4916e-48d2-4b55-b290-e9789ac52bf2"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Week_start": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "575ea8ff-05fe-4394-8d4d-698e73afc5f6"
+          },
+          "type": "Compose",
+          "inputs": "@formatDateTime(addDays(utcNow(), sub(1, dayOfWeek(utcNow()))), 'yyyy-MM-dd')"
+        },
+        "List_consultants": {
+          "runAfter": {
+            "Week_start": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "de1b12b9-338a-4971-8aea-5d2f66c4576a"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "hou_consultants",
+              "$select": "hou_consultantid,hou_name,hou_email"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "List_submitted": {
+          "runAfter": {
+            "List_consultants": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ac426ed0-da59-4d8e-b33f-c89e4481af59"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "hou_timesheets",
+              "$select": "_hou_consultant_value",
+              "$filter": "hou_weekstart eq @{outputs('Week_start')} and hou_status ne 741000000"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Missing": {
+          "runAfter": {
+            "List_submitted": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "56011b66-b625-4142-8221-feb5a253c724"
+          },
+          "type": "Query",
+          "inputs": {
+            "from": "@outputs('List_consultants')?['body/value']",
+            "where": "@not(contains(string(body('List_submitted')?['value']), item()?['hou_consultantid']))"
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@body('Missing')",
+          "actions": {
+            "Add_a_new_row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "a2c64c5e-5015-40e8-b159-38f5ddf01722"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "hou_alerts",
+                  "item/hou_title": "Timesheet not submitted",
+                  "item/hou_alerttype": 817260000,
+                  "item/hou_isread": false,
+                  "item/hou_message": "@concat('Your timesheet for the week of ', formatDateTime(outputs('Week_start'), 'dd MMM yyyy'), ' has not been submitted yet.')",
+                  "item/hou_Recipient@odata.bind": "hou_consultants(@{items('Apply_to_each')?['hou_consultantid']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Missing": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "40a2b4c8-6eb5-4176-a8a6-8fe33413ae2b"
+          },
+          "type": "Foreach"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

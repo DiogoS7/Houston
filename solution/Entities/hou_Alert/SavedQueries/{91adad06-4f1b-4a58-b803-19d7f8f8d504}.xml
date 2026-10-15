@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{91adad06-4f1b-4a58-b803-19d7f8f8d504}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="hou_title" select="1" icon="1" preview="1">
+        <row name="result" id="hou_alertid">
+          <cell name="hou_title" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="hou_alert">
+          <attribute name="hou_alertid" />
+          <attribute name="hou_title" />
+          <attribute name="createdon" />
+          <order attribute="hou_title" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="hou_title" operator="like" value="{0}" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find Active Alerts" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

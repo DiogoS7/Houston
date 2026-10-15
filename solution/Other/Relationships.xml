@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="business_unit_hou_alert" />
   <EntityRelationship Name="business_unit_hou_assignment" />
   <EntityRelationship Name="business_unit_hou_client" />
   <EntityRelationship Name="business_unit_hou_consultant" />
@@ -9,6 +10,7 @@
   <EntityRelationship Name="business_unit_hou_skill" />
   <EntityRelationship Name="business_unit_hou_timeentry" />
   <EntityRelationship Name="business_unit_hou_timesheet" />
+  <EntityRelationship Name="hou_alert_Recipient_hou_consultant" />
   <EntityRelationship Name="hou_client_engagement_client" />
   <EntityRelationship Name="hou_consultant_assignment_consultant" />
   <EntityRelationship Name="hou_consultant_consultant_manager" />
@@ -21,6 +23,8 @@
   <EntityRelationship Name="hou_skill_consultantskill_skill" />
   <EntityRelationship Name="hou_skill_engagementskill_skill" />
   <EntityRelationship Name="hou_timesheet_timeentry_timesheet" />
+  <EntityRelationship Name="lk_hou_alert_createdby" />
+  <EntityRelationship Name="lk_hou_alert_modifiedby" />
   <EntityRelationship Name="lk_hou_assignment_createdby" />
   <EntityRelationship Name="lk_hou_assignment_modifiedby" />
   <EntityRelationship Name="lk_hou_client_createdby" />
@@ -39,6 +43,7 @@
   <EntityRelationship Name="lk_hou_timeentry_modifiedby" />
   <EntityRelationship Name="lk_hou_timesheet_createdby" />
   <EntityRelationship Name="lk_hou_timesheet_modifiedby" />
+  <EntityRelationship Name="owner_hou_alert" />
   <EntityRelationship Name="owner_hou_assignment" />
   <EntityRelationship Name="owner_hou_client" />
   <EntityRelationship Name="owner_hou_consultant" />
@@ -48,6 +53,7 @@
   <EntityRelationship Name="owner_hou_skill" />
   <EntityRelationship Name="owner_hou_timeentry" />
   <EntityRelationship Name="owner_hou_timesheet" />
+  <EntityRelationship Name="team_hou_alert" />
   <EntityRelationship Name="team_hou_assignment" />
   <EntityRelationship Name="team_hou_client" />
   <EntityRelationship Name="team_hou_consultant" />
@@ -57,6 +63,7 @@
   <EntityRelationship Name="team_hou_skill" />
   <EntityRelationship Name="team_hou_timeentry" />
   <EntityRelationship Name="team_hou_timesheet" />
+  <EntityRelationship Name="user_hou_alert" />
   <EntityRelationship Name="user_hou_assignment" />
   <EntityRelationship Name="user_hou_client" />
   <EntityRelationship Name="user_hou_consultant" />
