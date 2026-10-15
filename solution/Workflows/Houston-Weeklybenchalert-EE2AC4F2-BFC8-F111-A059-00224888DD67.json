@@ -1,0 +1,246 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "hou_dataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Week",
+            "interval": 1,
+            "timeZone": "GMT Standard Time",
+            "startTime": "2026-10-15T09:00:00Z",
+            "schedule": {
+              "weekDays": [
+                "Monday"
+              ],
+              "hours": [
+                "8"
+              ],
+              "minutes": [
+                0
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "6373905f-9ecf-4b59-bc22-dd47355ad965"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Check_date": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "a76fb83f-6bf4-4492-87b3-742239b8a83f"
+          },
+          "type": "Compose",
+          "inputs": "@formatDateTime(addDays(utcNow(), add(sub(1, dayOfWeek(utcNow())), 28)), 'yyyy-MM-dd')"
+        },
+        "List_assignments": {
+          "runAfter": {
+            "List_consultants": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0df17e4a-fe98-4971-810f-23cb8f8a7c8f"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "hou_assignments",
+              "$select": "_hou_consultant_value,hou_allocation",
+              "$filter": "hou_startdate le @{outputs('Check_date')} and hou_enddate ge @{outputs('Check_date')}"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Initialize_variable": {
+          "runAfter": {
+            "List_assignments": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e108d063-d416-4284-9cb3-4791025ffa4b"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Allocation",
+                "type": "integer",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "For_each_consultant": {
+          "foreach": "@outputs('List_consultants')?['body/value']",
+          "actions": {
+            "Set_variable": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "37498b15-3464-40c5-ba23-a96e3968473e"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "Allocation",
+                "value": 0
+              }
+            },
+            "Their_assignments": {
+              "runAfter": {
+                "Set_variable": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c78eeb75-8e44-4157-84ed-7c4e7d1911f9"
+              },
+              "type": "Query",
+              "inputs": {
+                "from": "@outputs('List_assignments')?['body/value']",
+                "where": "@equals(item()?['_hou_consultant_value'], items('For_each_consultant')?['hou_consultantid'])"
+              }
+            },
+            "Add_allocations": {
+              "foreach": "@body('Their_assignments')",
+              "actions": {
+                "Increment_variable": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "7bce220b-698a-48d4-af02-5bd483dfddf6"
+                  },
+                  "type": "IncrementVariable",
+                  "inputs": {
+                    "name": "Allocation",
+                    "value": "@item()?['hou_allocation']"
+                  }
+                }
+              },
+              "runAfter": {
+                "Their_assignments": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "d9b75e7a-dc4b-4a33-be7f-b6a454385317"
+              },
+              "type": "Foreach"
+            },
+            "Condition": {
+              "actions": {
+                "Add_a_new_row": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "b135ab7e-1b91-4b6a-85a3-b34a10cd9ea5"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "hou_alerts",
+                      "item/hou_title": "@concat(items('For_each_consultant')?['hou_name'], ' is below target')",
+                      "item/hou_alerttype": 817260001,
+                      "item/hou_isread": false,
+                      "item/hou_message": "@concat(items('For_each_consultant')?['hou_name'], ' is ', variables('Allocation'), '% allocated in the week of ', formatDateTime(outputs('Check_date'), 'dd MMM yyyy'), ' (target ', items('For_each_consultant')?['hou_targetutilisation'], '%).')",
+                      "item/hou_Recipient@odata.bind": "hou_consultants(@{items('For_each_consultant')?['_hou_manager_value']})"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "Add_allocations": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "less": [
+                  "@variables('Allocation')",
+                  "@items('For_each_consultant')?['hou_targetutilisation']"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "6815cdd1-a642-4a75-ba26-d2cc34447aa3"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9d101404-ed3d-4437-a851-5c7dfbfe31f4"
+          },
+          "type": "Foreach",
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 1
+            }
+          }
+        },
+        "List_consultants": {
+          "runAfter": {
+            "Check_date": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5156532f-34a1-42fa-b35b-6cd97aabbe15"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "hou_consultants",
+              "$select": "hou_consultantid,hou_name,hou_targetutilisation,_hou_manager_value",
+              "$filter": "_hou_manager_value ne null"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}
