@@ -15,6 +15,7 @@ erDiagram
     CONSULTANT ||--o{ TIMESHEET : submits
     TIMESHEET ||--|{ TIME_ENTRY : contains
     ENGAGEMENT ||--o{ TIME_ENTRY : "booked to"
+    CONSULTANT ||--o{ ALERT : receives
 ```
 
 ## Tables
@@ -44,7 +45,7 @@ Every Dataverse table needs a primary name column. For Consultant Skill, Engagem
 | hou_name | Text | Primary column |
 | hou_client | Lookup → Client | |
 | hou_startdate / hou_enddate | Date | |
-| hou_status | Choice | Pipeline, Active, Closed |
+| hou_status | Choice | Display name "Engagement Status": Pipeline, Active, Closed |
 | hou_billable | Yes/No | Internal projects are non-billable |
 
 ### Skill (`hou_skill`)
@@ -83,7 +84,7 @@ Every Dataverse table needs a primary name column. For Consultant Skill, Engagem
 | hou_name | Text | Primary column, e.g. "Ana Lopes – 2026-10-05" |
 | hou_consultant | Lookup → Consultant | |
 | hou_weekstart | Date | Monday of the week |
-| hou_status | Choice | Draft, Submitted, Approved, Rejected |
+| hou_status | Choice | Display name "Approval Status": Draft, Submitted, Approved, Rejected |
 | hou_approver | Lookup → Consultant | Set by the approval flow |
 | hou_decisiondate | Date and time | |
 | hou_comment | Multiline text | Rejection reason |
@@ -96,6 +97,17 @@ Every Dataverse table needs a primary name column. For Consultant Skill, Engagem
 | hou_date | Date | |
 | hou_hours | Decimal | 0–12 |
 | hou_billable | Yes/No | Defaults from the engagement |
+
+### Alert (`hou_alert`)
+In-app notifications written by the flows and shown on the Home screen. (Named Alert to avoid clashing with Dataverse's built-in Notification table.)
+
+| Column | Type | Notes |
+|---|---|---|
+| hou_name | Text | Title (primary column) |
+| hou_message | Multiline text | |
+| hou_type | Choice | Display name "Alert Type": Timesheet reminder, Bench alert, Approval |
+| hou_isread | Yes/No | Display name "Is Read", default No |
+| hou_recipient | Lookup → Consultant | Who sees the alert |
 
 ## Key calculations (Power BI)
 
