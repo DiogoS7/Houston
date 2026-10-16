@@ -118,7 +118,7 @@
             "parameters": {
               "approvalType": "Basic",
               "WebhookApprovalCreationInput/title": "Timesheet: @{triggerOutputs()?['body/hou_name']}",
-              "WebhookApprovalCreationInput/assignedTo": ";",
+              "WebhookApprovalCreationInput/assignedTo": "   diogo@diogofasantos7gmail.onmicrosoft.com",
               "WebhookApprovalCreationInput/details": "Approving on behalf of @{outputs('Get_manager')?['body/hou_name']}",
               "WebhookApprovalCreationInput/enableNotifications": true,
               "WebhookApprovalCreationInput/enableReassignment": true
@@ -195,7 +195,7 @@
         }
       }
     },
-    "templateName": null
+    "templateName": ""
   },
   "schemaVersion": "1.0.0.0"
 }
