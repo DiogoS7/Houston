@@ -33,6 +33,19 @@
           }
         }
       }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
     ]
   },
   "resourcePackages": [
@@ -51,6 +64,11 @@
       "name": "RegisteredResources",
       "type": "RegisteredResources",
       "items": [
+        {
+          "name": "houston-logo.png",
+          "path": "houston-logo.png",
+          "type": "Image"
+        },
         {
           "name": "HoustonTheme.json",
           "path": "HoustonTheme.json",
