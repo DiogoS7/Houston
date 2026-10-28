@@ -1,0 +1,883 @@
+Screens:
+  scrAssign:
+    Properties:
+      Fill: |-
+        =RGBA(246, 247, 251, 1)
+      OnVisible: |-
+        =If(IsBlank(gblMe), Set(gblMe, LookUp(Consultants, Name = "Ana Lopes")));
+        If(IsBlank(gblWeekStart), Set(gblWeekStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days)));
+        Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart));
+        ClearCollect(colCS, 'Consultant Skills');
+        ClearCollect(colAssign, Assignments);
+        Clear(colReq);
+        UpdateContext({locSel: gblAssignConsultant})
+    Children:
+      - recHeaderA:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =64
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+      - imgBrandA:
+          Control: Image
+          Properties:
+            Image: |-
+              ='houston-logo'
+            X: |-
+              =28
+            Y: |-
+              =14
+            Width: |-
+              =36
+            Height: |-
+              =36
+            ImagePosition: |-
+              =ImagePosition.Fit
+      - lblBrandA:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Houston"
+            X: |-
+              =70
+            Y: |-
+              =0
+            Width: |-
+              =130
+            Height: |-
+              =64
+            Size: |-
+              =20
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblUserA:
+          Control: Label
+          Properties:
+            Text: |-
+              =gblMe.Name
+            X: |-
+              =Parent.Width - 332
+            Y: |-
+              =0
+            Width: |-
+              =300
+            Height: |-
+              =64
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Right
+      - lblNav0A:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Home"
+            X: |-
+              =200
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrHome, ScreenTransition.None)
+      - lblNav1A:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Timesheet"
+            X: |-
+              =340
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrMyTimesheet, ScreenTransition.None)
+      - lblNav2A:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Bench Board"
+            X: |-
+              =480
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrBenchBoard, ScreenTransition.None)
+      - lblNav3A:
+          Control: Label
+          Properties:
+            Text: |-
+              ="People & Skills"
+            X: |-
+              =620
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            FontWeight: |-
+              =FontWeight.Semibold
+      - recNavLineA:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =650
+            Y: |-
+              =58
+            Width: |-
+              =80
+            Height: |-
+              =4
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
+      - lblNav4A:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Skills"
+            X: |-
+              =760
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrMySkills, ScreenTransition.None)
+      - lblTitleA:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Assign to an engagement"
+            X: |-
+              =40
+            Y: |-
+              =84
+            Width: |-
+              =700
+            Height: |-
+              =44
+            Size: |-
+              =24
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblSubA:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Consultants who meet the engagement's required skills are listed first"
+            X: |-
+              =40
+            Y: |-
+              =128
+            Width: |-
+              =760
+            Height: |-
+              =26
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - conAssignEng:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =40
+            Y: |-
+              =172
+            Width: |-
+              =Parent.Width - 528
+            Height: |-
+              =Parent.Height - 196
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+          Children:
+            - lblAssignEngCap:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Engagement"
+                  X: |-
+                    =24
+                  Y: |-
+                    =16
+                  Width: |-
+                    =300
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - cmbAssignEng:
+                Control: Classic/ComboBox
+                Properties:
+                  Items: |-
+                    =Filter(Engagements, 'Engagement Status' <> 'Engagement Status (Engagements)'.Closed)
+                  DisplayFields: |-
+                    =["Name"]
+                  SearchFields: |-
+                    =["Name"]
+                  SelectMultiple: |-
+                    =false
+                  InputTextPlaceholder: |-
+                    ="Choose an engagement"
+                  OnChange: |-
+                    =ClearCollect(colReq, Filter('Engagement Skills', Engagement.Engagement = Self.Selected.Engagement))
+                  X: |-
+                    =24
+                  Y: |-
+                    =40
+                  Width: |-
+                    =420
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - lblReq:
+                Control: Label
+                Properties:
+                  Text: |-
+                    =If(IsBlank(cmbAssignEng.Selected), "Choose an engagement to see the skills it needs.", CountRows(colReq) = 0, "No skills recorded for this engagement.", "Needs: " & Concat(colReq, Skill.Name & " " & 'Required Level' & "+", " · "))
+                  X: |-
+                    =24
+                  Y: |-
+                    =88
+                  Width: |-
+                    =Parent.Width - 48
+                  Height: |-
+                    =44
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  VerticalAlign: |-
+                    =VerticalAlign.Top
+            - lblCandTitle:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Consultants, best match first"
+                  X: |-
+                    =24
+                  Y: |-
+                    =140
+                  Width: |-
+                    =400
+                  Height: |-
+                    =28
+                  Size: |-
+                    =13
+                  Color: |-
+                    =RGBA(27, 33, 64, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
+            - galCand:
+                Control: Gallery
+                Variant: Vertical
+                Properties:
+                  Items: |-
+                    =Sort(ForAll(Consultants As c, {
+                        Consultant: c.Consultant, Name: c.Name, Practice: Text(c.Practice),
+                        Matches: CountIf(colReq As r,
+                            !IsBlank(LookUp(colCS, Consultant.Consultant = c.Consultant && Skill.Skill = r.Skill.Skill && Proficiency >= r.'Required Level')))
+                    }), Matches, SortOrder.Descending)
+                  X: |-
+                    =8
+                  Y: |-
+                    =172
+                  Width: |-
+                    =Parent.Width - 16
+                  Height: |-
+                    =Parent.Height - 180
+                  TemplateSize: |-
+                    =56
+                  TemplatePadding: |-
+                    =0
+                  TemplateFill: |-
+                    =If(ThisItem.Consultant = locSel.Consultant, RGBA(222, 233, 255, 1), RGBA(0, 0, 0, 0))
+                  OnSelect: |-
+                    =UpdateContext({locSel: LookUp(Consultants, Consultant = ThisItem.Consultant)})
+                Children:
+                  - cirAvatarCd:
+                      Control: Circle
+                      Properties:
+                        X: |-
+                          =16
+                        Y: |-
+                          =10
+                        Width: |-
+                          =36
+                        Height: |-
+                          =36
+                        Fill: |-
+                          =Switch(Mod(Len(ThisItem.Name), 5),
+                              0, RGBA(107, 91, 255, 1), 1, RGBA(224, 86, 155, 1), 2, RGBA(31, 157, 107, 1),
+                              3, RGBA(217, 138, 28, 1), RGBA(61, 107, 255, 1))
+                  - lblInitialsCd:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =Left(ThisItem.Name, 1) & Left(Last(Split(ThisItem.Name, " ")).Value, 1)
+                        X: |-
+                          =16
+                        Y: |-
+                          =10
+                        Width: |-
+                          =36
+                        Height: |-
+                          =36
+                        Size: |-
+                          =10
+                        Color: |-
+                          =RGBA(255, 255, 255, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Center
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                  - lblCdName:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =ThisItem.Name
+                        X: |-
+                          =62
+                        Y: |-
+                          =4
+                        Width: |-
+                          =260
+                        Height: |-
+                          =26
+                        Size: |-
+                          =12
+                        Color: |-
+                          =RGBA(27, 33, 64, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                  - lblCdInfo:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =ThisItem.Practice & " · next 4 weeks " & Round(Average(ForAll(Sequence(4) As w,
+                              With({d: DateAdd(Today(), (w.Value - 1) * 7, TimeUnit.Days)},
+                                  Coalesce(Sum(Filter(colAssign, Consultant.Consultant = ThisItem.Consultant && 'Start Date' <= d && 'End Date' >= d), 'Allocation %'), 0))),
+                              Value), 0) & "% allocated"
+                        X: |-
+                          =62
+                        Y: |-
+                          =28
+                        Width: |-
+                          =Parent.TemplateWidth - 230
+                        Height: |-
+                          =22
+                        Size: |-
+                          =10
+                        Color: |-
+                          =RGBA(107, 115, 153, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                  - btnMatch:
+                      Control: Classic/Button
+                      Properties:
+                        Text: |-
+                          =If(ThisItem.Matches = CountRows(colReq), "Meets all", ThisItem.Matches & " of " & CountRows(colReq))
+                        X: |-
+                          =Parent.TemplateWidth - 140
+                        Y: |-
+                          =14
+                        Width: |-
+                          =120
+                        Height: |-
+                          =28
+                        Size: |-
+                          =10
+                        Font: |-
+                          =Font.'Segoe UI'
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                        DisplayMode: |-
+                          =DisplayMode.Disabled
+                        DisabledFill: |-
+                          =If(ThisItem.Matches = CountRows(colReq), RGBA(215, 245, 232, 1), ThisItem.Matches > 0, RGBA(255, 241, 194, 1), RGBA(236, 238, 245, 1))
+                        DisabledColor: |-
+                          =If(ThisItem.Matches = CountRows(colReq), RGBA(15, 122, 82, 1), ThisItem.Matches > 0, RGBA(138, 101, 0, 1), RGBA(107, 115, 153, 1))
+                        DisabledBorderColor: |-
+                          =If(ThisItem.Matches = CountRows(colReq), RGBA(215, 245, 232, 1), ThisItem.Matches > 0, RGBA(255, 241, 194, 1), RGBA(236, 238, 245, 1))
+                        BorderThickness: |-
+                          =0
+                        RadiusTopLeft: |-
+                          =14
+                        RadiusTopRight: |-
+                          =14
+                        RadiusBottomLeft: |-
+                          =14
+                        RadiusBottomRight: |-
+                          =14
+                        Visible: |-
+                          =CountRows(colReq) > 0
+                  - recCdDivider:
+                      Control: Rectangle
+                      Properties:
+                        X: |-
+                          =0
+                        Y: |-
+                          =Parent.TemplateHeight - 1
+                        Width: |-
+                          =Parent.TemplateWidth
+                        Height: |-
+                          =1
+                        Fill: |-
+                          =RGBA(236, 238, 245, 1)
+      - conAssignDetail:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =Parent.Width - 464
+            Y: |-
+              =172
+            Width: |-
+              =424
+            Height: |-
+              =Parent.Height - 196
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+          Children:
+            - lblAssignDetailTitle:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="New assignment"
+                  X: |-
+                    =24
+                  Y: |-
+                    =14
+                  Width: |-
+                    =360
+                  Height: |-
+                    =32
+                  Size: |-
+                    =15
+                  Color: |-
+                    =RGBA(27, 33, 64, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
+            - lblAssignWho:
+                Control: Label
+                Properties:
+                  Text: |-
+                    =If(IsBlank(locSel), "Pick a consultant from the list", locSel.Name)
+                  X: |-
+                    =24
+                  Y: |-
+                    =52
+                  Width: |-
+                    =376
+                  Height: |-
+                    =30
+                  Size: |-
+                    =14
+                  Color: |-
+                    =If(IsBlank(locSel), RGBA(107, 115, 153, 1), RGBA(31, 42, 92, 1))
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
+            - lblAllocCap:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Allocation % of the week"
+                  X: |-
+                    =24
+                  Y: |-
+                    =100
+                  Width: |-
+                    =376
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - txtAlloc:
+                Control: Classic/TextInput
+                Properties:
+                  Default: |-
+                    ="100"
+                  Format: |-
+                    =TextFormat.Number
+                  X: |-
+                    =24
+                  Y: |-
+                    =124
+                  Width: |-
+                    =376
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  RadiusTopLeft: |-
+                    =8
+                  RadiusTopRight: |-
+                    =8
+                  RadiusBottomLeft: |-
+                    =8
+                  RadiusBottomRight: |-
+                    =8
+            - lblStartCap:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Start date"
+                  X: |-
+                    =24
+                  Y: |-
+                    =176
+                  Width: |-
+                    =180
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - dpAssignStart:
+                Control: Classic/DatePicker
+                Properties:
+                  DefaultDate: |-
+                    =DateAdd(Today(), 7 - (Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days)
+                  Format: |-
+                    ="dd/mm/yyyy"
+                  X: |-
+                    =24
+                  Y: |-
+                    =200
+                  Width: |-
+                    =180
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - lblEndCap:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="End date"
+                  X: |-
+                    =220
+                  Y: |-
+                    =176
+                  Width: |-
+                    =180
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - dpAssignEnd:
+                Control: Classic/DatePicker
+                Properties:
+                  DefaultDate: |-
+                    =DateAdd(dpAssignStart.SelectedDate, 12 * 7 - 3, TimeUnit.Days)
+                  Format: |-
+                    ="dd/mm/yyyy"
+                  X: |-
+                    =220
+                  Y: |-
+                    =200
+                  Width: |-
+                    =180
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - lblAssignCheck:
+                Control: Label
+                Properties:
+                  Text: |-
+                    =If(IsBlank(locSel), "",
+                        Value(txtAlloc.Text) < 1 || Value(txtAlloc.Text) > 100, "Allocation must be between 1 and 100.",
+                        dpAssignEnd.SelectedDate < dpAssignStart.SelectedDate, "The end date can't be before the start date.",
+                        With({p: With({s: dpAssignStart.SelectedDate, e: dpAssignEnd.SelectedDate},
+                        Max(ForAll(Sequence(Max(1, Min(104, RoundDown(DateDiff(s, e, TimeUnit.Days) / 7, 0) + 1))) As w,
+                            With({d: DateAdd(s, (w.Value - 1) * 7, TimeUnit.Days)},
+                                Coalesce(Sum(Filter(colAssign, Consultant.Consultant = locSel.Consultant && 'Start Date' <= d && 'End Date' >= d),
+                                    'Allocation %'), 0))), Value) + Value(txtAlloc.Text))}, If(p > 100,
+                            "Warning: this takes " & locSel.Name & " to " & p & "% in at least one week.",
+                            "Peak allocation with this assignment: " & p & "%")))
+                  X: |-
+                    =24
+                  Y: |-
+                    =256
+                  Width: |-
+                    =376
+                  Height: |-
+                    =64
+                  Size: |-
+                    =11
+                  Color: |-
+                    =If(Value(txtAlloc.Text) < 1 || Value(txtAlloc.Text) > 100 || dpAssignEnd.SelectedDate < dpAssignStart.SelectedDate, RGBA(180, 35, 24, 1),
+                        !IsBlank(locSel) && With({s: dpAssignStart.SelectedDate, e: dpAssignEnd.SelectedDate},
+                        Max(ForAll(Sequence(Max(1, Min(104, RoundDown(DateDiff(s, e, TimeUnit.Days) / 7, 0) + 1))) As w,
+                            With({d: DateAdd(s, (w.Value - 1) * 7, TimeUnit.Days)},
+                                Coalesce(Sum(Filter(colAssign, Consultant.Consultant = locSel.Consultant && 'Start Date' <= d && 'End Date' >= d),
+                                    'Allocation %'), 0))), Value) + Value(txtAlloc.Text)) > 100, RGBA(138, 101, 0, 1), RGBA(15, 122, 82, 1))
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  VerticalAlign: |-
+                    =VerticalAlign.Top
+            - btnAssign:
+                Control: Classic/Button
+                Properties:
+                  Text: |-
+                    ="Assign"
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 128
+                  Width: |-
+                    =376
+                  Height: |-
+                    =48
+                  Size: |-
+                    =13
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  OnSelect: |-
+                    =Patch(Assignments, Defaults(Assignments), {
+                        Consultant: locSel,
+                        Engagement: cmbAssignEng.Selected,
+                        'Allocation %': Value(txtAlloc.Text),
+                        'Start Date': dpAssignStart.SelectedDate,
+                        'End Date': dpAssignEnd.SelectedDate });
+                    ClearCollect(colAssign, Assignments);
+                    Notify(locSel.Name & " is assigned to " & cmbAssignEng.Selected.Name, NotificationType.Success);
+                    UpdateContext({locSel: Blank()}); Reset(txtAlloc)
+                  RadiusTopLeft: |-
+                    =10
+                  RadiusTopRight: |-
+                    =10
+                  RadiusBottomLeft: |-
+                    =10
+                  RadiusBottomRight: |-
+                    =10
+                  Fill: |-
+                    =RGBA(31, 42, 92, 1)
+                  Color: |-
+                    =RGBA(255, 255, 255, 1)
+                  HoverFill: |-
+                    =RGBA(45, 60, 130, 1)
+                  PressedFill: |-
+                    =RGBA(45, 60, 130, 1)
+                  BorderThickness: |-
+                    =0
+                  DisabledFill: |-
+                    =RGBA(220, 223, 235, 1)
+                  DisabledColor: |-
+                    =RGBA(107, 115, 153, 1)
+                  DisplayMode: |-
+                    =If(!IsBlank(locSel) && !IsBlank(cmbAssignEng.Selected)
+                        && Value(txtAlloc.Text) >= 1 && Value(txtAlloc.Text) <= 100
+                        && dpAssignEnd.SelectedDate >= dpAssignStart.SelectedDate, DisplayMode.Edit, DisplayMode.Disabled)
+            - btnAssignBack:
+                Control: Classic/Button
+                Properties:
+                  Text: |-
+                    ="Back to People & Skills"
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 68
+                  Width: |-
+                    =376
+                  Height: |-
+                    =44
+                  Size: |-
+                    =12
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  OnSelect: |-
+                    =Navigate(scrPeople, ScreenTransition.None)
+                  RadiusTopLeft: |-
+                    =10
+                  RadiusTopRight: |-
+                    =10
+                  RadiusBottomLeft: |-
+                    =10
+                  RadiusBottomRight: |-
+                    =10
+                  Fill: |-
+                    =RGBA(255, 255, 255, 1)
+                  Color: |-
+                    =RGBA(31, 42, 92, 1)
+                  HoverFill: |-
+                    =RGBA(234, 238, 250, 1)
+                  HoverColor: |-
+                    =RGBA(31, 42, 92, 1)
+                  PressedFill: |-
+                    =RGBA(234, 238, 250, 1)
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  BorderThickness: |-
+                    =1

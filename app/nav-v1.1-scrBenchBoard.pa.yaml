@@ -1,0 +1,46 @@
+- lblNav3B:
+    Control: Label
+    Properties:
+      Text: |-
+        ="People & Skills"
+      X: |-
+        =620
+      Y: |-
+        =0
+      Width: |-
+        =140
+      Height: |-
+        =64
+      Size: |-
+        =13
+      Color: |-
+        =RGBA(190, 200, 235, 1)
+      Font: |-
+        =Font.'Segoe UI'
+      Align: |-
+        =Align.Center
+      OnSelect: |-
+        =Navigate(scrPeople, ScreenTransition.None)
+- lblNav4B:
+    Control: Label
+    Properties:
+      Text: |-
+        ="My Skills"
+      X: |-
+        =760
+      Y: |-
+        =0
+      Width: |-
+        =140
+      Height: |-
+        =64
+      Size: |-
+        =13
+      Color: |-
+        =RGBA(190, 200, 235, 1)
+      Font: |-
+        =Font.'Segoe UI'
+      Align: |-
+        =Align.Center
+      OnSelect: |-
+        =Navigate(scrMySkills, ScreenTransition.None)

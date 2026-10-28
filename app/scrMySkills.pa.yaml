@@ -1,0 +1,1075 @@
+Screens:
+  scrMySkills:
+    Properties:
+      Fill: |-
+        =RGBA(246, 247, 251, 1)
+      OnVisible: |-
+        =If(IsBlank(gblMe), Set(gblMe, LookUp(Consultants, Name = "Ana Lopes")));
+        If(IsBlank(gblWeekStart), Set(gblWeekStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days)));
+        Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart));
+        Set(gblMe, LookUp(Consultants, Consultant = gblMe.Consultant));
+        ClearCollect(colSkills, Sort(Skills, Name, SortOrder.Ascending));
+        ClearCollect(colCertCat, Certifications);
+        UpdateContext({locCert: Blank()})
+    Children:
+      - recHeaderS:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =64
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+      - imgBrandS:
+          Control: Image
+          Properties:
+            Image: |-
+              ='houston-logo'
+            X: |-
+              =28
+            Y: |-
+              =14
+            Width: |-
+              =36
+            Height: |-
+              =36
+            ImagePosition: |-
+              =ImagePosition.Fit
+      - lblBrandS:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Houston"
+            X: |-
+              =70
+            Y: |-
+              =0
+            Width: |-
+              =130
+            Height: |-
+              =64
+            Size: |-
+              =20
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblUserS:
+          Control: Label
+          Properties:
+            Text: |-
+              =gblMe.Name
+            X: |-
+              =Parent.Width - 332
+            Y: |-
+              =0
+            Width: |-
+              =300
+            Height: |-
+              =64
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Right
+      - lblNav0S:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Home"
+            X: |-
+              =200
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrHome, ScreenTransition.None)
+      - lblNav1S:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Timesheet"
+            X: |-
+              =340
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrMyTimesheet, ScreenTransition.None)
+      - lblNav2S:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Bench Board"
+            X: |-
+              =480
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrBenchBoard, ScreenTransition.None)
+      - lblNav3S:
+          Control: Label
+          Properties:
+            Text: |-
+              ="People & Skills"
+            X: |-
+              =620
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrPeople, ScreenTransition.None)
+      - lblNav4S:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Skills"
+            X: |-
+              =760
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            FontWeight: |-
+              =FontWeight.Semibold
+      - recNavLineS:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =790
+            Y: |-
+              =58
+            Width: |-
+              =80
+            Height: |-
+              =4
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
+      - lblTitleS:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Skills & Certifications"
+            X: |-
+              =40
+            Y: |-
+              =84
+            Width: |-
+              =700
+            Height: |-
+              =44
+            Size: |-
+              =24
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblSubS:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Keep your profile current so you are staffed on the right work"
+            X: |-
+              =40
+            Y: |-
+              =128
+            Width: |-
+              =700
+            Height: |-
+              =26
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - conMySkills:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =40
+            Y: |-
+              =172
+            Width: |-
+              =(Parent.Width - 104) / 2
+            Height: |-
+              =Parent.Height - 196
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+          Children:
+            - lblMySkillsTitle:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="My skills"
+                  X: |-
+                    =24
+                  Y: |-
+                    =14
+                  Width: |-
+                    =300
+                  Height: |-
+                    =32
+                  Size: |-
+                    =15
+                  Color: |-
+                    =RGBA(27, 33, 64, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
+            - lblReviewed:
+                Control: Label
+                Properties:
+                  Text: |-
+                    =If(IsBlank(gblMe.'Skills Reviewed'), "Not reviewed yet", "Last reviewed " & Text(gblMe.'Skills Reviewed', "dd mmm yyyy"))
+                  X: |-
+                    =Parent.Width - 324
+                  Y: |-
+                    =14
+                  Width: |-
+                    =300
+                  Height: |-
+                    =32
+                  Size: |-
+                    =11
+                  Color: |-
+                    =If(IsBlank(gblMe.'Skills Reviewed') || DateDiff(gblMe.'Skills Reviewed', Today(), TimeUnit.Days) > 90, RGBA(180, 35, 24, 1), RGBA(107, 115, 153, 1))
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Right
+            - lblMySkillsHint:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Tap a dot to set your level. Any change counts as a review."
+                  X: |-
+                    =24
+                  Y: |-
+                    =44
+                  Width: |-
+                    =Parent.Width - 48
+                  Height: |-
+                    =22
+                  Size: |-
+                    =10
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - galMySkills:
+                Control: Gallery
+                Variant: Vertical
+                Properties:
+                  Items: |-
+                    =Filter('Consultant Skills', Consultant.Consultant = gblMe.Consultant)
+                  X: |-
+                    =8
+                  Y: |-
+                    =72
+                  Width: |-
+                    =Parent.Width - 16
+                  Height: |-
+                    =Parent.Height - 210
+                  TemplateSize: |-
+                    =48
+                  TemplatePadding: |-
+                    =0
+                Children:
+                  - lblMySkillName:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =ThisItem.Skill.Name
+                        X: |-
+                          =16
+                        Y: |-
+                          =4
+                        Width: |-
+                          =Parent.TemplateWidth - 230
+                        Height: |-
+                          =40
+                        Size: |-
+                          =12
+                        Color: |-
+                          =RGBA(27, 33, 64, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                  - galLvlDots:
+                      Control: Gallery
+                      Variant: Horizontal
+                      Properties:
+                        Items: |-
+                          =ForAll(Sequence(5) As n, {N: n.Value, Rec: ThisItem})
+                        X: |-
+                          =Parent.TemplateWidth - 200
+                        Y: |-
+                          =4
+                        Width: |-
+                          =130
+                        Height: |-
+                          =40
+                        TemplateSize: |-
+                          =26
+                        TemplatePadding: |-
+                          =0
+                        ShowScrollbar: |-
+                          =false
+                      Children:
+                        - cirLvlDot:
+                            Control: Circle
+                            Properties:
+                              X: |-
+                                =4
+                              Y: |-
+                                =10
+                              Width: |-
+                                =18
+                              Height: |-
+                                =18
+                              Fill: |-
+                                =If(ThisItem.N <= ThisItem.Rec.Proficiency, RGBA(31, 42, 92, 1), RGBA(226, 229, 240, 1))
+                              OnSelect: |-
+                                =Patch('Consultant Skills', ThisItem.Rec, {Proficiency: ThisItem.N});
+                                Set(gblMe, Patch(Consultants, gblMe, {'Skills Reviewed': Today()}))
+                  - icoRemoveSkill:
+                      Control: Classic/Icon
+                      Properties:
+                        Icon: |-
+                          =Icon.Trash
+                        X: |-
+                          =Parent.TemplateWidth - 52
+                        Y: |-
+                          =8
+                        Width: |-
+                          =32
+                        Height: |-
+                          =32
+                        PaddingTop: |-
+                          =6
+                        PaddingBottom: |-
+                          =6
+                        PaddingLeft: |-
+                          =6
+                        PaddingRight: |-
+                          =6
+                        Color: |-
+                          =RGBA(180, 35, 24, 1)
+                        Tooltip: |-
+                          ="Remove skill"
+                        OnSelect: |-
+                          =Remove('Consultant Skills', ThisItem);
+                          Set(gblMe, Patch(Consultants, gblMe, {'Skills Reviewed': Today()}))
+                  - recMySkillDivider:
+                      Control: Rectangle
+                      Properties:
+                        X: |-
+                          =0
+                        Y: |-
+                          =Parent.TemplateHeight - 1
+                        Width: |-
+                          =Parent.TemplateWidth
+                        Height: |-
+                          =1
+                        Fill: |-
+                          =RGBA(236, 238, 245, 1)
+            - cmbAddSkill:
+                Control: Classic/ComboBox
+                Properties:
+                  Items: |-
+                    =colSkills
+                  DisplayFields: |-
+                    =["Name"]
+                  SearchFields: |-
+                    =["Name"]
+                  SelectMultiple: |-
+                    =false
+                  InputTextPlaceholder: |-
+                    ="Add a skill"
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 124
+                  Width: |-
+                    =Parent.Width - 200
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - btnAddSkill:
+                Control: Classic/Button
+                Properties:
+                  Text: |-
+                    ="Add"
+                  X: |-
+                    =Parent.Width - 160
+                  Y: |-
+                    =Parent.Height - 124
+                  Width: |-
+                    =136
+                  Height: |-
+                    =40
+                  Size: |-
+                    =12
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  OnSelect: |-
+                    =Patch('Consultant Skills', Defaults('Consultant Skills'), {
+                        Consultant: gblMe, Skill: cmbAddSkill.Selected, Proficiency: 3, 'Last Used': Today() });
+                    Set(gblMe, Patch(Consultants, gblMe, {'Skills Reviewed': Today()}));
+                    Reset(cmbAddSkill)
+                  RadiusTopLeft: |-
+                    =10
+                  RadiusTopRight: |-
+                    =10
+                  RadiusBottomLeft: |-
+                    =10
+                  RadiusBottomRight: |-
+                    =10
+                  Fill: |-
+                    =RGBA(31, 42, 92, 1)
+                  Color: |-
+                    =RGBA(255, 255, 255, 1)
+                  HoverFill: |-
+                    =RGBA(45, 60, 130, 1)
+                  PressedFill: |-
+                    =RGBA(45, 60, 130, 1)
+                  BorderThickness: |-
+                    =0
+                  DisabledFill: |-
+                    =RGBA(220, 223, 235, 1)
+                  DisabledColor: |-
+                    =RGBA(107, 115, 153, 1)
+                  DisplayMode: |-
+                    =If(!IsBlank(cmbAddSkill.Selected) && IsBlank(LookUp(galMySkills.AllItems, Skill.Skill = cmbAddSkill.Selected.Skill)),
+                        DisplayMode.Edit, DisplayMode.Disabled)
+            - btnMarkReviewed:
+                Control: Classic/Button
+                Properties:
+                  Text: |-
+                    ="My skills are up to date"
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 68
+                  Width: |-
+                    =Parent.Width - 48
+                  Height: |-
+                    =44
+                  Size: |-
+                    =12
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  OnSelect: |-
+                    =Set(gblMe, Patch(Consultants, gblMe, {'Skills Reviewed': Today()}));
+                    Notify("Thanks, your skills are marked as reviewed", NotificationType.Success)
+                  RadiusTopLeft: |-
+                    =10
+                  RadiusTopRight: |-
+                    =10
+                  RadiusBottomLeft: |-
+                    =10
+                  RadiusBottomRight: |-
+                    =10
+                  Fill: |-
+                    =RGBA(255, 255, 255, 1)
+                  Color: |-
+                    =RGBA(31, 42, 92, 1)
+                  HoverFill: |-
+                    =RGBA(234, 238, 250, 1)
+                  HoverColor: |-
+                    =RGBA(31, 42, 92, 1)
+                  PressedFill: |-
+                    =RGBA(234, 238, 250, 1)
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  BorderThickness: |-
+                    =1
+      - conMyCerts:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =40 + (Parent.Width - 104) / 2 + 24
+            Y: |-
+              =172
+            Width: |-
+              =(Parent.Width - 104) / 2
+            Height: |-
+              =Parent.Height - 196
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+          Children:
+            - lblMyCertsTitle:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="My certifications"
+                  X: |-
+                    =24
+                  Y: |-
+                    =14
+                  Width: |-
+                    =400
+                  Height: |-
+                    =32
+                  Size: |-
+                    =15
+                  Color: |-
+                    =RGBA(27, 33, 64, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
+            - galMyCerts:
+                Control: Gallery
+                Variant: Vertical
+                Properties:
+                  Items: |-
+                    =Filter('Consultant Certifications', Consultant.Consultant = gblMe.Consultant)
+                  X: |-
+                    =8
+                  Y: |-
+                    =52
+                  Width: |-
+                    =Parent.Width - 16
+                  Height: |-
+                    =Parent.Height - 300 - 64
+                  TemplateSize: |-
+                    =60
+                  TemplatePadding: |-
+                    =0
+                Children:
+                  - lblCertName:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =ThisItem.Certification.Name
+                        X: |-
+                          =16
+                        Y: |-
+                          =6
+                        Width: |-
+                          =Parent.TemplateWidth - 270
+                        Height: |-
+                          =26
+                        Size: |-
+                          =12
+                        Color: |-
+                          =RGBA(27, 33, 64, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                  - lblCertDetail:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =Switch(Text(ThisItem.'Certification Status'),
+                              "Planned", "Target date " & Text(ThisItem.'Target Date', "dd mmm yyyy"),
+                              "In progress", "Exam booked for " & Text(ThisItem.'Target Date', "dd mmm yyyy"),
+                              "Passed", "Passed " & Text(ThisItem.'Achieved Date', "dd mmm yyyy") &
+                                  If(ThisItem.Verified = 'Verified (Consultant Certifications)'.No, " · waiting for your manager",
+                                      IsBlank(ThisItem.'Expiry Date'), " · no expiry",
+                                      " · expires " & Text(ThisItem.'Expiry Date', "dd mmm yyyy")),
+                              "Expired", "Expired " & Text(ThisItem.'Expiry Date', "dd mmm yyyy") & " · plan a renewal",
+                              "")
+                        X: |-
+                          =16
+                        Y: |-
+                          =30
+                        Width: |-
+                          =Parent.TemplateWidth - 270
+                        Height: |-
+                          =22
+                        Size: |-
+                          =10
+                        Color: |-
+                          =RGBA(107, 115, 153, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                  - btnCertState:
+                      Control: Classic/Button
+                      Properties:
+                        Text: |-
+                          =If(ThisItem.'Certification Status' = 'Certification Status (Consultant Certifications)'.Passed && ThisItem.Verified = 'Verified (Consultant Certifications)'.No, "Awaiting verification",
+                              Text(ThisItem.'Certification Status'))
+                        X: |-
+                          =Parent.TemplateWidth - 236
+                        Y: |-
+                          =14
+                        Width: |-
+                          =176
+                        Height: |-
+                          =30
+                        Size: |-
+                          =10
+                        Font: |-
+                          =Font.'Segoe UI'
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                        DisplayMode: |-
+                          =DisplayMode.Disabled
+                        DisabledFill: |-
+                          =Switch(Self.Text, "Passed", RGBA(215, 245, 232, 1), "In progress", RGBA(255, 241, 194, 1), "Planned", RGBA(222, 233, 255, 1),
+                              "Expired", RGBA(255, 217, 217, 1), RGBA(236, 238, 245, 1))
+                        DisabledColor: |-
+                          =Switch(Self.Text, "Passed", RGBA(15, 122, 82, 1), "In progress", RGBA(138, 101, 0, 1), "Planned", RGBA(37, 87, 214, 1), "Expired", RGBA(180, 35, 24, 1), RGBA(107, 115, 153, 1))
+                        DisabledBorderColor: |-
+                          =Switch(Self.Text, "Passed", RGBA(215, 245, 232, 1), "In progress", RGBA(255, 241, 194, 1), "Planned", RGBA(222, 233, 255, 1),
+                              "Expired", RGBA(255, 217, 217, 1), RGBA(236, 238, 245, 1))
+                        BorderThickness: |-
+                          =0
+                        RadiusTopLeft: |-
+                          =15
+                        RadiusTopRight: |-
+                          =15
+                        RadiusBottomLeft: |-
+                          =15
+                        RadiusBottomRight: |-
+                          =15
+                  - icoEditCert:
+                      Control: Classic/Icon
+                      Properties:
+                        Icon: |-
+                          =Icon.Edit
+                        X: |-
+                          =Parent.TemplateWidth - 50
+                        Y: |-
+                          =13
+                        Width: |-
+                          =32
+                        Height: |-
+                          =32
+                        PaddingTop: |-
+                          =6
+                        PaddingBottom: |-
+                          =6
+                        PaddingLeft: |-
+                          =6
+                        PaddingRight: |-
+                          =6
+                        Color: |-
+                          =RGBA(31, 42, 92, 1)
+                        Tooltip: |-
+                          ="Update"
+                        OnSelect: |-
+                          =UpdateContext({locCert: ThisItem})
+                  - recCertDivider:
+                      Control: Rectangle
+                      Properties:
+                        X: |-
+                          =0
+                        Y: |-
+                          =Parent.TemplateHeight - 1
+                        Width: |-
+                          =Parent.TemplateWidth
+                        Height: |-
+                          =1
+                        Fill: |-
+                          =RGBA(236, 238, 245, 1)
+            - recCertFormLine:
+                Control: Rectangle
+                Properties:
+                  X: |-
+                    =0
+                  Y: |-
+                    =Parent.Height - 300 - 8
+                  Width: |-
+                    =Parent.Width
+                  Height: |-
+                    =1
+                  Fill: |-
+                    =RGBA(226, 229, 240, 1)
+            - lblCertFormTitle:
+                Control: Label
+                Properties:
+                  Text: |-
+                    =If(IsBlank(locCert), "Add a certification", "Update " & locCert.Certification.Code)
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 300
+                  Width: |-
+                    =Parent.Width - 160
+                  Height: |-
+                    =30
+                  Size: |-
+                    =13
+                  Color: |-
+                    =RGBA(27, 33, 64, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
+            - btnCertCancel:
+                Control: Classic/Button
+                Properties:
+                  Text: |-
+                    ="Cancel"
+                  X: |-
+                    =Parent.Width - 124
+                  Y: |-
+                    =Parent.Height - 300
+                  Width: |-
+                    =100
+                  Height: |-
+                    =30
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  OnSelect: |-
+                    =UpdateContext({locCert: Blank()}); Reset(cmbCert); Reset(cmbCertStatus); Reset(dpCertDate); Reset(txtBadge)
+                  RadiusTopLeft: |-
+                    =10
+                  RadiusTopRight: |-
+                    =10
+                  RadiusBottomLeft: |-
+                    =10
+                  RadiusBottomRight: |-
+                    =10
+                  Fill: |-
+                    =RGBA(255, 255, 255, 1)
+                  Color: |-
+                    =RGBA(31, 42, 92, 1)
+                  HoverFill: |-
+                    =RGBA(234, 238, 250, 1)
+                  HoverColor: |-
+                    =RGBA(31, 42, 92, 1)
+                  PressedFill: |-
+                    =RGBA(234, 238, 250, 1)
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  BorderThickness: |-
+                    =1
+            - cmbCert:
+                Control: Classic/ComboBox
+                Properties:
+                  Items: |-
+                    =Sort(colCertCat, Name, SortOrder.Ascending)
+                  DisplayFields: |-
+                    =["Name"]
+                  SearchFields: |-
+                    =["Name"]
+                  SelectMultiple: |-
+                    =false
+                  DefaultSelectedItems: |-
+                    =If(IsBlank(locCert), Blank(), Filter(colCertCat, Certification = locCert.Certification.Certification))
+                  DisplayMode: |-
+                    =If(IsBlank(locCert), DisplayMode.Edit, DisplayMode.Disabled)
+                  InputTextPlaceholder: |-
+                    ="Choose a certification"
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 300 + 40
+                  Width: |-
+                    =Parent.Width - 48
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - lblCertStatusCap:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Status"
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 300 + 88
+                  Width: |-
+                    =200
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - cmbCertStatus:
+                Control: Classic/ComboBox
+                Properties:
+                  Items: |-
+                    =Filter(Choices('Consultant Certifications'.'Certification Status'), Value <> 'Certification Status (Consultant Certifications)'.Expired)
+                  DisplayFields: |-
+                    =["Value"]
+                  SearchFields: |-
+                    =["Value"]
+                  SelectMultiple: |-
+                    =false
+                  IsSearchable: |-
+                    =false
+                  DefaultSelectedItems: |-
+                    =If(IsBlank(locCert), Table({Value: 'Certification Status (Consultant Certifications)'.Planned}), Table({Value: locCert.'Certification Status'}))
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 300 + 112
+                  Width: |-
+                    =(Parent.Width - 72) / 2
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - lblCertDateCap:
+                Control: Label
+                Properties:
+                  Text: |-
+                    =If(cmbCertStatus.Selected.Value = 'Certification Status (Consultant Certifications)'.Passed, "Date passed", "Target date")
+                  X: |-
+                    =36 + (Parent.Width - 72) / 2
+                  Y: |-
+                    =Parent.Height - 300 + 88
+                  Width: |-
+                    =200
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - dpCertDate:
+                Control: Classic/DatePicker
+                Properties:
+                  DefaultDate: |-
+                    =If(IsBlank(locCert), Today(), Coalesce(locCert.'Achieved Date', locCert.'Target Date', Today()))
+                  Format: |-
+                    ="dd/mm/yyyy"
+                  X: |-
+                    =36 + (Parent.Width - 72) / 2
+                  Y: |-
+                    =Parent.Height - 300 + 112
+                  Width: |-
+                    =(Parent.Width - 72) / 2
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - txtBadge:
+                Control: Classic/TextInput
+                Properties:
+                  Default: |-
+                    =If(IsBlank(locCert), "", locCert.'Badge URL')
+                  HintText: |-
+                    ="Badge or transcript link (optional)"
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 300 + 164
+                  Width: |-
+                    =Parent.Width - 48
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  RadiusTopLeft: |-
+                    =8
+                  RadiusTopRight: |-
+                    =8
+                  RadiusBottomLeft: |-
+                    =8
+                  RadiusBottomRight: |-
+                    =8
+            - btnSaveCert:
+                Control: Classic/Button
+                Properties:
+                  Text: |-
+                    ="Save certification"
+                  X: |-
+                    =24
+                  Y: |-
+                    =Parent.Height - 300 + 220
+                  Width: |-
+                    =Parent.Width - 48
+                  Height: |-
+                    =44
+                  Size: |-
+                    =12
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  OnSelect: |-
+                    =With({passed: cmbCertStatus.Selected.Value = 'Certification Status (Consultant Certifications)'.Passed, d: dpCertDate.SelectedDate},
+                        If(passed && d > Today(),
+                            Notify("The date you passed can't be in the future", NotificationType.Error),
+                            Patch('Consultant Certifications', If(IsBlank(locCert), Defaults('Consultant Certifications'), locCert), {
+                                Consultant: gblMe,
+                                Certification: cmbCert.Selected,
+                                'Certification Status': cmbCertStatus.Selected.Value,
+                                'Target Date': If(passed, locCert.'Target Date', d),
+                                'Achieved Date': If(passed, d, Blank()),
+                                'Badge URL': txtBadge.Text,
+                                Verified: If(passed && !IsBlank(locCert) && locCert.'Certification Status' = 'Certification Status (Consultant Certifications)'.Passed, locCert.Verified, 'Verified (Consultant Certifications)'.No)
+                            });
+                            Notify(If(passed, "Saved. Your manager will be asked to verify it.", "Saved."), NotificationType.Success);
+                            UpdateContext({locCert: Blank()});
+                            Reset(cmbCert); Reset(cmbCertStatus); Reset(dpCertDate); Reset(txtBadge)))
+                  RadiusTopLeft: |-
+                    =10
+                  RadiusTopRight: |-
+                    =10
+                  RadiusBottomLeft: |-
+                    =10
+                  RadiusBottomRight: |-
+                    =10
+                  Fill: |-
+                    =RGBA(31, 42, 92, 1)
+                  Color: |-
+                    =RGBA(255, 255, 255, 1)
+                  HoverFill: |-
+                    =RGBA(45, 60, 130, 1)
+                  PressedFill: |-
+                    =RGBA(45, 60, 130, 1)
+                  BorderThickness: |-
+                    =0
+                  DisabledFill: |-
+                    =RGBA(220, 223, 235, 1)
+                  DisabledColor: |-
+                    =RGBA(107, 115, 153, 1)
+                  DisplayMode: |-
+                    =If(!IsBlank(cmbCert.Selected) && !IsBlank(cmbCertStatus.Selected), DisplayMode.Edit, DisplayMode.Disabled)

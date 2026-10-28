@@ -1,0 +1,1062 @@
+Screens:
+  scrPeople:
+    Properties:
+      Fill: |-
+        =RGBA(246, 247, 251, 1)
+      OnVisible: |-
+        =If(IsBlank(gblMe), Set(gblMe, LookUp(Consultants, Name = "Ana Lopes")));
+        If(IsBlank(gblWeekStart), Set(gblWeekStart, DateAdd(Today(), -(Weekday(Today(), StartOfWeek.Monday) - 1), TimeUnit.Days)));
+        Set(gblSheet, LookUp(Timesheets, Consultant.Consultant = gblMe.Consultant && 'Week Start' = gblWeekStart));
+        ClearCollect(colSkills, Sort(Skills, Name, SortOrder.Ascending));
+        ClearCollect(colCS, 'Consultant Skills');
+        ClearCollect(colAssign, Assignments);
+        ClearCollect(colCertCat, Certifications);
+        ClearCollect(colCC, 'Consultant Certifications');
+        If(IsBlank(locView), UpdateContext({locView: "Matrix"}))
+    Children:
+      - recHeaderP:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =64
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+      - imgBrandP:
+          Control: Image
+          Properties:
+            Image: |-
+              ='houston-logo'
+            X: |-
+              =28
+            Y: |-
+              =14
+            Width: |-
+              =36
+            Height: |-
+              =36
+            ImagePosition: |-
+              =ImagePosition.Fit
+      - lblBrandP:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Houston"
+            X: |-
+              =70
+            Y: |-
+              =0
+            Width: |-
+              =130
+            Height: |-
+              =64
+            Size: |-
+              =20
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblUserP:
+          Control: Label
+          Properties:
+            Text: |-
+              =gblMe.Name
+            X: |-
+              =Parent.Width - 332
+            Y: |-
+              =0
+            Width: |-
+              =300
+            Height: |-
+              =64
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Right
+      - lblNav0P:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Home"
+            X: |-
+              =200
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrHome, ScreenTransition.None)
+      - lblNav1P:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Timesheet"
+            X: |-
+              =340
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrMyTimesheet, ScreenTransition.None)
+      - lblNav2P:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Bench Board"
+            X: |-
+              =480
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrBenchBoard, ScreenTransition.None)
+      - lblNav3P:
+          Control: Label
+          Properties:
+            Text: |-
+              ="People & Skills"
+            X: |-
+              =620
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            FontWeight: |-
+              =FontWeight.Semibold
+      - recNavLineP:
+          Control: Rectangle
+          Properties:
+            X: |-
+              =650
+            Y: |-
+              =58
+            Width: |-
+              =80
+            Height: |-
+              =4
+            Fill: |-
+              =RGBA(62, 230, 168, 1)
+      - lblNav4P:
+          Control: Label
+          Properties:
+            Text: |-
+              ="My Skills"
+            X: |-
+              =760
+            Y: |-
+              =0
+            Width: |-
+              =140
+            Height: |-
+              =64
+            Size: |-
+              =13
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Center
+            Color: |-
+              =RGBA(190, 200, 235, 1)
+            OnSelect: |-
+              =Navigate(scrMySkills, ScreenTransition.None)
+      - lblTitleP:
+          Control: Label
+          Properties:
+            Text: |-
+              ="People & Skills"
+            X: |-
+              =40
+            Y: |-
+              =84
+            Width: |-
+              =500
+            Height: |-
+              =44
+            Size: |-
+              =24
+            Color: |-
+              =RGBA(27, 33, 64, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+            FontWeight: |-
+              =FontWeight.Semibold
+      - lblSubP:
+          Control: Label
+          Properties:
+            Text: |-
+              ="Who knows what across the team, from 1 (learning) to 5 (expert)"
+            X: |-
+              =40
+            Y: |-
+              =128
+            Width: |-
+              =700
+            Height: |-
+              =26
+            Size: |-
+              =12
+            Color: |-
+              =RGBA(107, 115, 153, 1)
+            Font: |-
+              =Font.'Segoe UI'
+            Align: |-
+              =Align.Left
+      - btnViewMatrix:
+          Control: Classic/Button
+          Properties:
+            Text: |-
+              ="Skills matrix"
+            X: |-
+              =40
+            Y: |-
+              =168
+            Width: |-
+              =160
+            Height: |-
+              =40
+            Size: |-
+              =12
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            OnSelect: |-
+              =UpdateContext({locView: "Matrix"})
+            Fill: |-
+              =If(locView = "Matrix", RGBA(31, 42, 92, 1), RGBA(255, 255, 255, 1))
+            Color: |-
+              =If(locView = "Matrix", RGBA(255, 255, 255, 1), RGBA(31, 42, 92, 1))
+            HoverFill: |-
+              =If(locView = "Matrix", RGBA(45, 60, 130, 1), RGBA(234, 238, 250, 1))
+            HoverColor: |-
+              =If(locView = "Matrix", RGBA(255, 255, 255, 1), RGBA(31, 42, 92, 1))
+            PressedFill: |-
+              =If(locView = "Matrix", RGBA(45, 60, 130, 1), RGBA(234, 238, 250, 1))
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =If(locView = "Matrix", 0, 1)
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+      - btnViewFind:
+          Control: Classic/Button
+          Properties:
+            Text: |-
+              ="Find by skill"
+            X: |-
+              =208
+            Y: |-
+              =168
+            Width: |-
+              =160
+            Height: |-
+              =40
+            Size: |-
+              =12
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            OnSelect: |-
+              =UpdateContext({locView: "Find"})
+            Fill: |-
+              =If(locView = "Find", RGBA(31, 42, 92, 1), RGBA(255, 255, 255, 1))
+            Color: |-
+              =If(locView = "Find", RGBA(255, 255, 255, 1), RGBA(31, 42, 92, 1))
+            HoverFill: |-
+              =If(locView = "Find", RGBA(45, 60, 130, 1), RGBA(234, 238, 250, 1))
+            HoverColor: |-
+              =If(locView = "Find", RGBA(255, 255, 255, 1), RGBA(31, 42, 92, 1))
+            PressedFill: |-
+              =If(locView = "Find", RGBA(45, 60, 130, 1), RGBA(234, 238, 250, 1))
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =If(locView = "Find", 0, 1)
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+      - btnGoAssign:
+          Control: Classic/Button
+          Properties:
+            Text: |-
+              ="Assign to an engagement"
+            X: |-
+              =Parent.Width - 300
+            Y: |-
+              =168
+            Width: |-
+              =260
+            Height: |-
+              =40
+            Size: |-
+              =12
+            Font: |-
+              =Font.'Segoe UI'
+            FontWeight: |-
+              =FontWeight.Semibold
+            OnSelect: |-
+              =Set(gblAssignConsultant, Blank()); Navigate(scrAssign, ScreenTransition.None)
+            RadiusTopLeft: |-
+              =10
+            RadiusTopRight: |-
+              =10
+            RadiusBottomLeft: |-
+              =10
+            RadiusBottomRight: |-
+              =10
+            Fill: |-
+              =RGBA(31, 42, 92, 1)
+            Color: |-
+              =RGBA(255, 255, 255, 1)
+            HoverFill: |-
+              =RGBA(45, 60, 130, 1)
+            PressedFill: |-
+              =RGBA(45, 60, 130, 1)
+            BorderThickness: |-
+              =0
+            DisabledFill: |-
+              =RGBA(220, 223, 235, 1)
+            DisabledColor: |-
+              =RGBA(107, 115, 153, 1)
+      - conMatrix:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =40
+            Y: |-
+              =224
+            Width: |-
+              =Parent.Width - 80
+            Height: |-
+              =Parent.Height - 248
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+            Visible: |-
+              =locView = "Matrix"
+          Children:
+            - lblMxConsultant:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Consultant"
+                  X: |-
+                    =24
+                  Y: |-
+                    =14
+                  Width: |-
+                    =260
+                  Height: |-
+                    =40
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+                  FontWeight: |-
+                    =FontWeight.Semibold
+            - galMxHeaders:
+                Control: Gallery
+                Variant: Horizontal
+                Properties:
+                  Items: |-
+                    =colSkills
+                  X: |-
+                    =Parent.Width - 952
+                  Y: |-
+                    =8
+                  Width: |-
+                    =936
+                  Height: |-
+                    =52
+                  TemplateSize: |-
+                    =78
+                  TemplatePadding: |-
+                    =0
+                  ShowScrollbar: |-
+                    =false
+                Children:
+                  - lblMxSkill:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =ThisItem.Name
+                        X: |-
+                          =2
+                        Y: |-
+                          =0
+                        Width: |-
+                          =Parent.TemplateWidth - 4
+                        Height: |-
+                          =52
+                        Size: |-
+                          =9
+                        Color: |-
+                          =RGBA(107, 115, 153, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Center
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                        VerticalAlign: |-
+                          =VerticalAlign.Middle
+            - galMatrix:
+                Control: Gallery
+                Variant: Vertical
+                Properties:
+                  Items: |-
+                    =Sort(Consultants, Name, SortOrder.Ascending)
+                  X: |-
+                    =8
+                  Y: |-
+                    =64
+                  Width: |-
+                    =Parent.Width - 16
+                  Height: |-
+                    =Parent.Height - 72
+                  TemplateSize: |-
+                    =52
+                  TemplatePadding: |-
+                    =0
+                Children:
+                  - cirAvatarMx:
+                      Control: Circle
+                      Properties:
+                        X: |-
+                          =16
+                        Y: |-
+                          =8
+                        Width: |-
+                          =36
+                        Height: |-
+                          =36
+                        Fill: |-
+                          =Switch(Mod(Len(ThisItem.Name), 5),
+                              0, RGBA(107, 91, 255, 1), 1, RGBA(224, 86, 155, 1), 2, RGBA(31, 157, 107, 1),
+                              3, RGBA(217, 138, 28, 1), RGBA(61, 107, 255, 1))
+                  - lblInitialsMx:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =Left(ThisItem.Name, 1) & Left(Last(Split(ThisItem.Name, " ")).Value, 1)
+                        X: |-
+                          =16
+                        Y: |-
+                          =8
+                        Width: |-
+                          =36
+                        Height: |-
+                          =36
+                        Size: |-
+                          =10
+                        Color: |-
+                          =RGBA(255, 255, 255, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Center
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                  - lblMxName:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =ThisItem.Name
+                        X: |-
+                          =62
+                        Y: |-
+                          =4
+                        Width: |-
+                          =260
+                        Height: |-
+                          =24
+                        Size: |-
+                          =12
+                        Color: |-
+                          =RGBA(27, 33, 64, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                  - lblMxPractice:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =Text(ThisItem.Practice) & " · " & Text(ThisItem.Grade)
+                        X: |-
+                          =62
+                        Y: |-
+                          =26
+                        Width: |-
+                          =260
+                        Height: |-
+                          =20
+                        Size: |-
+                          =10
+                        Color: |-
+                          =RGBA(107, 115, 153, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                  - galMxCells:
+                      Control: Gallery
+                      Variant: Horizontal
+                      Properties:
+                        Items: |-
+                          =ForAll(colSkills As s,
+                              {Lvl: LookUp(colCS, Consultant.Consultant = ThisItem.Consultant && Skill.Skill = s.Skill, Proficiency)})
+                        X: |-
+                          =Parent.TemplateWidth - 944
+                        Y: |-
+                          =4
+                        Width: |-
+                          =936
+                        Height: |-
+                          =44
+                        TemplateSize: |-
+                          =78
+                        TemplatePadding: |-
+                          =0
+                        ShowScrollbar: |-
+                          =false
+                      Children:
+                        - btnMxCell:
+                            Control: Classic/Button
+                            Properties:
+                              Text: |-
+                                =If(IsBlank(ThisItem.Lvl), "·", Text(ThisItem.Lvl))
+                              X: |-
+                                =6
+                              Y: |-
+                                =6
+                              Width: |-
+                                =Parent.TemplateWidth - 12
+                              Height: |-
+                                =32
+                              Size: |-
+                                =11
+                              Font: |-
+                                =Font.'Segoe UI'
+                              FontWeight: |-
+                                =FontWeight.Semibold
+                              DisplayMode: |-
+                                =DisplayMode.Disabled
+                              DisabledFill: |-
+                                =Switch(ThisItem.Lvl, 5, RGBA(31, 42, 92, 1), 4, RGBA(61, 107, 255, 1), 3, RGBA(222, 233, 255, 1), 2, RGBA(234, 238, 250, 1),
+                                    1, RGBA(246, 247, 251, 1), RGBA(255, 255, 255, 1))
+                              DisabledColor: |-
+                                =If(ThisItem.Lvl >= 4, RGBA(255, 255, 255, 1), ThisItem.Lvl = 3, RGBA(37, 87, 214, 1), RGBA(107, 115, 153, 1))
+                              DisabledBorderColor: |-
+                                =Switch(ThisItem.Lvl, 5, RGBA(31, 42, 92, 1), 4, RGBA(61, 107, 255, 1), 3, RGBA(222, 233, 255, 1), 2, RGBA(234, 238, 250, 1),
+                                    1, RGBA(246, 247, 251, 1), RGBA(255, 255, 255, 1))
+                              BorderThickness: |-
+                                =0
+                              RadiusTopLeft: |-
+                                =8
+                              RadiusTopRight: |-
+                                =8
+                              RadiusBottomLeft: |-
+                                =8
+                              RadiusBottomRight: |-
+                                =8
+                  - recMxDivider:
+                      Control: Rectangle
+                      Properties:
+                        X: |-
+                          =0
+                        Y: |-
+                          =Parent.TemplateHeight - 1
+                        Width: |-
+                          =Parent.TemplateWidth
+                        Height: |-
+                          =1
+                        Fill: |-
+                          =RGBA(236, 238, 245, 1)
+      - conFind:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =40
+            Y: |-
+              =224
+            Width: |-
+              =Parent.Width - 80
+            Height: |-
+              =Parent.Height - 248
+            Fill: |-
+              =RGBA(255, 255, 255, 1)
+            BorderColor: |-
+              =RGBA(226, 229, 240, 1)
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =14
+            RadiusTopRight: |-
+              =14
+            RadiusBottomLeft: |-
+              =14
+            RadiusBottomRight: |-
+              =14
+            Visible: |-
+              =locView = "Find"
+          Children:
+            - lblFindSkillCap:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Skill"
+                  X: |-
+                    =24
+                  Y: |-
+                    =16
+                  Width: |-
+                    =300
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - cmbFindSkill:
+                Control: Classic/ComboBox
+                Properties:
+                  Items: |-
+                    =colSkills
+                  DisplayFields: |-
+                    =["Name"]
+                  SearchFields: |-
+                    =["Name"]
+                  SelectMultiple: |-
+                    =false
+                  InputTextPlaceholder: |-
+                    ="Choose a skill"
+                  X: |-
+                    =24
+                  Y: |-
+                    =40
+                  Width: |-
+                    =320
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - lblFindLevelCap:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Minimum level"
+                  X: |-
+                    =368
+                  Y: |-
+                    =16
+                  Width: |-
+                    =200
+                  Height: |-
+                    =22
+                  Size: |-
+                    =11
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - cmbFindLevel:
+                Control: Classic/ComboBox
+                Properties:
+                  Items: |-
+                    =["1", "2", "3", "4", "5"]
+                  DefaultSelectedItems: |-
+                    =["3"]
+                  DisplayFields: |-
+                    =["Value"]
+                  SearchFields: |-
+                    =["Value"]
+                  SelectMultiple: |-
+                    =false
+                  IsSearchable: |-
+                    =false
+                  X: |-
+                    =368
+                  Y: |-
+                    =40
+                  Width: |-
+                    =140
+                  Height: |-
+                    =40
+                  BorderColor: |-
+                    =RGBA(226, 229, 240, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+            - lblFindCount:
+                Control: Label
+                Properties:
+                  Text: |-
+                    =If(IsBlank(cmbFindSkill.Selected), "", CountRows(galFind.AllItems) & " consultants at level " & cmbFindLevel.Selected.Value & " or above")
+                  X: |-
+                    =532
+                  Y: |-
+                    =40
+                  Width: |-
+                    =500
+                  Height: |-
+                    =40
+                  Size: |-
+                    =12
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Left
+            - lblFindEmpty:
+                Control: Label
+                Properties:
+                  Text: |-
+                    ="Choose a skill to find the consultants who have it."
+                  X: |-
+                    =24
+                  Y: |-
+                    =140
+                  Width: |-
+                    =Parent.Width - 48
+                  Height: |-
+                    =60
+                  Size: |-
+                    =13
+                  Color: |-
+                    =RGBA(107, 115, 153, 1)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  Align: |-
+                    =Align.Center
+                  Visible: |-
+                    =IsBlank(cmbFindSkill.Selected)
+            - galFind:
+                Control: Gallery
+                Variant: Vertical
+                Properties:
+                  Items: |-
+                    =If(IsBlank(cmbFindSkill.Selected), Blank(),
+                        Sort(Filter(colCS, Skill.Skill = cmbFindSkill.Selected.Skill && Proficiency >= Value(cmbFindLevel.Selected.Value)),
+                            Proficiency, SortOrder.Descending))
+                  X: |-
+                    =8
+                  Y: |-
+                    =96
+                  Width: |-
+                    =Parent.Width - 16
+                  Height: |-
+                    =Parent.Height - 104
+                  TemplateSize: |-
+                    =64
+                  TemplatePadding: |-
+                    =0
+                Children:
+                  - cirAvatarFd:
+                      Control: Circle
+                      Properties:
+                        X: |-
+                          =16
+                        Y: |-
+                          =14
+                        Width: |-
+                          =36
+                        Height: |-
+                          =36
+                        Fill: |-
+                          =Switch(Mod(Len(LookUp(Consultants, Consultant = ThisItem.Consultant.Consultant).Name), 5),
+                              0, RGBA(107, 91, 255, 1), 1, RGBA(224, 86, 155, 1), 2, RGBA(31, 157, 107, 1),
+                              3, RGBA(217, 138, 28, 1), RGBA(61, 107, 255, 1))
+                  - lblInitialsFd:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =Left(LookUp(Consultants, Consultant = ThisItem.Consultant.Consultant).Name, 1) & Left(Last(Split(LookUp(Consultants, Consultant = ThisItem.Consultant.Consultant).Name, " ")).Value, 1)
+                        X: |-
+                          =16
+                        Y: |-
+                          =14
+                        Width: |-
+                          =36
+                        Height: |-
+                          =36
+                        Size: |-
+                          =10
+                        Color: |-
+                          =RGBA(255, 255, 255, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Center
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                  - lblFdName:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =LookUp(Consultants, Consultant = ThisItem.Consultant.Consultant).Name
+                        X: |-
+                          =62
+                        Y: |-
+                          =8
+                        Width: |-
+                          =280
+                        Height: |-
+                          =24
+                        Size: |-
+                          =13
+                        Color: |-
+                          =RGBA(27, 33, 64, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                  - lblFdPractice:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =Text(LookUp(Consultants, Consultant = ThisItem.Consultant.Consultant).Practice) & " · " & Text(LookUp(Consultants, Consultant = ThisItem.Consultant.Consultant).Grade)
+                        X: |-
+                          =62
+                        Y: |-
+                          =32
+                        Width: |-
+                          =280
+                        Height: |-
+                          =22
+                        Size: |-
+                          =10
+                        Color: |-
+                          =RGBA(107, 115, 153, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                  - lblFdLevel:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =Left("●●●●●", ThisItem.Proficiency) & Left("○○○○○", 5 - ThisItem.Proficiency) & "  level " & ThisItem.Proficiency
+                        X: |-
+                          =360
+                        Y: |-
+                          =8
+                        Width: |-
+                          =200
+                        Height: |-
+                          =48
+                        Size: |-
+                          =13
+                        Color: |-
+                          =RGBA(31, 42, 92, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                  - lblFdAlloc:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          ="Next 4 weeks: " & Round(Average(ForAll(Sequence(4) As w,
+                              With({d: DateAdd(Today(), (w.Value - 1) * 7, TimeUnit.Days)},
+                                  Coalesce(Sum(Filter(colAssign, Consultant.Consultant = ThisItem.Consultant.Consultant && 'Start Date' <= d && 'End Date' >= d), 'Allocation %'), 0))),
+                              Value), 0) & "% allocated"
+                        X: |-
+                          =580
+                        Y: |-
+                          =8
+                        Width: |-
+                          =260
+                        Height: |-
+                          =48
+                        Size: |-
+                          =11
+                        Color: |-
+                          =RGBA(107, 115, 153, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                  - lblFdCerts:
+                      Control: Label
+                      Properties:
+                        Text: |-
+                          =With({c: With({ids: Filter(colCertCat, Skill.Skill = cmbFindSkill.Selected.Skill)},
+                              Concat(Filter(colCC, Consultant.Consultant = ThisItem.Consultant.Consultant
+                                      && Certification.Certification in ids.Certification
+                                      && 'Certification Status' = 'Certification Status (Consultant Certifications)'.Passed) As cc,
+                                  LookUp(colCertCat, Certification = cc.Certification.Certification, Code), ", "))}, If(IsBlank(c), "No certification yet", c))
+                        X: |-
+                          =850
+                        Y: |-
+                          =8
+                        Width: |-
+                          =Parent.TemplateWidth - 1030
+                        Height: |-
+                          =48
+                        Size: |-
+                          =11
+                        Color: |-
+                          =RGBA(27, 33, 64, 1)
+                        Font: |-
+                          =Font.'Segoe UI'
+                        Align: |-
+                          =Align.Left
+                  - btnFdAssign:
+                      Control: Classic/Button
+                      Properties:
+                        Text: |-
+                          ="Assign"
+                        X: |-
+                          =Parent.TemplateWidth - 140
+                        Y: |-
+                          =14
+                        Width: |-
+                          =120
+                        Height: |-
+                          =36
+                        Size: |-
+                          =12
+                        Font: |-
+                          =Font.'Segoe UI'
+                        FontWeight: |-
+                          =FontWeight.Semibold
+                        OnSelect: |-
+                          =Set(gblAssignConsultant, LookUp(Consultants, Consultant = ThisItem.Consultant.Consultant)); Navigate(scrAssign, ScreenTransition.None)
+                        RadiusTopLeft: |-
+                          =10
+                        RadiusTopRight: |-
+                          =10
+                        RadiusBottomLeft: |-
+                          =10
+                        RadiusBottomRight: |-
+                          =10
+                        Fill: |-
+                          =RGBA(255, 255, 255, 1)
+                        Color: |-
+                          =RGBA(31, 42, 92, 1)
+                        HoverFill: |-
+                          =RGBA(234, 238, 250, 1)
+                        HoverColor: |-
+                          =RGBA(31, 42, 92, 1)
+                        PressedFill: |-
+                          =RGBA(234, 238, 250, 1)
+                        BorderColor: |-
+                          =RGBA(226, 229, 240, 1)
+                        BorderThickness: |-
+                          =1
+                  - recFdDivider:
+                      Control: Rectangle
+                      Properties:
+                        X: |-
+                          =0
+                        Y: |-
+                          =Parent.TemplateHeight - 1
+                        Width: |-
+                          =Parent.TemplateWidth
+                        Height: |-
+                          =1
+                        Fill: |-
+                          =RGBA(236, 238, 245, 1)
