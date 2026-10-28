@@ -16,7 +16,12 @@ erDiagram
     TIMESHEET ||--|{ TIME_ENTRY : contains
     ENGAGEMENT ||--o{ TIME_ENTRY : "booked to"
     CONSULTANT ||--o{ ALERT : receives
+    SKILL ||--o{ CERTIFICATION : "certified by"
+    CERTIFICATION ||--o{ CONSULTANT_CERTIFICATION : "held as"
+    CONSULTANT ||--o{ CONSULTANT_CERTIFICATION : holds
 ```
+
+Tables added in **v1.1 (SkillPath)**: Certification and Consultant Certification. Consultant gains a *Skills Reviewed* date, and Alert gains two alert types.
 
 ## Tables
 
@@ -31,6 +36,7 @@ Every Dataverse table needs a primary name column. For Consultant Skill, Engagem
 | hou_practice | Choice | Power Platform, Salesforce, Data & AI, Business Analysis |
 | hou_targetutilisation | Whole number | Target billable %, e.g. 80 |
 | hou_manager | Lookup → Consultant | |
+| hou_skillsreviewed | Date | *v1.1.* Last time the consultant reviewed their skills |
 
 ### Client (`hou_client`)
 | Column | Type | Notes |
@@ -105,12 +111,39 @@ In-app notifications written by the flows and shown on the Home screen. (Named A
 |---|---|---|
 | hou_name | Text | Title (primary column) |
 | hou_message | Multiline text | |
-| hou_type | Choice | Display name "Alert Type": Timesheet reminder, Bench alert, Approval |
+| hou_type | Choice | Display name "Alert Type": Timesheet reminder, Bench alert, Approval; *v1.1:* Certification, Skills review |
 | hou_isread | Yes/No | Display name "Is Read", default No |
 | hou_recipient | Lookup → Consultant | Who sees the alert |
+
+### Certification (`hou_certification`) – v1.1
+The catalogue of certifications the firm tracks.
+
+| Column | Type | Notes |
+|---|---|---|
+| hou_name | Text | Primary column, e.g. "PL-200 Power Platform Functional Consultant" |
+| hou_code | Text | Exam or credential code, e.g. PL-200 |
+| hou_vendor | Choice | Microsoft, Salesforce, Scrum.org, IIBA, Other |
+| hou_level | Choice | Display name "Certification Level": Fundamentals, Associate, Expert, Professional |
+| hou_validitymonths | Whole number | Months before renewal is due; 0 = no expiry |
+| hou_skill | Lookup → Skill | The main skill the certification proves |
+
+### Consultant Certification (`hou_consultantcertification`) – v1.1
+| Column | Type | Notes |
+|---|---|---|
+| hou_name | Autonumber | `CC-{SEQNUM:5}` |
+| hou_consultant | Lookup → Consultant | |
+| hou_certification | Lookup → Certification | |
+| hou_status | Choice | Display name "Certification Status": Planned, In progress, Passed, Expired |
+| hou_targetdate | Date | Planned exam date |
+| hou_achieveddate | Date | Date passed |
+| hou_expirydate | Date | Set by the verification flow: achieved date + validity months |
+| hou_verified | Yes/No | Set to Yes when the manager approves; default No |
+| hou_badgeurl | Text (URL) | Link to the badge or transcript |
 
 ## Key calculations (Power BI)
 
 - **Billable utilisation %** = billable hours ÷ (40 × weeks) for approved timesheets
 - **Forecast allocation** = sum of active assignment allocations per consultant per future week
 - **Bench gap** = target utilisation − forecast allocation (when positive)
+- *v1.1:* **Certification coverage** = consultants with a verified, unexpired certification ÷ consultants in the practice
+- *v1.1:* **Expiring soon** = passed certifications with an expiry date in the next 60 days

@@ -1,0 +1,13 @@
+hou_name,hou_code,hou_vendor,hou_level,hou_validitymonths,hou_skill
+PL-900 Power Platform Fundamentals,PL-900,Microsoft,Fundamentals,0,Power Apps
+PL-200 Power Platform Functional Consultant,PL-200,Microsoft,Associate,12,Power Apps
+PL-400 Power Platform Developer,PL-400,Microsoft,Associate,12,Power Automate
+PL-600 Power Platform Solution Architect,PL-600,Microsoft,Expert,12,Dataverse
+PL-300 Power BI Data Analyst,PL-300,Microsoft,Associate,12,Power BI
+DP-900 Azure Data Fundamentals,DP-900,Microsoft,Fundamentals,0,SQL
+Salesforce Certified Administrator,SF-ADM,Salesforce,Associate,12,Salesforce
+Salesforce Platform App Builder,SF-PAB,Salesforce,Associate,12,Salesforce
+Salesforce Platform Developer I,SF-PD1,Salesforce,Associate,12,Apex
+Salesforce Business Analyst,SF-BA,Salesforce,Associate,12,Requirements Elicitation
+PSM I Professional Scrum Master,PSM-I,Scrum.org,Professional,0,Agile / Scrum
+ECBA Entry Certificate in Business Analysis,ECBA,IIBA,Fundamentals,0,Requirements Elicitation

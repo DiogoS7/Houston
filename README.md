@@ -71,7 +71,7 @@ More in [`screenshots/v1.0`](screenshots/v1.0) and the [v1.0 release notes](docs
 ## Documentation
 
 - [Problem statement](docs/problem-statement.md)
-- [User stories](docs/user-stories.md)
+- [User stories – v1.0 Bench](docs/user-stories.md) · [v1.1 SkillPath](docs/user-stories-v1.1.md)
 - [Data model](docs/data-model.md)
 - [Process flows](docs/process-flows.md)
 - [Release notes](docs/releases/)

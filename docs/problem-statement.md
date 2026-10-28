@@ -52,3 +52,48 @@ A Power Platform app where:
 | Consultant | Quick timesheet entry, clear view of assignments |
 | Practice manager | Approvals, staffing, utilisation |
 | Leadership | Utilisation and bench trends |
+
+---
+
+# v1.1: SkillPath
+
+## The problem
+
+v1.0 made staffing visible, but it still can't answer the third question well: **do we have the right skills?**
+
+- Consultants' skills are recorded once and then go stale. Nobody knows when a profile was last reviewed.
+- Certifications live in people's heads and LinkedIn profiles. Managers can't see who is certified in what, or who is working towards an exam.
+- Role-based certifications (Microsoft, Salesforce) must be renewed every year. They lapse without anyone noticing, and the firm finds out when a client or partner programme asks for proof.
+- When a new engagement needs, say, two Salesforce consultants at level 4, the manager searches by memory, and assignments are still created outside the app.
+
+## Impact
+
+- Staffing proposals that don't match the client's requirements
+- Lapsed certifications that weaken partner status and bids
+- No visibility of the team's learning pipeline, so training is not planned against demand
+
+## Proposed solution (v1.1: SkillPath)
+
+Extend Houston so that:
+
+- consultants keep their skills and proficiency up to date, and are reminded when they haven't reviewed them for 90 days;
+- consultants plan certifications, record them when they pass, and managers verify them through an approval;
+- the system tracks expiry dates and alerts the consultant and their manager before a certification lapses;
+- managers see a skills matrix of their team, find consultants by skill and level, and assign them to engagements from the app;
+- Power BI shows certification coverage by practice, the learning pipeline and upcoming expiries.
+
+## Success measures
+
+| Measure | Target |
+|---|---|
+| Consultants who reviewed their skills in the last 90 days | ≥ 90% |
+| Certifications that lapse without a warning | 0 |
+| Warning before a certification expires | 60 days |
+| Passed certifications verified by a manager | 100% |
+| Time to find candidates for a skill and level | From hours to seconds |
+
+## Scope
+
+**In scope (v1.1):** certifications catalogue, consultant certifications with status and expiry, verification approval, expiry and skills-review alerts, skills matrix, search by skill, assignment from the app, certification reporting.
+
+**Out of scope (v1.1):** training budgets and exam vouchers, integration with Microsoft Learn or Trailhead, learning paths and course content.

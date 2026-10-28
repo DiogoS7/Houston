@@ -6,16 +6,22 @@
   Creates (only if missing):
     - publisher "diogosantos" with prefix "hou"
     - solution "Houston"
-    - 9 tables with their columns, choices, lookups and autonumbers
+    - 12 tables with their columns, choices, lookups and autonumbers
+      (v1.0 Bench + v1.1 SkillPath: Certification, Consultant Certification)
   Then publishes the customisations and loads the CSVs in /data.
-  Safe to run again: anything that already exists is skipped.
+  Safe to run again: anything that already exists is skipped, so running it on a
+  v1.0 environment only adds what v1.1 needs.
+
+  Sign-in opens a browser window (Az.Accounts, installed for the current user on
+  first run). Use -DeviceCode only if your tenant still allows device-code sign-in.
 
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File scripts\Setup-Houston.ps1 -OrgUrl https://orgxxxx.crm4.dynamics.com
 #>
 param(
   [Parameter(Mandatory = $true)][string]$OrgUrl,
-  [switch]$SkipData
+  [switch]$SkipData,
+  [switch]$DeviceCode
 )
 
 $ErrorActionPreference = 'Stop'
@@ -29,7 +35,25 @@ $DataDir = Join-Path $PSScriptRoot '..\data'
 
 # ---------------------------------------------------------------- sign in
 function Get-Token {
-  # Device-code sign-in with Microsoft's public Azure CLI client (no app registration needed).
+  if ($DeviceCode) { return Get-DeviceCodeToken }
+  # Interactive browser sign-in through Azure PowerShell (no app registration needed).
+  if (-not (Get-Module -ListAvailable -Name Az.Accounts)) {
+    Write-Host 'Installing the Az.Accounts module for your user (one-off)...' -ForegroundColor Yellow
+    if (-not (Get-PackageProvider -ListAvailable -Name NuGet -ErrorAction SilentlyContinue)) {
+      Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Scope CurrentUser -Force | Out-Null
+    }
+    Install-Module Az.Accounts -Scope CurrentUser -Force -AllowClobber
+  }
+  Import-Module Az.Accounts
+  Write-Host 'A sign-in window opens: use your diogo@...onmicrosoft.com account.' -ForegroundColor Yellow
+  Connect-AzAccount -WarningAction SilentlyContinue | Out-Null
+  $t = (Get-AzAccessToken -ResourceUrl $OrgUrl -WarningAction SilentlyContinue).Token
+  if ($t -is [securestring]) { $t = [Net.NetworkCredential]::new('', $t).Password }
+  return $t
+}
+
+function Get-DeviceCodeToken {
+  # Device-code sign-in with Microsoft's public Azure CLI client (blocked in many tenants).
   $clientId = '04b07795-8ddb-461a-bbee-02f9e1bf7b46'
   $scope = "$OrgUrl/.default offline_access"
   $dc = Invoke-RestMethod -Method Post -Uri 'https://login.microsoftonline.com/organizations/oauth2/v2.0/devicecode' `
@@ -124,6 +148,9 @@ $Tables = @(
   @{ N = 'timesheet';       D = 'Timesheet';        P = 'Timesheets';        Pk = 'Name' }
   @{ N = 'timeentry';       D = 'Time Entry';       P = 'Time Entries';      Pk = 'Reference'; Auto = 'TE-{SEQNUM:6}' }
   @{ N = 'alert';           D = 'Alert';            P = 'Alerts';            Pk = 'Title' }
+  # v1.1 SkillPath
+  @{ N = 'certification';            D = 'Certification';            P = 'Certifications';            Pk = 'Name' }
+  @{ N = 'consultantcertification';  D = 'Consultant Certification'; P = 'Consultant Certifications'; Pk = 'Reference'; Auto = 'CC-{SEQNUM:5}' }
 )
 
 # Columns: table, schema suffix, label, type, extra
@@ -134,7 +161,13 @@ $Choices = @{
   'consultant.practice' = @('Power Platform', 'Salesforce', 'Data & AI', 'Business Analysis')
   'engagement.status'   = @('Pipeline', 'Active', 'Closed')
   'timesheet.status'    = @('Draft', 'Submitted', 'Approved', 'Rejected')
-  'alert.type'          = @('Timesheet reminder', 'Bench alert', 'Approval')
+  # New options are only added when the column is created. On a v1.0 environment,
+  # add 'Certification' and 'Skills review' to Alert Type by hand (see docs/releases).
+  'alert.type'          = @('Timesheet reminder', 'Bench alert', 'Approval', 'Certification', 'Skills review')
+  # v1.1 SkillPath
+  'certification.vendor'           = @('Microsoft', 'Salesforce', 'Scrum.org', 'IIBA', 'Other')
+  'certification.level'            = @('Fundamentals', 'Associate', 'Expert', 'Professional')
+  'consultantcertification.status' = @('Planned', 'In progress', 'Passed', 'Expired')
 }
 $Columns = @(
   @{ T = 'skill';           S = 'Category';          L = 'Category';           Type = 'Choice' }
@@ -165,6 +198,18 @@ $Columns = @(
   @{ T = 'alert';           S = 'Message';           L = 'Message';            Type = 'Memo' }
   @{ T = 'alert';           S = 'Type';              L = 'Alert Type';         Type = 'Choice' }
   @{ T = 'alert';           S = 'IsRead';            L = 'Is Read';            Type = 'YesNo'; Default = $false }
+  # v1.1 SkillPath
+  @{ T = 'consultant';              S = 'SkillsReviewed'; L = 'Skills Reviewed';      Type = 'Date' }
+  @{ T = 'certification';           S = 'Code';           L = 'Code';                 Type = 'Text' }
+  @{ T = 'certification';           S = 'Vendor';         L = 'Vendor';               Type = 'Choice' }
+  @{ T = 'certification';           S = 'Level';          L = 'Certification Level';  Type = 'Choice' }
+  @{ T = 'certification';           S = 'ValidityMonths'; L = 'Validity (months)';    Type = 'Int'; Min = 0; Max = 60 }
+  @{ T = 'consultantcertification'; S = 'Status';         L = 'Certification Status'; Type = 'Choice' }
+  @{ T = 'consultantcertification'; S = 'TargetDate';     L = 'Target Date';          Type = 'Date' }
+  @{ T = 'consultantcertification'; S = 'AchievedDate';   L = 'Achieved Date';        Type = 'Date' }
+  @{ T = 'consultantcertification'; S = 'ExpiryDate';     L = 'Expiry Date';          Type = 'Date' }
+  @{ T = 'consultantcertification'; S = 'Verified';       L = 'Verified';             Type = 'YesNo'; Default = $false }
+  @{ T = 'consultantcertification'; S = 'BadgeUrl';       L = 'Badge URL';            Type = 'Url' }
 )
 
 # Lookups: child table, lookup schema suffix, label, parent table, parental (cascade delete)
@@ -182,6 +227,10 @@ $Lookups = @(
   @{ T = 'timeentry';       S = 'Timesheet';  L = 'Timesheet';  P = 'timesheet'; Parental = $true }
   @{ T = 'timeentry';       S = 'Engagement'; L = 'Engagement'; P = 'engagement' }
   @{ T = 'alert';           S = 'Recipient';  L = 'Recipient';  P = 'consultant' }
+  # v1.1 SkillPath
+  @{ T = 'certification';           S = 'Skill';         L = 'Skill';         P = 'skill' }
+  @{ T = 'consultantcertification'; S = 'Consultant';    L = 'Consultant';    P = 'consultant' }
+  @{ T = 'consultantcertification'; S = 'Certification'; L = 'Certification'; P = 'certification' }
 )
 
 function Get-ChoiceValues([string]$key) {
@@ -218,6 +267,7 @@ foreach ($c in $Columns) {
   $base = @{ SchemaName = $schema; DisplayName = (L $c.L); RequiredLevel = $Req }
   switch ($c.Type) {
     'Text'     { $base += @{ '@odata.type' = 'Microsoft.Dynamics.CRM.StringAttributeMetadata'; MaxLength = 100; FormatName = @{ Value = 'Text' } } }
+    'Url'      { $base += @{ '@odata.type' = 'Microsoft.Dynamics.CRM.StringAttributeMetadata'; MaxLength = 500; FormatName = @{ Value = 'Url' } } }
     'Email'    { $base += @{ '@odata.type' = 'Microsoft.Dynamics.CRM.StringAttributeMetadata'; MaxLength = 200; FormatName = @{ Value = 'Email' } } }
     'Memo'     { $base += @{ '@odata.type' = 'Microsoft.Dynamics.CRM.MemoAttributeMetadata'; MaxLength = 2000; FormatName = @{ Value = 'TextArea' } } }
     'Int'      { $base += @{ '@odata.type' = 'Microsoft.Dynamics.CRM.IntegerAttributeMetadata'; MinValue = $c.Min; MaxValue = $c.Max; Format = 'None' } }
@@ -332,5 +382,20 @@ Import-Table 'engagementskill' 'engagement_skills.csv' @{ hou_engagement = 'enga
 Import-Table 'assignment'      'assignments.csv'       @{ hou_consultant = 'consultant'; hou_engagement = 'engagement' }
 Import-Table 'timesheet'       'timesheets.csv'        @{ hou_consultant = 'consultant'; hou_approver = 'consultant' }
 Import-Table 'timeentry'       'time_entries.csv'      @{ hou_timesheet = 'timesheet'; hou_engagement = 'engagement' }
+
+# v1.1 SkillPath
+Import-Table 'certification'           'certifications.csv'            @{ hou_skill = 'skill' }
+Import-Table 'consultantcertification' 'consultant_certifications.csv' @{ hou_consultant = 'consultant'; hou_certification = 'certification' }
+# Skills Reviewed dates: fills in consultants created by v1.0 (only where the date is still empty)
+$n = 0
+$current = @{}
+foreach ($e in (Invoke-Dv GET "$($Meta['consultant'].Set)?`$select=hou_name,hou_skillsreviewed").value) { $current[$e.hou_name] = $e.hou_skillsreviewed }
+foreach ($row in (Import-Csv (Join-Path $DataDir 'consultants.csv') -Encoding UTF8)) {
+  if ($row.hou_skillsreviewed -and -not $current[$row.hou_name] -and $Ids['consultant'][$row.hou_name]) {
+    Invoke-Dv PATCH "$($Meta['consultant'].Set)($($Ids['consultant'][$row.hou_name]))" @{ hou_skillsreviewed = $row.hou_skillsreviewed } | Out-Null
+    $n++
+  }
+}
+Write-Host "  + consultant skills-reviewed dates ($n updated)" -ForegroundColor Green
 
 Write-Host "`nHouston, we have a solution. All done." -ForegroundColor Green
